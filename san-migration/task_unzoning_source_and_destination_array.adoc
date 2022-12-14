@@ -1,0 +1,90 @@
+---
+permalink: san-migration/task_unzoning_source_and_destination_array.html 
+sidebar: sidebar 
+keywords: unzone, source, destination, array 
+summary: Tras haber completado todas las migraciones, transiciones y verificaciones, puede desdividir las cabinas de origen y destino. 
+---
+= Desdividir en zonas las matrices de origen y destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Tras haber completado todas las migraciones, transiciones y verificaciones, puede desdividir las cabinas de origen y destino.
+
+Para desvincular las cabinas de origen y destino, quite la zona de almacenamiento de origen a destino de ambas estructuras.
+
+Ejemplo de estructura Brocade
+
+.Pasos
+. Elimina la zona de la zoneset de la tela A.
++
+[listing]
+----
+cfgDelete "PROD_LEFT", "ZONE_AMS2100_cDOT_Initiator_fabA"
+zoneDelete "ZONE_AMS2100_cDOT_Initiator_fabA"
+----
+. Activa las zonasetas en la tela A.
++
+[listing]
+----
+cfgEnable "PROD_LEFT"
+cfgSave
+----
+. Elimina la zona de la zonadel tejido B.
++
+[listing]
+----
+cfgDelete "PROD_RIGHT", "ZONE_AMS2100_cDOT_Initiator_fabB"
+zoneDelete "ZONE_AMS2100_cDOT_Initiator_fabA"
+----
+. Activa las zonasetas en la tela B.
++
+[listing]
+----
+cfgEnable "PROD_RIGHT"
+cfgSave
+----
+
+
+Ejemplo de estructura Cisco
+
+.Pasos
+. Elimina la zona de la zoneset de la tela A.
++
+[listing]
+----
+conf t
+zoneset name PROD_LEFT vsan 10
+no member ZONE_AMS2100_cDOT_Initiator_fabA
+no zone name ZONE_AMS2100_cDOT_Initiator_fabA vsan 10
+exit
+----
+. Activa las zonasetas en la tela A.
++
+[listing]
+----
+zoneset activate name PROD_LEFT vsan 10
+end
+copy running-config startup-config
+----
+. Elimina la zona de la zonadel tejido B.
++
+[listing]
+----
+conf t
+zoneset name PROD_RIGHT vsan 10
+no member ZONE_AMS2100_cDOT_Initiator_fabB
+no zone name ZONE_AMS2100_cDOT_Initiator_fabB vsan 10
+exit
+----
+. Activa las zonasetas en la tela B.
++
+[listing]
+----
+zoneset activate name PROD_RIGHT vsan 10
+end
+Copy running-config startup-config
+----
+

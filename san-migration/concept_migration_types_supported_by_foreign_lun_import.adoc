@@ -1,0 +1,24 @@
+---
+permalink: san-migration/concept_migration_types_supported_by_foreign_lun_import.html 
+sidebar: sidebar 
+keywords: migration, types, supported, foreign, lun, import 
+summary: 'FLI admite cuatro tipos principales de flujos de trabajo de migración: En línea, sin conexión, transición y automatizados. La elección del flujo de trabajo que se debe utilizar depende de la configuración y de otros factores.' 
+---
+= Tipos de migración compatibles con importación de LUN externa
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+FLI admite cuatro tipos principales de flujos de trabajo de migración: En línea, sin conexión, transición y automatizados. La elección del flujo de trabajo que se debe utilizar depende de la configuración y de otros factores.
+
+* En una migración en línea, FLI desde cabinas de terceros permite que el sistema cliente permanezca en línea durante la migración (requiere un sistema operativo host Windows, Linux o ESXi).
+* En una migración sin conexión, FLI desde cabinas de terceros desconecta el sistema cliente y copia los datos en la nueva LUN antes de volver a ponerla en línea.
+* En una migración de transición, FLI realiza una transición de ONTAP que opera en 7-Mode a ONTAP. Este es funcionalmente el mismo proceso, excepto que la cabina de origen es ONTAP. El flujo de trabajo de transición está disponible tanto en línea como sin conexión.
+* En una migración automatizada, FLI utiliza el software de automatización del flujo de trabajo (WFA) para automatizar partes del proceso de migración. FLI con WFA está disponible en modo en línea o sin conexión.
+
+
+Desde el punto de vista de la arquitectura, las tres migraciones y el flujo de trabajo de transición son bastante similares. Las cuatro confían en la tecnología FlexArray de NetApp para permitir que su controladora ONTAP actúe como iniciador frente a una cabina de origen y utilice esa posición para copiar LUN en bloque desde la fuente a una LUN de la cabina ONTAP de destino.
+
+Las diferencias entre los flujos de trabajo deben estar relacionados cuando se producen recortes, la duración del plazo de interrupción, el uso de la automatización o si la cabina de origen es una cabina de NetApp que ejecuta ONTAP 7-Mode o una cabina de terceros.

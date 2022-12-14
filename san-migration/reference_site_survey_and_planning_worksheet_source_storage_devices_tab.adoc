@@ -1,0 +1,153 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_source_storage_devices_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, source storage devices tab 
+summary: Como parte de la hoja de trabajo de planificación y encuesta de sitios, debe tener una ficha que contenga información sobre los dispositivos de almacenamiento de origen de la migración. 
+---
+= Hoja de trabajo Encuesta de sitios y planificación Ficha dispositivos de almacenamiento de origen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de la hoja de trabajo de planificación y encuesta de sitios, debe tener una ficha que contenga información sobre los dispositivos de almacenamiento de origen de la migración.
+
+A continuación se muestra un ejemplo de cómo configurar la ficha dispositivos de almacenamiento de origen.
+
+|===
+5+| Sistemas de almacenamiento 
+
+
+ a| 
+Nombre de cabina
+ a| 
+Dirección IP
+ a| 
+Proveedor
+ a| 
+Modelo de matriz
+ a| 
+Microcódigo FW/ONTAP
+
+
+
+ a| 
+AMS2100
+ a| 
+10.x.x.x.
+ a| 
+Hitachi
+ a| 
+AMS 2100
+ a| 
+0893/B-X.
+
+
+
+ a| 
+AMS2100
+ a| 
+10.x.x.x.
+ a| 
+Hitachi
+ a| 
+AMS 2100
+ a| 
+0893/B-X.
+
+
+
+ a| 
+AMS2100
+ a| 
+10.x.x.x.
+ a| 
+Hitachi
+ a| 
+AMS 2100
+ a| 
+0893/B-X.
+
+
+
+ a| 
+AMS2100
+ a| 
+10.x.x.x.
+ a| 
+Hitachi
+ a| 
+AMS 2100
+ a| 
+0893/B-X.
+
+|===
+|===
+5+| Sistemas de almacenamiento 
+
+
+ a| 
+Controller/Node
+ a| 
+Nombre de puerto
+ a| 
+WWPN
+ a| 
+Nombre de la estructura
+ a| 
+Tipo de destino
+
+
+
+ a| 
+Controller0
+ a| 
+0a
+ a| 
+50060E80xxxxxxxx
+ a| 
+Estructura de producción A
+ a| 
+Origen
+
+
+
+ a| 
+Controller0
+ a| 
+0e
+ a| 
+50060E80xxxxxxxx
+ a| 
+Estructura de producción B
+ a| 
+Origen
+
+
+
+ a| 
+Control1
+ a| 
+1a
+ a| 
+50060E80xxxxxxxx
+ a| 
+Estructura de producción A
+ a| 
+Origen
+
+
+
+ a| 
+Control1
+ a| 
+1e
+ a| 
+50060E80xxxxxxxx
+ a| 
+Estructura de producción A
+ a| 
+Origen
+
+|===

@@ -1,0 +1,26 @@
+---
+permalink: san-migration/concept_foreign_lun_import_features.html 
+sidebar: sidebar 
+keywords: foreign, lun, import, features 
+summary: Las funciones FLI permiten migrar los datos desde almacenamiento SAN de terceros a sistemas ONTAP. Las funciones de migración FLI admiten una amplia variedad de procesos y sistemas. 
+---
+= Funciones de importación de LUN externa
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Las funciones FLI permiten migrar los datos desde almacenamiento SAN de terceros a sistemas ONTAP. Las funciones de migración FLI admiten una amplia variedad de procesos y sistemas.
+
+* Soporte para migraciones en línea y sin conexión.
+* Independencia del sistema operativo: La migración de datos a nivel de bloque no depende de los administradores de volúmenes ni de las utilidades del sistema operativo.
+* Independencia de la estructura de Fibre Channel: FLI es totalmente compatible con las estructuras FC de Brocade y Cisco.
+* Compatible con la mayoría de cabinas de almacenamiento Fibre Channel. Consulte la matriz de interoperabilidad para obtener una lista de cabinas compatibles.
+* Soporte para multivía nativa y balanceo de carga.
+* Gestión basada en CLI.
+
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

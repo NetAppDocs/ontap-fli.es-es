@@ -1,0 +1,23 @@
+---
+permalink: san-migration/concept_benchmarks_for_estimating_migration_durations.html 
+sidebar: sidebar 
+keywords: benchmarks, estimating, migration, durations 
+summary: A los fines de la planificación, se pueden utilizar determinadas suposiciones para estimar el nivel de esfuerzo y la duración de las migraciones de datos. 
+---
+= Referencias para calcular las duraciones de las migraciones
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A los fines de la planificación, se pueden utilizar determinadas suposiciones para estimar el nivel de esfuerzo y la duración de las migraciones de datos.
+
+Para obtener una estimación precisa del rendimiento real, debe llevar a cabo una serie de migraciones de prueba de diferentes tamaños con el fin de obtener unos números de rendimiento precisos para sus entornos concretos.
+
+[NOTE]
+====
+Las siguientes pruebas de rendimiento se aplican estrictamente a fines de planificación y es poco probable que sean especialmente precisas para entornos específicos.
+
+====
+Supuestos: Cinco horas por migración de host basada en un host con 8 LUN con un total de 2 TB de datos. Estos parámetros proporcionan un número de planificación de aproximadamente 400 GB por hora.

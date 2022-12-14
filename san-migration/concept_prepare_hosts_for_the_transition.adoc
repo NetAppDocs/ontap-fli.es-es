@@ -1,0 +1,16 @@
+---
+permalink: san-migration/concept_prepare_hosts_for_the_transition.html 
+sidebar: sidebar 
+keywords: prepare, hosts, transition 
+summary: La fase de ejecución incluye la preparación de los hosts de migración. 
+---
+= Prepare los hosts para la transición
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de ejecución incluye la preparación de los hosts de migración.
+
+En muchos casos puede ser posible haber realizado la corrección antes de este paso. De lo contrario, es donde debería realizar cualquier reparación del host, como instalar kits de conexión del host o DSM. En la fase de análisis, usted dispondrá de una lista de elementos GAP que deben realizarse en cada host para que ese host tenga una configuración compatible con ONTAP de NetApp. Según el tipo de migración que se realice, ya sea el host se repararía y luego se reiniciaría (FLI de 7-Mode a ONTAP online) o los hosts se reiniciarían, remediarían y luego se apagarían (FLI de 7-Mode a ONTAP sin conexión).

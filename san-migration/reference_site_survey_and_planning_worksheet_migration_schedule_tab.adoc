@@ -1,0 +1,39 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_migration_schedule_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, migration schedule tab 
+summary: Como parte de su hoja de trabajo de planificación y encuesta del sitio, debe tener una ficha que contenga información sobre su programa de migración. 
+---
+= Ficha Planificación y encuesta de sitios Planificación de la hoja de trabajo Planificación de migración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de su hoja de trabajo de planificación y encuesta del sitio, debe tener una ficha que contenga información sobre su programa de migración.
+
+A continuación se muestra un ejemplo de cómo configurar la ficha Planificación de migración.
+
+|===
+8+| Programa de migración 
+
+
+ a| 
+Fecha de migración
+ a| 
+Host
+ a| 
+SO
+ a| 
+Cliente más
+ a| 
+Controladora de almacenamiento
+ a| 
+UID DE LUN
+ a| 
+Tamaño de LUN
+ a| 
+Estado
+
+|===

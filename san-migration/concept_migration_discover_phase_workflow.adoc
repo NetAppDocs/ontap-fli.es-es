@@ -1,0 +1,59 @@
+---
+permalink: san-migration/concept_migration_discover_phase_workflow.html 
+sidebar: sidebar 
+keywords: discover phase workflow 
+summary: La fase de detección del proceso de migración se centra en recopilar la información que se utiliza para la reparación del host y en crear planes de migración en los pasos posteriores. La recopilación de la mayor parte de la información se automatiza mediante una herramienta de recopilación de datos, como OneCollect. 
+---
+= Flujo de trabajo de fase de detección
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de detección del proceso de migración se centra en recopilar la información que se utiliza para la reparación del host y en crear planes de migración en los pasos posteriores. La recopilación de la mayor parte de la información se automatiza mediante una herramienta de recopilación de datos, como OneCollect.
+
+La siguiente figura muestra el flujo de trabajo de la fase de detección.
+
+image::../media/discover_phase_1.png[descubrir fase 1]
+
+Las tareas de la fase de detección se enumeran en la siguiente tabla.
+
+[cols="2*"]
+|===
+| Componente | Tareas 
+
+
+ a| 
+Host
+ a| 
+. Identificar los WWPN de HBA (utilizados para la creación de zonas).
+. Identificar la información de la LUN (tamaño, números de serie, distribuciones de particiones y offsets).
+. Identifique la configuración MPIO de terceros, el sistema operativo host, los modelos HBA/CNA y el firmware, etc.
+
+
+
+
+ a| 
+Estructura
+ a| 
+Identificación del host a las zonas de almacenamiento de origen. (Se eliminan tras la migración).
+
+
+
+ a| 
+Almacenamiento de destino
+ a| 
+Identifique los WWPN para los puertos que se usarán para el uso de iniciador/destino.
+
+
+
+ a| 
+Almacenamiento de origen
+ a| 
+. Identificar los WWPN (utilizados para la creación de zonas).
+. Identificar las LUN asignadas al host.
+. Identifique los registros del iniciador para el host.
+
+
+|===

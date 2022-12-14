@@ -1,0 +1,23 @@
+---
+permalink: san-migration/task_rebooting_hosts_9207.html 
+sidebar: sidebar 
+keywords: reboot, hosts 
+summary: Tiene la opción de reiniciar hosts antes de iniciar este flujo de trabajo para verificar que el host está en estado correcto conocido. 
+---
+= Reiniciar hosts
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Tiene la opción de reiniciar hosts antes de iniciar este flujo de trabajo para verificar que el host está en estado correcto conocido.
+
+Esto también sería un buen momento para realizar una copia Snapshot con el fin de facilitar una reversión si fuera necesario más adelante. Para verificar que la configuración del servidor sea persistente y prístina en todos los reinicios, complete los siguientes pasos:
+
+.Pasos
+. Cierre todas sus aplicaciones abiertas.
+. Revise los registros en busca de errores.
+. Verifique que el host vea todas sus rutas.
+. Reinicie el host.
+

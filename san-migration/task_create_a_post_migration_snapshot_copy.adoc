@@ -1,0 +1,27 @@
+---
+permalink: san-migration/task_create_a_post_migration_snapshot_copy.html 
+sidebar: sidebar 
+keywords: Create, post-migration, snapshot, copies 
+summary: Puede crear una copia Snapshot posterior a la migración para facilitar una reversión si fuera necesario en el futuro. 
+---
+= Creación de copias Snapshot posteriores a la migración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede crear una copia Snapshot posterior a la migración para facilitar una reversión si fuera necesario en el futuro.
+
+.Paso
+. Para crear una copia snapshot posterior a la migración, ejecute el `snap create` comando.
++
+[listing]
+----
+DataMig-cmode::> snap create -vserver datamig -volume winvol -snapshot post-migration
+
+DataMig-cmode::> snap create -vserver datamig -volume linuxvol -snapshot post-migration
+
+DataMig-cmode::> snap create -vserver datamig -volume esxvol -snapshot post-migration
+----
+

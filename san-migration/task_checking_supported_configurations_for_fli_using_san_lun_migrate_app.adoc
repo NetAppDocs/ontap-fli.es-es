@@ -1,0 +1,24 @@
+---
+permalink: san-migration/task_checking_supported_configurations_for_fli_using_san_lun_migrate_app.html 
+sidebar: sidebar 
+keywords: check, supported configurations, fli, using, san lun migrate app 
+summary: A partir de ONTAP 9.9.1, es posible usar la aplicación de migración de LUN DE SAN para evaluar una cabina de origen externa para FLI. La aplicación de migración de LUN DE SAN puede usarse cuando la cabina externa deseada no se incluye en FLI IMT. 
+---
+= Comprobación de las configuraciones compatibles para FLI con la aplicación de migración LUN de SAN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partir de ONTAP 9.9.1, es posible usar la aplicación de migración de LUN DE SAN para evaluar una cabina de origen externa para FLI. La aplicación de migración de LUN DE SAN puede usarse cuando la cabina externa deseada no se incluye en FLI IMT.
+
+.Pasos
+. Vaya al sitio de soporte de NetApp.
+. En *filtro por categoría*, seleccione *migración*.
+. En *migración de San LUN*, haga clic en *Descargar aplicación*.
+. Ejecute la aplicación desde un host Linux FC o iSCSI que tenga acceso de bloque a la cabina de origen.
++
+Si la matriz de origen extranjero puede ser calificada, se muestra una Marca de verificación verde. Si la matriz de origen extranjero no puede ser calificada, se muestra una X roja.
+
+

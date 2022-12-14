@@ -1,0 +1,39 @@
+---
+permalink: san-migration/concept_target_and_initiator_port_zoning.html 
+sidebar: sidebar 
+keywords: target, initiator, port, zoning 
+summary: La migración FLI requiere que el almacenamiento de NetApp acceda a las LUN de almacenamiento de origen. Esto se logra mediante la división en zonas de los puertos de destino del almacenamiento de origen con los puertos iniciadores del almacenamiento de destino. 
+---
+= División en zonas de puertos de destino e iniciador
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La migración FLI requiere que el almacenamiento de NetApp acceda a las LUN de almacenamiento de origen. Esto se logra mediante la división en zonas de los puertos de destino del almacenamiento de origen con los puertos iniciadores del almacenamiento de destino.
+
+Las zonas de almacenamiento de origen a host existentes no se modifican y se desactivan tras la migración. Las zonas de almacenamiento del host al destino se crean para permitir el acceso del host a las LUN migradas del almacenamiento de destino.
+
+Una situación de migración estándar con FLI requiere cuatro zonas distintas:
+
+* Zona 1: Almacenamiento de origen a almacenamiento de destino (estructura De producción A)
+* Zona 2: Almacenamiento de origen al almacenamiento de destino (estructura de producción B)
+* Zona 3: Host a almacenamiento de destino (estructura De producción A)
+* Zona 4: Host a almacenamiento de destino (estructura de producción B)
+
+
+Siga las siguientes prácticas recomendadas de la división en zonas:
+
+* No mezcle los puertos de destino de almacenamiento de origen y los puertos de destino de almacenamiento de destino en la misma zona.
+* No mezcle los puertos de iniciador de almacenamiento de destino con los puertos de host en la misma zona.
+* No mezcle los puertos de destino de almacenamiento y los puertos de iniciador en la misma zona.
+* Zona con al menos dos puertos de cada controladora para redundancia.
+* NetApp recomienda la división en zonas de iniciador único y destino único.
+
+
+[NOTE]
+====
+Después de dividir en zonas los puertos de destino de almacenamiento de origen con los puertos de iniciador de almacenamiento de destino, el almacenamiento de origen será visible en el almacenamiento de destino mediante el comando Storage array show.cuando se detecta por primera vez la cabina de almacenamiento, es posible que las controladoras de NetApp no muestren la cabina automáticamente. Corrija esto mediante el restablecimiento del puerto del switch donde se conectan los puertos iniciadores ONTAP.
+
+====

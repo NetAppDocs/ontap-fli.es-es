@@ -1,0 +1,33 @@
+---
+permalink: san-migration/reference_sample_site_survey_and_planning_worksheet.html 
+sidebar: sidebar 
+keywords: sample, site, survey and planning, worksheet 
+summary: Durante las fases de análisis y planificación de la metodología de migración, deberá documentar la configuración, las configuraciones de destino, los vacíos y los planes de corrección existentes mediante una hoja de trabajo Encuesta y planificación del sitio. 
+---
+= Hoja de trabajo de planificación y encuesta de emplazamiento de ejemplo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durante las fases de análisis y planificación de la metodología de migración, deberá documentar la configuración, las configuraciones de destino, los vacíos y los planes de corrección existentes mediante una hoja de trabajo Encuesta y planificación del sitio.
+
+Esta sección proporciona ejemplos de tipos de información que debe contener la hoja de cálculo Encuesta del sitio y Planificación. Se recomienda utilizar las siguientes pestañas:
+
+* Contacto
+* Cuestionario
+* Interruptores
+* Dispositivos de almacenamiento (origen)
+* Dispositivos de almacenamiento (destino)
+* Hosts
+* Información de HBA y zona
+* LUN de origen
+* Grupos de almacenamiento
+* Detalles de LUN
+* Diseños de LUN de NetApp
+* Programa de migración
+* Estado del agregado
+* Config. FAS
+* Scripts de CLI de SDS
+

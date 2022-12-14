@@ -1,0 +1,29 @@
+---
+permalink: san-migration/concept_variables_that_affect_foreign_lun_import_migration_performance.html 
+sidebar: sidebar 
+keywords: variables, affect, foreign lun import, migration, performance 
+summary: Existen diversas variables que afectan a la rapidez con la que finaliza una migración determinada. 
+---
+= Variables que afectan al rendimiento de la migración de importación de LUN externos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Existen diversas variables que afectan a la rapidez con la que finaliza una migración determinada.
+
+Estas variables son las siguientes:
+
+* ¿Cuántas migraciones simultáneas se ejecutan entre un origen y un destino dado
+* Funcionalidades de cabina de origen
+* Carga de matriz de origen
+* Funcionalidades de cabina de destino
+* Carga de matriz de destino
+* ¿Qué cantidad de I/o se genera en la LUN durante la migración
+* El tipo, el ancho de banda, y los fan-ins/fan-out en las estructuras front-end
+
+
+Para obtener el mejor rendimiento, use no más de 16 migraciones FLI simultáneas por nodo.
+
+Dado el número de variables que afectan al rendimiento de la migración, se recomienda realizar una serie de migraciones de prueba. Generalmente, cuanto más grande sea la muestra de prueba, mejor será la caracterización. Por lo tanto, recomendamos realizar una serie de migraciones de prueba de diferentes tamaños con el fin de obtener un muestreo preciso del rendimiento de la capacidad de procesamiento. Los datos de rendimiento de estas pruebas se pueden utilizar para extrapolar los tiempos y las duraciones de las migraciones de producción planificadas.

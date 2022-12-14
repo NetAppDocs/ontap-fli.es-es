@@ -1,0 +1,164 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_destination_storage_devices_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, destination storage devices tab 
+summary: Como parte de la hoja de trabajo Encuesta y planificación del sitio, debe tener una ficha que contenga información sobre los dispositivos de almacenamiento de destino. 
+---
+= Hoja de trabajo Encuesta de sitios y planificación Ficha dispositivos de almacenamiento de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de la hoja de trabajo Encuesta y planificación del sitio, debe tener una ficha que contenga información sobre los dispositivos de almacenamiento de destino.
+
+[cols="6*"]
+|===
+6+| Sistemas de almacenamiento 
+
+
+ a| 
+Nombre del clúster
+ a| 
+Dirección IP
+ a| 
+Modo de matriz
+ a| 
+ONTAP
+ a| 
+vserver
+ a| 
+Tipo de puerto
+
+
+
+ a| 
+Data Mig-CDOT
+ a| 
+10.x.x.x.
+ a| 
+FAS8080
+ a| 
+8.3.1
+ a| 
+mig
+ a| 
+Destino
+
+
+
+ a| 
+Data Mig-CDOT
+ a| 
+10.x.x.x.
+ a| 
+FAS8080
+ a| 
+8.3.1
+ a| 
+mig
+ a| 
+Destino
+
+
+
+ a| 
+Data Mig-CDOT
+ a| 
+10.x.x.x.
+ a| 
+FAS8080
+ a| 
+8.3.1
+ a| 
+Data Mig-01
+ a| 
+Iniciador
+
+
+
+ a| 
+Data Mig-CDOT
+ a| 
+10.x.x.x.
+ a| 
+FAS8080
+ a| 
+8.3.1
+ a| 
+Data Mig-01
+ a| 
+Iniciador
+
+|===
+[cols="5*"]
+|===
+5+| Sistemas de almacenamiento 
+
+
+ a| 
+Nombre de puerto
+ a| 
+Nombre de LIF
+ a| 
+WWPN
+ a| 
+Nombre de la estructura
+ a| 
+Tipo de destino
+
+
+
+ a| 
+0c
+ a| 
+miglia1
+ a| 
+20:01:00:a0:98:2f:xx:xx
+ a| 
+Prod. A
+ a| 
+Destino
+
+
+
+ a| 
+0d
+ a| 
+miglifo2
+ a| 
+20:01:00:a0:98:2f:xx:xx
+ a| 
+Prod B
+ a| 
+Destino
+
+
+
+ a| 
+0a
+ a| 
+n.a.
+ a| 
+50:0a:09:81:00:xx:xx
+ a| 
+Prod. A
+ a| 
+Destino
+
+
+
+ a| 
+0b
+ a| 
+n.a.
+ a| 
+50:0a:09:81:00:xx:xx
+ a| 
+Prod B
+ a| 
+Destino
+
+|===
+A continuación se muestra un ejemplo de cómo configurar la ficha dispositivos de almacenamiento de destino.

@@ -1,0 +1,67 @@
+---
+permalink: san-migration/task_fli_online_performing_a_disruptive_cutover.html 
+sidebar: sidebar 
+keywords: fli online, perform, disruptive, cutover 
+summary: Este ejemplo le da los pasos generales para realizar una transición disruptiva para el proceso de migración en línea FLI. 
+---
+= FLI en línea: Realiza una transición sin interrupciones
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Este ejemplo le da los pasos generales para realizar una transición disruptiva para el proceso de migración en línea FLI.
+
+Para obtener información acerca de cómo realizar la reparación de hosts de Windows, Linux y ESXi, consulte las secciones siguientes de esta guía, así como el sistema operativo host y la documentación del kit de conexión a host.
+
+.Pasos
+. En la cabina externa, muestre el grupo de almacenamiento al que se asigna el LUN de origen.
++
+Consulte la documentación del proveedor para conocer los comandos correspondientes.
+
+. Si las LUN que se están importando son para un host ESXi, revise y siga las instrucciones del tema _ESXi CAW/ATS remediación_.
+. Desasigne la LUN de origen desde los hosts.
++
+[NOTE]
+====
+El periodo de interrupción comienza aquí.
+
+====
++
+La interrupción comienza inmediatamente después del `unmap` se ejecuta el comando. Por lo general, el plazo de interrupción se puede medir en minutos. El plazo de interrupción es el tiempo necesario para reorientar el host en el nuevo destino de NetApp y buscar las LUN.
+
++
+Debe asegurarse de que esta es la única LUN asignada a este igroup, porque al quitar el host (iniciador) del igroup se afectan otras LUN que están asignadas al igroup. Consulte la documentación del proveedor para conocer los comandos correspondientes.
+
+. Compruebe que ya no estén presentes los iniciadores de host.
+. En el clúster de ONTAP, active la LUN de destino y compruebe que esté asignada.
++
+[listing]
+----
+cluster::*> lun online -vserver fli -path /vol/fli_vol/OnlineFLI_LUN
+----
+. Compruebe que la LUN está en línea.
++
+[listing]
+----
+cluster::*> lun show -vserver fli
+Vserver   Path                            State   Mapped   Type        Size
+--------- ------------------------------- ------- -------- -------- --------
+fli       /vol/fli_vol/OnlineFLI_LUN      online  mapped   windows_2008  1TB
+----
+. Vuelva a analizar los discos en el host, encuentre el LUN en el destino ONTAP y, a continuación, compruebe que el DSM ha reclamado la LUN.
++
+[NOTE]
+====
+El plazo para la interrupción termina aquí.
+
+====
+. Compruebe que puede ver todas las rutas esperadas y compruebe los registros de eventos para verificar que no existen errores.
++
+En este punto, se completa la parte disruptiva de esta migración, a menos que existan interrupciones en las tareas de corrección del host (identificadas durante las fases de análisis y planificación).
+
++
+Las LUN están en línea y asignadas, y los hosts ahora montan la nueva LUN alojada en ONTAP. Las lecturas se pasan a través de la cabina ONTAP al LUN de origen, y las escrituras se escriben en la nueva LUN alojada en ONTAP y en la LUN de origen original. La LUN de origen y la LUN de destino permanecerán sincronizadas hasta que se complete la migración y se rompa la relación de la LUN.
+
+

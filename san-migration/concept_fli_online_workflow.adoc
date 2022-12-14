@@ -1,0 +1,30 @@
+---
+permalink: san-migration/concept_fli_online_workflow.html 
+sidebar: sidebar 
+keywords: fli, online, workflow 
+summary: Este es el segundo de los cuatro ejemplos de flujos de trabajo FLI, que abarcan la migración en línea FLI. 
+---
+= Flujo de trabajo en línea FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Este es el segundo de los cuatro ejemplos de flujos de trabajo FLI, que abarcan la migración en línea FLI. La matriz de origen de este ejemplo es un EMC VNX5500.
+
+el flujo de trabajo en línea tiene las siguientes tareas:
+
+. Preparar la ruta de LUN
+. Realización de una transición disruptiva
+. Importe los datos de las LUN de origen
+. Verificación de los resultados de la migración
+. Limpieza de la migración en línea FLI
+. Tareas posteriores a la migración en línea de FLI
+
+
+[NOTE]
+====
+Si el destino de las controladoras de NetApp es una MetroCluster, NO use el flujo de trabajo en línea. Si se produce una conmutación por error de un sitio durante una importación en línea activa, podría producirse un error en las transferencia de escritura en la matriz de origen, lo que provocaría un fallo de verificación y una posible pérdida de datos. Si el destino es MetroCluster, use el proceso FLI sin conexión.
+
+====

@@ -1,0 +1,24 @@
+---
+permalink: san-migration/concept_gap_analysis_report.html 
+sidebar: sidebar 
+keywords: gap, analysis, report 
+summary: El análisis de GAP es un informe del entorno actual y recomendado por NetApp del cliente. Presenta todas las actualizaciones recomendadas para el entorno del cliente que deberán realizarse después de la migración. 
+---
+= Informe de análisis de brechas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El análisis de GAP es un informe del entorno actual y recomendado por NetApp del cliente. Presenta todas las actualizaciones recomendadas para el entorno del cliente que tendrán que realizarse después de la migración.
+
+La configuración de destino (después de la migración) incluye detalles de cada host (configuración del sistema operativo, MPIO, detalles del HBA, versión del kit de utilidades de host, etc.). También hay disponible información sobre otros productos requeridos por NetApp, como SnapDrive y SnapManager.
+
+Normalmente, los cambios necesarios no se realizan hasta el evento de migración real, debido a la necesidad habitual de programar ventanas de mantenimiento. Normalmente, cualquier cambio realizado en la configuración MPIO antes de la migración afectará también al soporte del almacenamiento actual.
+
+La sección «Completed NetApp recommended» en la sección hosts de su hoja de trabajo para la encuesta y planificación del sitio servirá como informe de análisis de deficiencias. El análisis de deficiencias se debe completar en cada host incluido en el proyecto de migración. El informe de análisis de deficiencias completado debe revisarse con el cliente.
+
+A continuación se muestra un ejemplo de informe de análisis de brechas.
+
+image::../media/create_the_gap_analysis_report_1.png[crear el informe de análisis de separaciones 1]

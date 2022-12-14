@@ -1,0 +1,33 @@
+---
+permalink: san-migration/concept_initiator_group_configuration.html 
+sidebar: sidebar 
+keywords: initiator, group, configuration 
+summary: 'Es fundamental que la configuración de enmascaramiento de LUN sea correcta para el funcionamiento correcto. Todos los puertos de iniciador (en ambos nodos) del almacenamiento ONTAP deben residir en el mismo igroup.' 
+---
+= Configuración del iGroup
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es fundamental que la configuración de enmascaramiento de LUN sea correcta para el funcionamiento correcto. Todos los puertos de iniciador (en ambos nodos) del almacenamiento ONTAP deben residir en el mismo igroup.
+
+La migración FLI requiere que el almacenamiento de NetApp acceda a las LUN de almacenamiento de origen. Para permitir el acceso aparte de la división en zonas, es necesario crear iGroups en el almacenamiento de origen con el nombre de puerto WWPN de los puertos iniciadores del almacenamiento de destino.
+
+
+NOTE: Los ejemplos de esta sección utilizan una matriz AMS de Hitachi Data Systems (HDS) y, por lo tanto, los comandos de matriz externa variarán en función de la matriz de terceros desde la que se esté migrando.
+
+Habilite siempre el acceso asimétrico de Unidad lógica (ALUA) en grupos de iniciadores para cabinas de NetApp.
+
+Los iGroups se usan con diferentes nombres, según el proveedor y el producto. Por ejemplo:
+
+* Hitachi Data Systems (HDS) utiliza "'grupo de host'".
+* E-Series de NetApp utiliza «entrada de host».
+* EMC utiliza «'registro del iniciador» o «grupo de almacenamiento».
+* NetApp utiliza «'igroup».
+
+
+Independientemente de la nomenclatura, el propósito de un iGroup es identificar iniciadores por WWPN que compartan las mismas asignaciones de LUN.
+
+Para definir grupos iniciadores, revise la documentación de la cabina para ver cómo configurar el enmascaramiento de LUN (iGroups/grupos de hosts/grupos de almacenamiento, etc.). También puede revisar https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"] para requisitos de configuración del almacenamiento de terceros.

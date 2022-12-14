@@ -1,0 +1,29 @@
+---
+permalink: san-migration/task_removing_destination_array_configuration.html 
+sidebar: sidebar 
+keywords: remove, destination, array, configuration 
+summary: Los siguientes pasos muestran cómo quitar la configuración de la cabina de destino de la cabina de origen una vez completada la migración FLI. 
+---
+= Eliminación de la configuración de la cabina de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los siguientes pasos muestran cómo quitar la configuración de la cabina de destino de la cabina de origen una vez completada la migración FLI.
+
+.Pasos
+. Inicie sesión en el sistema AS de Hitachi Storage Navigator Modular.
+. Seleccione *matriz AMS 2100* y haga clic en *Mostrar* y *Configurar matriz*.
+. Inicie sesión mediante la raíz.
+. Expanda grupos y seleccione *grupos de hosts*.
+. Seleccione *CDOT_FLI* host group y haga clic en *Delete Host Group*.
++
+image::../media/remove_destination_array_configuration_from_source_array_1.png[quitar la configuración de la matriz de destino de la matriz de origen 1]
+
+. Confirme la eliminación del grupo de hosts.
++
+image::../media/remove_destination_array_configuration_from_source_array_2.png[quitar la configuración de la matriz de destino de la matriz de origen 2]
+
+

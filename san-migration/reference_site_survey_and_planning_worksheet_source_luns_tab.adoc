@@ -1,0 +1,128 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_source_luns_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, source luns tab 
+summary: Como parte de su hoja de trabajo para realizar una encuesta y planificación del sitio, debe configurar una pestaña que contenga información sobre sus LUN de origen. 
+---
+= Ficha LUN de origen de la hoja de cálculo Encuesta del sitio y planificación
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de su hoja de trabajo para realizar una encuesta y planificación del sitio, debe configurar una pestaña que contenga información sobre sus LUN de origen.
+
+A continuación se muestra un ejemplo de cómo configurar la pestaña LUN de origen.
+
+|===
+5+| LUN de origen 
+
+
+ a| 
+LUN enmascarados
+
+
+
+ a| 
+Nombre del grupo de almacenamiento
+ a| 
+ID de LUN del host
+ a| 
+ID de LUN de cabina
+ a| 
+Grueso/fino
+ a| 
+UID
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+0
+ a| 
+30
+ a| 
+Grueso
+ a| 
+60060e801046b96004f2bf460000001e
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+1
+ a| 
+14
+ a| 
+Grueso
+ a| 
+60060e801046b96004f2bf460000000e
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+2
+ a| 
+15
+ a| 
+Grueso
+ a| 
+60060e801046b96004f2bf460000000f
+
+|===
+|===
+5+| LUN de origen 
+
+
+ a| 
+Todas LAS LUN .2a
+| Prefijo personalizado 
+
+
+ a| 
+Nombre de LUN
+ a| 
+UID
+ a| 
+Sector inicial
+ a| 
+Desplazamiento de partición
+ a| 
+
+
+
+| LUN30  a| 
+ a| 
+ a| 
+368050176
+ a| 
+0
+
+
+
+ a| 
+LUN14
+ a| 
+ a| 
+ a| 
+33619968
+ a| 
+0
+
+
+
+ a| 
+LUN15
+ a| 
+ a| 
+ a| 
+33619968
+ a| 
+0
+
+|===

@@ -1,0 +1,14 @@
+---
+permalink: san-migration/concept_how_to_configure_source_arrays.html 
+sidebar: sidebar 
+keywords: configure, source, arrays 
+summary: 'Consulte la documentación de la cabina de origen para añadir una entrada de host para los puertos del iniciador (enmascaramiento de LUN, igroup en NetApp parlance). Esta información puede recuperarse de la sección grupos de almacenamiento de su hoja de trabajo Encuesta y planificación del sitio.' 
+---
+= Cómo configurar cabinas de origen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Consulte la documentación de la cabina de origen para añadir una entrada de host para los puertos del iniciador (enmascaramiento de LUN, igroup en NetApp parlance). Esta información puede recuperarse de la sección grupos de almacenamiento de su hoja de trabajo Encuesta y planificación del sitio.

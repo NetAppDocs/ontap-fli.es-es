@@ -1,0 +1,16 @@
+---
+permalink: san-migration/concept_discover_phase_procedures.html 
+sidebar: sidebar 
+keywords: discover, phase, data, collection, procedures 
+summary: La fase de detección recopila la información del entorno del cliente necesaria para planificar y ejecutar correctamente la migración. 
+---
+= Detección de procedimientos de recopilación de datos de fase
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de detección recopila la información del entorno del cliente necesaria para planificar y ejecutar correctamente la migración.
+
+Utilice Active IQ OneCollect en la fase de recogida de datos. Para obtener todos los detalles, consulte Active IQ OneCollect https://mysupport.netapp.com/site/tools["documentación"].

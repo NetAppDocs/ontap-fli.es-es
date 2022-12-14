@@ -1,0 +1,91 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_hba_and_zone_information_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, hba and zone information tab 
+summary: Como parte de su hoja de trabajo de planificación y encuesta de instalaciones, debe configurar una ficha que contenga información sobre su HBA y la zona. 
+---
+= Hoja de trabajo para la encuesta y planificación de las instalaciones, ficha HBA e Información de zona
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de su hoja de trabajo de planificación y encuesta de instalaciones, debe configurar una ficha que contenga información sobre su HBA y la zona.
+
+A continuación se muestra un ejemplo de cómo configurar la ficha HBA e Información de zona.
+
+[cols="4*"]
+|===
+4+| Detalles de la estructura 
+
+
+ a| 
+Nombre de host
+ a| 
+Descripción
+ a| 
+WWPN
+ a| 
+Nombre de la estructura
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+HBA0
+ a| 
+21:00:00:24:ff:xx:xx
+ a| 
+Prod. A
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+HBA1
+ a| 
+21:00:00:24:ff:xx:xx
+ a| 
+Prod B
+
+|===
+[cols="4*"]
+|===
+4+| Detalles de la estructura 
+
+
+ a| 
+VSAN/dominio
+ a| 
+Número de puerto
+ a| 
+Miembros de la zona de pre-migración
+ a| 
+Pertenencia a la zona de posmigración
+
+
+
+ a| 
+10
+ a| 
+fc2/3
+ a| 
+Rx21_AMS2100
+ a| 
+Rx21_flicDOT
+
+
+
+ a| 
+10
+ a| 
+fc2/3
+ a| 
+Rx21_AMS2100
+ a| 
+Rx21_flicDOT
+
+|===

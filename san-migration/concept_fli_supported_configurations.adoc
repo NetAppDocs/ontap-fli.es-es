@@ -1,0 +1,24 @@
+---
+permalink: san-migration/concept_fli_supported_configurations.html 
+sidebar: sidebar 
+keywords: fli, supported, configurations 
+summary: El entorno FLI debe ponerse en marcha de una forma compatible para garantizar que las operaciones y el soporte son correctos. A medida que ingeniería califique nuevas configuraciones, la lista de configuraciones admitidas cambiará. Consulte la matriz de interoperabilidad de NetApp para comprobar la compatibilidad con configuraciones específicas. 
+---
+= FLI configuraciones compatibles
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El entorno FLI debe ponerse en marcha de una forma compatible para garantizar que las operaciones y el soporte son correctos. A medida que ingeniería califique nuevas configuraciones, la lista de configuraciones admitidas cambiará. Consulte la matriz de interoperabilidad de NetApp para comprobar la compatibilidad con configuraciones específicas.
+
+ONTAP 8.3 y versiones posteriores son el único almacenamiento de destino compatible. No se admiten las migraciones a almacenamiento de terceros.
+
+Para acceder a una lista de las cabinas de almacenamiento de origen, los switches y el firmware admitidos, consulte la matriz de interoperabilidad. El programa de migración de datos admitirá las configuraciones de la matriz de interoperabilidad de NetApp.
+
+Una vez finalizada la importación y todas las LUN se han migrado a las controladoras de NetApp, asegúrese de que todas las configuraciones sean compatibles.
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

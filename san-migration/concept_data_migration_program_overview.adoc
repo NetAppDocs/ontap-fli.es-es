@@ -1,0 +1,16 @@
+---
+permalink: san-migration/concept_data_migration_program_overview.html 
+sidebar: sidebar 
+keywords: data, migration, program, overview 
+summary: 'El programa de migración de datos crea soluciones de migración de datos que facilitan a los clientes la migración a un almacenamiento NetApp y la migración de LUN de NetApp 7-Mode a ONTAP. Foreign LUN Import (FLI) forma parte de la cartera de migración de datos.' 
+---
+= Información general del programa de migración de datos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El programa de migración de datos crea soluciones de migración de datos que facilitan a los clientes la migración a un almacenamiento NetApp y la migración de LUN de NetApp 7-Mode a ONTAP. Foreign LUN Import (FLI) forma parte de la cartera de migración de datos.
+
+El programa mejora la productividad al ofrecer las herramientas, los productos y el material complementario de servicio necesarios para una correcta migración de datos. Este programa, que proporciona las habilidades y los conocimientos necesarios para llevar a cabo las migraciones de datos, pretende acelerar la adopción de las tecnologías de NetApp.

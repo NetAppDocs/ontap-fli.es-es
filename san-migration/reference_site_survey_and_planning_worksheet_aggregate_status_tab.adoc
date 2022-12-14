@@ -1,0 +1,36 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_aggregate_status_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning, worksheet, aggregate status tab 
+summary: Como parte de la hoja de trabajo Encuesta y planificación del sitio, debe tener una ficha que contenga información sobre el estado del agregado. 
+---
+= Ficha Estado agregado de la hoja de cálculo Encuesta de planta y planificación
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de la hoja de trabajo Encuesta y planificación del sitio, debe tener una ficha que contenga información sobre el estado del agregado.
+
+A continuación se muestra un ejemplo de cómo configurar la pestaña Estado del agregado.
+
+[cols="6*"]
+|===
+6+| Información agregada de NetApp 
+
+
+ a| 
+Controladora
+ a| 
+Agregado
+ a| 
+Tamaño total (GB)
+ a| 
+Capacidad utilizada (GB)
+ a| 
+Disponible (GB)
+ a| 
+Anterior a crear
+
+|===

@@ -1,0 +1,54 @@
+---
+permalink: san-migration/task_fli_transition_importing_the_data.html 
+sidebar: sidebar 
+keywords: import, data, fli 7-mode, ontap 
+summary: Estos pasos describen cómo importar los datos de una LUN de origen de 7-Mode a una LUN de destino de ONTAP con FLI. 
+---
+= Importar los datos de FLI 7-Mode a ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Estos pasos describen cómo importar los datos de una LUN de origen de 7-Mode a una LUN de destino de ONTAP con FLI.
+
+.Pasos
+. Inicie la importación de la migración.
++
+[listing]
+----
+cluster::*> lun import start -vserver fli_72C -path /vol/flivol/72Clun1
+----
+. Visualizar el estado de FLI.
++
+[listing]
+----
+cluster::*> lun import show -vserver fli_72C -path /vol/flivol/72Clun1
+vserver foreign-disk   path                operation admin operational percent
+                                         in progress state state       complete
+-------------------------------------------------------------------------------
+fli_72C D0i1E+G8Wg6m   /vol/flivol/72Clun1 import    started
+                                                           completed        100
+----
++
+Si desea asegurarse de que la LUN de origen siga siendo coherente una vez completada la migración, necesitará:
+
++
+** Después de que el programa de importación indique que está completo, apague el host.
+** Eliminar la relación de LUN: `lun import delete -vserver fli_72C -path /vol/flivol/72Clun1`.
++
+[NOTE]
+====
+Recuerde que una vez que la relación de LUN se ha roto, las LUN perderán rápidamente la sincronización porque solo se han realizado cambios en la nueva LUN. Por lo tanto, aunque pueda ser beneficioso mantener un estado consistente en el caso de que desee restaurar el estado original, es probable que la nueva LUN no se refleje en la LUN de origen.
+
+====
++
+[NOTE]
+====
+Una vez detenida la importación, puede destruir la relación de importación a menos que tenga intención de verificar la importación.
+
+====
+
+
+

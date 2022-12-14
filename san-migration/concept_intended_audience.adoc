@@ -1,0 +1,16 @@
+---
+permalink: san-migration/concept_intended_audience.html 
+sidebar: sidebar 
+keywords: intended, audience 
+summary: Puede usar este contenido para ayudarle a migrar datos de una cabina externa a ONTAP o para realizar la transición de LUN de cabinas 7-Mode de NetApp a ONTAP. 
+---
+= Audiencia de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede usar este contenido para ayudarle a migrar datos de una cabina externa a ONTAP o para realizar la transición de LUN de cabinas 7-Mode de NetApp a ONTAP.
+
+Debería estar familiarizado con los conceptos y procesos comunes DE SAN, incluidos la división en zonas, el enmascaramiento de LUN, los sistemas operativos host cuyos LUN se deben migrar, ONTAP y la cabina de origen de terceros.

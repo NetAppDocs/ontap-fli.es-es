@@ -1,0 +1,18 @@
+---
+permalink: san-migration/concept_fli_online_post_migration_tasks.html 
+sidebar: sidebar 
+keywords: fli, online, post-migration, tasks 
+summary: Durante la migración posterior, se lleva a cabo cualquier corrección del servidor que no se haya realizado antes de la migración. 
+---
+= Tareas posteriores a la migración en línea de FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durante la migración posterior, se lleva a cabo cualquier corrección del servidor que no se haya realizado antes de la migración.
+
+Se elimina cualquier software de terceros. El software NetApp está instalado y configurado. Consulte la resolución de hosts para obtener ejemplos de la corrección posterior a la migración de tipos de hosts específicos.
+
+Revise los registros en busca de errores, compruebe las rutas y realice cualquier prueba de aplicaciones para comprobar que la migración se ha completado correctamente y correctamente.

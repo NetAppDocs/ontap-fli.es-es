@@ -1,0 +1,18 @@
+---
+permalink: san-migration/concept_fli_offline_post_migration_tasks.html 
+sidebar: sidebar 
+keywords: fli, offline, post-migration, tasks 
+summary: Cualquier corrección de servidor pendiente que no se haya realizado anteriormente se realizará durante la migración posterior. 
+---
+= Las tareas posteriores a la migración sin conexión de FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cualquier corrección de servidor pendiente que no se haya realizado anteriormente se realizará durante la migración posterior.
+
+El software de terceros se elimina, se instala y se configura el software de NetApp y, a continuación, se accede al host para que acceda a las LUN de NetApp. Consulte el tema _Host remediación_ para obtener ejemplos de la corrección posterior a la migración para tipos de host específicos.
+
+Revise los registros en busca de errores, compruebe las rutas y realice cualquier prueba de aplicaciones para comprobar que la migración se ha completado correctamente y correctamente.

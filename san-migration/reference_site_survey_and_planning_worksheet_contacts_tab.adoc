@@ -1,0 +1,36 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_contacts_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, contacts tab 
+summary: Como parte de la hoja de trabajo Encuesta y planificación del sitio, debe configurar una ficha que contenga la información de contacto del proyecto de migración. 
+---
+= Ficha Contactos de la hoja de trabajo de planificación y encuesta del sitio
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de la hoja de trabajo Encuesta y planificación del sitio, debe configurar una ficha que contenga la información de contacto del proyecto de migración.
+
+A continuación se muestra un ejemplo de cómo configurar la ficha Contactos.
+
+[cols="6*"]
+|===
+6+| Información de contacto del proyecto de migración 
+
+
+ a| 
+Nombre del recurso
+ a| 
+Organización
+ a| 
+Función del proyecto
+ a| 
+Teléfono de la oficina
+ a| 
+Teléfono móvil
+ a| 
+Correo electrónico
+
+|===

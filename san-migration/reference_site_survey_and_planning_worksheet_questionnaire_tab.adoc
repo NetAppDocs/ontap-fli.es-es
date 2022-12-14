@@ -1,0 +1,177 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_questionnaire_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, questionnaire tab 
+summary: Como parte de su hoja de trabajo de planificación y encuesta de sitios, debe tener una pestaña que contenga la información del proyecto de migración del cuestionario de migración inicial. 
+---
+= Pestaña Cuestionario de la hoja de trabajo de planificación y encuesta de sitio
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de su hoja de trabajo de planificación y encuesta de sitios, debe tener una pestaña que contenga la información del proyecto de migración del cuestionario de migración inicial.
+
+A continuación se muestra un ejemplo de cómo configurar la ficha Cuestionario.
+
+|===
+3+| Información del proyecto de migración 
+
+
+ a| 
+Tipo de proyecto
+ a| 
+☐ migración de datos
+
+☐ los demás
+ a| 
+
+
+
+ a| 
+Objetivos de migración de datos
+ a| 
+&#91;objetivos&#93;
+ a| 
+
+
+
+ a| 
+Dispositivos de origen
+ a| 
+Almacenamiento: [Tipo de almacenamiento]
+
+No De dispositivos: [No de cabinas]
+
+Thin-Provisioning: ☐ Sí ☐ no
+ a| 
+Enumera todos los dispositivos
+
+
+
+ a| 
+Dispositivos cliente
+ a| 
+Sistema operativo: [Versión del SO]
+
+Arranque SAN: ☐ Sí ☐ no
+
+MPIO: [Versión de MPIO]
+
+HBA: [Proveedor de HBA, modelo, firmware]
+ a| 
+
+
+
+ a| 
+Switches de estructura
+ a| 
+Proveedor:
+
+Modelo:
+
+Firmware:
+
+No De puertos:
+ a| 
+
+
+
+ a| 
+Protocolos actuales
+ a| 
+☐ FCP
+
+☐ iSCSI
+ a| 
+
+
+
+ a| 
+Gestor de volúmenes
+ a| 
+Proveedor:
+
+Producto:
+
+Versión:
+ a| 
+
+
+
+ a| 
+Dispositivos de destino (almacenamiento)
+ a| 
+Almacenamiento: [Almacenamiento]
+
+No [Número]
+
+Thin-Provisioning: ☐ Sí ☐ no
+ a| 
+Para este servicio, sólo servidores dedicados a almacenamiento de NetApp
+
+
+
+ a| 
+Cantidad de datos que se deben migrar (en TB)
+ a| 
+&#91;cantidad de datos&#93;
+ a| 
+Resumen y detalle (cada dispositivo de origen)
+
+
+
+ a| 
+Número de LUN
+ a| 
+&#91;número de LUN&#93;
+ a| 
+Resumen y detalle (cada dispositivo de origen)
+
+
+
+ a| 
+Reorganización de datos
+ a| 
+☐ Sí☐ no
+ a| 
+¿Desea el cliente mover volúmenes, directorios, carpetas o archivos a distintas estructuras de datos como parte de la migración?
+
+
+
+ a| 
+Expectativas de interrupción del servicio
+ a| 
+Ventana de interrupción
+
+☐ flexible predefinido ☐
+
+Directivas de ventana de mantenimiento estándar : [Info]
+ a| 
+Número y duración de interrupciones que se puedan utilizar. Indique las ventanas de mantenimiento, si las hubiera.
+
+
+
+ a| 
+Lapso deseado para la finalización
+ a| 
+&#91;plazo deseado para la finalización&#93;&#91;sensibilidades de tiempo&#93;
+ a| 
+
+
+
+ a| 
+Otra información pertinente
+ a| 
+&#91;otra información relevante&#93;
+ a| 
+
+
+
+ a| 
+Nombre y ubicación de la organización del cliente (ciudad y estado)
+ a| 
+ a| 
+
+|===

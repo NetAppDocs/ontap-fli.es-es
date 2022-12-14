@@ -1,0 +1,297 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_lun_details_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, lun details tab 
+summary: Como parte de su hoja de trabajo para la encuesta y la planificación del sitio, debe tener una pestaña que contenga información sobre los detalles de su LUN. 
+---
+= Pestaña Detalles de LUN de la hoja de trabajo Encuesta del sitio y planificación
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de su hoja de trabajo para la encuesta y la planificación del sitio, debe tener una pestaña que contenga información sobre los detalles de su LUN.
+
+A continuación se muestra un ejemplo de cómo configurar la pestaña Detalles de LUN.
+
+|===
+5+| Detalles de LUN 
+
+
+ a| 
+Origen
+
+
+
+ a| 
+Nombre de host
+ a| 
+Grupo de almacenamiento
+ a| 
+Sistema operativo
+ a| 
+Clustered Data ONTAP
+ a| 
+Controladora de almacenamiento
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+dm-rx200s6-21
+ a| 
+Microsoft Windows Server 2012 R2 Datacenter
+ a| 
+No
+ a| 
+AMS2100
+
+
+
+ a| 
+dm-rx200s6-22
+ a| 
+dm-rx200s6-22
+ a| 
+Red Hat Enterprise Linux Server versión 5.10
+ a| 
+No
+ a| 
+AMS2100
+
+
+
+ a| 
+dm-rx200s6-20
+ a| 
+dm-rx200s6-20
+ a| 
+ESXi 5.5.0 Build-1331820
+ a| 
+No
+ a| 
+AMS2100
+
+
+
+ a| 
+dm-rx200s6-20
+ a| 
+dm-rx200s6-20
+ a| 
+ESXi 5.5.0 Build-1331820
+ a| 
+No
+ a| 
+AMS2100
+
+|===
+|===
+5+| Detalles de LUN 
+
+
+ a| 
+Origen
+
+
+
+ a| 
+Punto de montaje
+ a| 
+Número de unidad física
+ a| 
+Puerto
+ a| 
+Autobús
+ a| 
+Destino
+
+
+
+ a| 
+C:
+ a| 
+FYSIICLDRIVE0
+ a| 
+2
+ a| 
+0
+ a| 
+0
+
+
+
+ a| 
+/
+ a| 
+sda
+ a| 
+0
+ a| 
+0
+ a| 
+0
+
+
+
+ a| 
+BootLUN_Datastore
+ a| 
+naa.60060e801046b96004f2bf4600000014
+ a| 
+0
+ a| 
+0
+ a| 
+0
+
+
+
+ a| 
+Almacén de datos_VM
+ a| 
+naa.60060e801046b96004f2bf4600000015
+ a| 
+0
+ a| 
+0
+ a| 
+0
+
+|===
+|===
+5+| Detalles de LUN 
+
+
+ a| 
+Origen
+
+
+
+ a| 
+LUN
+ a| 
+PG80 SN
+ a| 
+PG83 SN / UID
+ a| 
+Tamaño de LUN (GB)
+ a| 
+Desplazamiento inicial
+
+
+
+ a| 
+0
+ a| 
+ a| 
+60060e801046b96004f2bf460000001e
+ a| 
+40
+ a| 
+0
+
+
+
+ a| 
+0
+ a| 
+ a| 
+60060e801046b96004f2bf4600000010
+ a| 
+20
+ a| 
+
+
+
+ a| 
+0
+ a| 
+ a| 
+60060e801046b96004f2bf4600000014
+ a| 
+20
+ a| 
+
+
+
+ a| 
+1
+ a| 
+ a| 
+60060e801046b96004f2bf4600000015
+ a| 
+40
+ a| 
+
+|===
+|===
+5+| Detalles de LUN 
+
+
+ a| 
+Origen
+
+
+
+ a| 
+Tipo de LUN
+ a| 
+Alineado
+ a| 
+Prefijo personalizado (bloques)
+ a| 
+Prefijo personalizado (bytes)
+ a| 
+
+
+
+ a| 
+windows
+ a| 
+Alineado
+ a| 
+0
+ a| 
+0
+ a| 
+
+
+
+ a| 
+linux
+ a| 
+Alineado
+ a| 
+0
+ a| 
+0
+ a| 
+
+
+
+ a| 
+vmware
+ a| 
+Alineado
+ a| 
+0
+ a| 
+0
+ a| 
+
+
+
+ a| 
+vmware
+ a| 
+Alineado
+ a| 
+0
+ a| 
+0
+ a| 
+
+|===

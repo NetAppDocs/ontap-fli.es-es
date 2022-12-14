@@ -1,0 +1,26 @@
+---
+permalink: san-migration/task_document_customer_environment.html 
+sidebar: sidebar 
+keywords: document, newly, migrated, environment 
+summary: Deberá ejecutar el comando AutoSupport para documentar el entorno del cliente. 
+---
+= Documentar el entorno que se acaba de migrar
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Deberá emitir el `AutoSupport` para documentar el entorno del cliente.
+
+Para documentar el entorno del cliente, lleve a cabo los siguientes pasos:
+
+.Pasos
+. Emita un `AutoSupport` para documentar la configuración final.
++
+[listing]
+----
+B9CModeCluster::*> autosupport invoke -node DataMig-cmode-01 -type all –message “migration-final”
+----
+. Documentar por completo el entorno que acaba de migrar.
+

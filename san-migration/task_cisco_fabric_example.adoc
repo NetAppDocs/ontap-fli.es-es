@@ -1,0 +1,60 @@
+---
+permalink: san-migration/task_cisco_fabric_example.html 
+sidebar: sidebar 
+keywords: cisco, fabric, example 
+summary: Este procedimiento muestra cómo quitar el almacenamiento de origen y la zona de host de una estructura de Cisco zoneset. 
+---
+= Ejemplo de estructura Cisco
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Este procedimiento muestra cómo quitar el almacenamiento de origen y la zona de host de una estructura de Cisco zoneset.
+
+[NOTE]
+====
+El nombre de la zona para los ejemplos es _rx21_AMS2100_.
+
+====
+.Pasos
+. Elimina la zona de la zoneset de la tela A.
++
+[listing]
+----
+conf t
+zoneset name PROD_LEFT vsan 10
+no member rx21_AMS2100
+no member rx22_AMS2100
+no member rx20_AMS2100
+exit
+----
+. Activa la zonaet en la tela A.
++
+[listing]
+----
+zoneset activate name PROD_LEFT vsan 10
+end
+copy running-config startup-config
+----
+. Elimina la zona de la zonadel tejido B.
++
+[listing]
+----
+conf t
+zoneset name PROD_RIGHT vsan 10
+no member rx21_AMS2100
+no member rx22_AMS2100
+no member rx20_AMS2100
+exit
+----
+. Activa la zonaet en la tela B.
++
+[listing]
+----
+zoneset activate name PROD_RIGHT vsan 10
+end
+copy running-config startup-config
+----
+

@@ -1,0 +1,32 @@
+---
+permalink: san-migration/concept_foreign_lun_import_concepts.html 
+sidebar: sidebar 
+keywords: foreign, lun, import, concepts 
+summary: Comprender los conceptos básicos de FLI ayuda a mantener un funcionamiento adecuado y reduce el trabajo de configuración inicial. 
+---
+= Conceptos de importación de LUN externa
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Comprender los conceptos básicos de FLI ayuda a mantener un funcionamiento adecuado y reduce el trabajo de configuración inicial.
+
+* *Matriz exterior*
++
+Una cabina externa es un dispositivo de almacenamiento que no ejecuta ONTAP. Esto también se conoce como cabina de terceros o cabina de origen. En el caso de una transición de 7-Mode a ONTAP, la cabina externa sería una cabina producida por NetApp con ONTAP 7-Mode.
+
+* *LUN exterior*
++
+Una LUN externa es un LUN que contiene datos de usuario alojados en una cabina de terceros que utiliza el formato de disco nativo de esa cabina.
+
+* *FLI relación de LUN*
++
+Una relación de LUN de FLI es un emparejamiento persistente entre el almacenamiento de origen y de destino con el fin de importar los datos. Los extremos de origen y destino son LUN.
+
+* *Importación de LUN*
++
+La importación de LUN es un proceso de transferir los datos de una LUN externa desde su formato de terceros a una LUN con formato de NetApp nativa.
+
+

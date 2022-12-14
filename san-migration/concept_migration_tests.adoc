@@ -1,0 +1,14 @@
+---
+permalink: san-migration/concept_migration_tests.html 
+sidebar: sidebar 
+keywords: migration, tests 
+summary: Debe realizar una o varias migraciones de prueba para verificar que las matrices, los switches y los hosts están correctamente configurados y también para obtener varias muestras que se pueden extrapolar para determinar la duración y los niveles de esfuerzo de las migraciones. 
+---
+= Pruebas de migración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe realizar una o varias migraciones de prueba para verificar que las matrices, los switches y los hosts están correctamente configurados y también para obtener varias muestras que se pueden extrapolar para determinar la duración y los niveles de esfuerzo de las migraciones.

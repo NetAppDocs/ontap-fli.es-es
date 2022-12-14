@@ -1,0 +1,16 @@
+---
+permalink: san-migration/concept_prepare_hosts_for_fli_offline_migration.html 
+sidebar: sidebar 
+keywords: prepare, hosts, fli, offline, migration 
+summary: La fase de ejecución sin conexión FLI incluye la preparación de los hosts de migración. 
+---
+= Preparar los hosts para la migración sin conexión FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de ejecución sin conexión FLI incluye la preparación de los hosts de migración.
+
+En muchos casos, puede ser posible haber realizado esta corrección antes de este paso. De lo contrario, es donde debería realizar cualquier reparación del host, como instalar kits de conexión del host o DSM. En la fase de análisis, dispondrá de una lista de elementos GAP que deben realizarse en cada host para que ese host tenga una configuración compatible con ONTAP. Según el tipo de migración que se realice, ya sea el host se repararía y luego se reiniciaría (FLI/7-Mode a ONTAP FLI en línea) o se remediaría y luego se cerraría hasta que finalice el proceso de migración (sin conexión).

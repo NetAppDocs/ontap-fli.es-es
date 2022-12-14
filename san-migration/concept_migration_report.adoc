@@ -1,0 +1,28 @@
+---
+permalink: san-migration/concept_migration_report.html 
+sidebar: sidebar 
+keywords: migration, report 
+summary: Los registros de importación se almacenan en el archivo de registro de eventos del clúster. Debe revisar los registros en busca de errores para verificar que la migración se ha realizado correctamente. 
+---
+= Informe de migración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los registros de importación se almacenan en el archivo de registro de eventos del clúster. Debe revisar los registros en busca de errores para verificar que la migración se ha realizado correctamente.
+
+El informe de migración debería aparecer del siguiente modo:
+
+[listing]
+----
+DataMig-cmode::*> rows 0; event log show –nodes * –event fli*
+7/7/2014 18:37:21   DataMig-cmode-01 INFORMATIONAL fli.lun.verify.complete: Import verify of foreign LUN 83017542001E of size 42949672960 bytes from array model DF600F belonging to vendor HITACHI  with NetApp LUN QvChd+EUXoiS is successfully completed.
+~~~~~~ Output truncated ~~~~~~~
+----
+[NOTE]
+====
+Los pasos de verificación para comparar las LUN de origen y de destino se tratan en la fase de ejecución de la migración. Los pasos para importar y verificar LUN se tratan en la fase de ejecución de la migración, ya que están vinculados al trabajo de importación y la LUN externa.
+
+====

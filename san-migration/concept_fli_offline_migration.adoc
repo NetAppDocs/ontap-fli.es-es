@@ -1,0 +1,84 @@
+---
+permalink: san-migration/concept_fli_offline_migration.html 
+sidebar: sidebar 
+keywords: offline, migration, workflow 
+summary: El flujo de trabajo de migración sin conexión se realiza durante la fase de ejecución del proceso de migración. El diagrama de flujo de trabajo sin conexión muestra las tareas que se ejecutan en el host, la estructura, el almacenamiento de destino y el almacenamiento de origen. 
+---
+= Flujo de trabajo de migración sin conexión
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El flujo de trabajo de migración sin conexión se realiza durante la fase de ejecución del proceso de migración. El diagrama de flujo de trabajo sin conexión muestra las tareas que se ejecutan en el host, la estructura, el almacenamiento de destino y el almacenamiento de origen.
+
+image::../media/offline_migration_1.png[migración fuera de línea 1]
+
+Las tareas del flujo de trabajo sin conexión se enumeran en la siguiente tabla.
+
+[cols="2*"]
+|===
+| Componente | Tareas 
+
+
+ a| 
+Host
+ a| 
+. Reinicie el host y compruebe que todos los sistemas de archivos estén montados, que todas las rutas de LUN estén disponibles y que los servicios se inicien.
+. Prepare y apague el host.
+. Cuando se complete la migración, encienda el host.
+. Configure el HBA para que utilice una nueva LUN de arranque SAN (solo arranque SAN).
+. Desinstale MPIO de terceros.
+. Instalar el software de host de NetApp y configurar el acceso multivía.
+. Comprobar que todas las rutas a la LUN de arranque SAN estén en buen estado (solo arranque SAN).
+. Actualice los archivos del sistema y la configuración para reflejar los nuevos dispositivos.
+. Compruebe que todas las rutas a todas las LUN estén en buen estado.
+. Volver a habilitar todos los servicios y reiniciar el host (compruebe que el host vuelve a estar activo, que monta todos los sistemas de archivos, que se inician todos los servicios).
+. Configure el HBA con la segunda ruta a la nueva LUN de arranque SAN (solo arranque SAN).
+
+
+
+
+ a| 
+Estructura
+ a| 
+. DesZone el host desde el almacenamiento de origen.
+. Crear un host a la zona de almacenamiento de destino.
+
+
+
+
+ a| 
+Almacenamiento de destino
+ a| 
+. Detección de cabina de origen y nuevos LUN.
+. Marque las LUN de origen como extranjeras.
+. Crear LUN de destino con LUN externas.
+. Cree iGroups de host y asigne LUN de destino a igroup.migration Snapshot copy.
+. LUN de destino sin conexión.
+. Cree relaciones de importación e inicie trabajos de importación.
+. Crear trabajos de verificación (opcional).
+. Elimine las relaciones de importación.
+. Marque el atributo de LUN externo como false.
+. LUN de destino en línea.
+. Cree una copia Snapshot® para permitir la reversión de la LUN de destino.
+. Limite la conectividad a una única ruta (solo arranque SAN).
+. Asigne el LUN DE arranque SAN al host; no asigne LUN de datos en este momento (solo arranque SAN).
+. Verifique que todos los puertos de host estén conectados.
+. Cree copias Snapshot periódicas para habilitar la reversión de la LUN de arranque SAN de destino (solo arranque SAN).
+. Habilite todas las rutas a LA LUN de arranque SAN (solo arranque SAN).
+. Asignar LUN de datos al host.
+. Cree una copia Snapshot final.
+
+
+
+
+ a| 
+Almacenamiento de origen
+ a| 
+. Asigne LUN de origen al almacenamiento de destino.
+. Quite las LUN de origen asignadas al almacenamiento de destino.
+
+
+|===

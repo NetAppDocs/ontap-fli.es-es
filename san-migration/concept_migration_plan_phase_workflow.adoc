@@ -1,0 +1,62 @@
+---
+permalink: san-migration/concept_migration_plan_phase_workflow.html 
+sidebar: sidebar 
+keywords: plan, phase, workflow 
+summary: La fase de planificación del proceso de migración de datos se centra en las tareas necesarias para crear planes de migración detallados y asegurarse de que todo esté listo para la migración en sí. La mayor parte del trabajo migratorio es la planificación realizada durante esta fase. 
+---
+= Planificar flujo de trabajo de fase
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de planificación del proceso de migración de datos se centra en las tareas necesarias para crear planes de migración detallados y asegurarse de que todo esté listo para la migración en sí. La mayor parte del trabajo migratorio es la planificación realizada durante esta fase.
+
+En la fase de planificación, se desarrolla un plan de solución de problemas mediante la información de análisis de deficiencias del host que se recopila en la fase de análisis. Utilizar la información de corrección del host durante la planificación. Tras verificar la conectividad completa, se realiza una migración de pruebas para asegurarse de que todo se configura correctamente antes de iniciar la migración de producción.
+
+La siguiente figura muestra el flujo de trabajo del plan.
+
+image::../media/plan_and_prepare_phase_1.png[planificar y preparar la fase 1]
+
+Las tareas de la fase de planificación se enumeran en la siguiente tabla.
+
+[cols="2*"]
+|===
+| Componente | Tareas 
+
+
+ a| 
+Estructura
+ a| 
+. Realice una copia de seguridad de las zonas existentes.
+. Dividir el almacenamiento de origen en zonas en el de destino.
+
+
+
+
+ a| 
+Almacenamiento de destino
+ a| 
+. Conecte los puertos del iniciador a la estructura.
+. Detectar el almacenamiento de origen y probar la LUN. Marque la LUN de origen como externa.
+. Crear LUN de prueba mediante LUN externas.
+. Crear un igroup de prueba y asignar una LUN de prueba.
+. LUN de prueba sin conexión.
+. Cree una relación de importación e inicie una migración de prueba.
+. Elimine la relación de importación y desasigne la LUN de prueba.
+. Quite la LUN de prueba.
+
+
+
+
+ a| 
+Almacenamiento de origen
+ a| 
+. Crear grupos de hosts para el almacenamiento de destino mediante WWPN de puerto de iniciador.
+. Crear LUN de prueba (1 GB).
+. Asignar (mapa/máscara) LUN de prueba al grupo de hosts de almacenamiento de destino.
+. Quite la LUN de prueba.
+
+
+|===

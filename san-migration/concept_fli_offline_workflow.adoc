@@ -1,0 +1,23 @@
+---
+permalink: san-migration/concept_fli_offline_workflow.html 
+redirect: ontap-fli/san-migration/task_rebooting_the_host_to_validate_system_state.html 
+sidebar: sidebar 
+keywords: fli, offline, workflow 
+summary: Esta sección proporciona un ejemplo del flujo de trabajo sin conexión FLI, uno de los cuatro flujos de trabajo FLI. 
+---
+= Flujo de trabajo sin conexión FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta sección proporciona un ejemplo del flujo de trabajo sin conexión FLI, uno de los cuatro flujos de trabajo FLI.
+
+Este flujo de trabajo utiliza una matriz HDS AMS2100 como matriz de origen. El flujo de trabajo sin conexión tiene las siguientes tareas:
+
+. Preparación para la transición
+. Importar los datos
+. Verificación de los resultados de la migración (opcional)
+. Las tareas posteriores a la migración sin conexión de FLI
+

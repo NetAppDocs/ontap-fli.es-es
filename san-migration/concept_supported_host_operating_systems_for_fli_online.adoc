@@ -1,0 +1,42 @@
+---
+permalink: san-migration/concept_supported_host_operating_systems_for_fli_online.html 
+sidebar: sidebar 
+keywords: supported, host, operating, systems, fli, online 
+summary: El flujo de trabajo en línea FLI se puede usar para las LUN conectadas a hosts que ejecutan uno de los siguientes sistemas operativos. 
+---
+= Sistemas operativos de host compatibles para FLI en línea
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El flujo de trabajo en línea FLI puede utilizarse para las LUN conectadas a hosts que ejecutan uno de los siguientes sistemas operativos, a partir de las versiones enumeradas.
+
+. Microsoft (todas las versiones de los servidores que se muestran son compatibles):
++
+** Windows Server 2008 y posterior (incluye clústeres de conmutación al nodo de respaldo de Windows Server)
+** Microsoft Hyper-V Server 2008 y posterior
+** Windows Server 2012 y posterior (incluye clúster Windows Server 2012)
+** Microsoft Hyper-V Server 2012 y posterior
+
+
+. VMware:
++
+** Todas las versiones ESXi 5.x y posteriores
+
+
+. Linux:
++
+** Red Hat Enterprise Linux (RHEL) 5.x y posteriores
+
+
+
+
+Considere la posibilidad de usar el flujo de trabajo sin conexión FLI para sistemas operativos host que no estén en la lista anterior.
+
+[NOTE]
+====
+Si el destino de las controladoras de NetApp es una MetroCluster, NO use el flujo de trabajo en línea. Si se produce una conmutación por error de un sitio durante una importación en línea activa, podría producirse un error en las transferencia de escritura en la matriz de origen, lo que provocaría un fallo de verificación y una posible pérdida de datos. Si el destino es MetroCluster, utilice FLI sin conexión, independientemente del sistema operativo del host.
+
+====

@@ -1,0 +1,87 @@
+---
+permalink: san-migration/concept_fli_online_migration.html 
+sidebar: sidebar 
+keywords: online, migration, workflow 
+summary: El flujo de trabajo de migración en línea se realiza durante la fase de ejecución del proceso de migración. El diagrama de flujo de trabajo en línea muestra las tareas que se ejecutan en el host, la estructura, el almacenamiento de destino y el almacenamiento de origen. 
+---
+= Flujo de trabajo de migración en línea
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El flujo de trabajo de migración en línea se realiza durante la fase de ejecución del proceso de migración. El diagrama de flujo de trabajo en línea muestra las tareas que se ejecutan en el host, la estructura, el almacenamiento de destino y el almacenamiento de origen.
+
+image::../media/online_migration_1.png[migración en línea 1]
+
+Las tareas del flujo de trabajo en línea se enumeran en la siguiente tabla.
+
+[cols="2*"]
+|===
+| Componente | Tareas 
+
+
+ a| 
+Host
+ a| 
+. Compruebe que todos los sistemas de archivos están montados y que todas las rutas y aplicaciones LUN están disponibles.
+. *Opcional:* Si las LUN que se importan son para ESX, revise y siga las instrucciones del Apéndice A: Corrección de ESX CAW/ATS.
+. Prepare y apague los hosts.
+. Encienda los hosts con las LUN de destino.
+. Configure el HBA para que utilice una nueva LUN de arranque SAN (solo arranque SAN).
+. Desinstale MPIO de terceros.
+. Instalar el software de host de NetApp y configurar el acceso multivía.
+. Comprobar que todas las rutas a la LUN de arranque SAN estén en buen estado (solo arranque SAN).
+. Actualice los archivos del sistema y la configuración para reflejar los nuevos dispositivos.
+. Compruebe que todas las rutas a todas las LUN estén en buen estado.
+. Volver a habilitar todos los servicios y reiniciar el host (compruebe que el host vuelve a estar activo, que monta todos los sistemas de archivos, que se inician todos los servicios).
+. Configure el HBA con la segunda ruta a la nueva LUN de arranque SAN (solo arranque SAN).
+
+
+
+
+ a| 
+Estructura
+ a| 
+. DesZone el host desde el almacenamiento de origen.
+. Crear un host a la zona de almacenamiento de destino.
+
+
+
+
+ a| 
+Almacenamiento de destino
+ a| 
+. Detección de cabina de origen y nuevos LUN.
+. Marque las LUN de origen como extranjeras.
+. Crear LUN de destino con LUN externas.
+. Cree iGroups de host y asigne LUN de destino a igroup.
+. Desconecte las LUN de destino.
+. Quite los hosts del enmascaramiento LUN (iGroups) de la cabina de origen.
+. Cree relaciones de importación e inicie trabajos de importación.
+. Realice el paso de host 4 anterior (reasignar los hosts a nuevas ubicaciones de LUN).
+. Limite la conectividad a una única ruta (solo arranque SAN).
+. Asigne el LUN DE arranque SAN al host; no asigne LUN de datos en este momento (solo arranque SAN).
+. Cree copias Snapshot periódicas para habilitar la reversión de la LUN de arranque SAN de destino (solo arranque SAN).
+. Habilite todas las rutas a LA LUN de arranque SAN (solo arranque SAN).
+. LUN de destino en línea.
+. Cree una copia Snapshot para habilitar la reversión de la LUN de destino.
+. Inicie relaciones de importación (inicie la copia de datos de las LUN de origen a destino).
+. Crear trabajos de verificación y detener relaciones de importación (opcional).
+. Elimine las relaciones de importación.
+. Marque el atributo de LUN externo como false.
+
+
+
+
+ a| 
+Almacenamiento de origen
+ a| 
+. Asigne LUN de origen al almacenamiento de destino.
+. Desasigne las LUN de origen al host.
+. Cree una copia Snapshot para habilitar la reversión de la LUN de destino.
+. Quite las LUN de origen asignadas al almacenamiento de destino.
+
+
+|===

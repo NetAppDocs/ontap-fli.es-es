@@ -1,0 +1,111 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_fas_config_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, fas config tab 
+summary: Como parte de la hoja de trabajo de planificación y encuesta de sitios, debe tener una ficha que contenga información sobre la configuración de FAS. 
+---
+= Ficha Configuración de FAS de la hoja de trabajo Encuesta del sitio y planificación
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de la hoja de trabajo de planificación y encuesta de sitios, debe tener una ficha que contenga información sobre la configuración de FAS.
+
+A continuación se muestra un ejemplo de cómo configurar la pestaña Configuración de FAS.
+
+|===
+| Nombre del clúster | Dirección IP de administración del clúster | Credenciales de gestión de clústeres disponibles 2+| Host de System Manager de ONTAP 
+
+
+|  |  |  | *Dirección IP* | *Credenciales disponibles* 
+
+
+|  |  |  |  |  
+|===
+|===
+6+| Puertos de red 
+
+
+| Nodo | Nombre de la interfaz | Tipo de puerto | Velocidad del puerto | Nombre/ID de VLAN | IFGRP 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+|===
+| Nombre de SVM | Tipo | Protocolos | Agregado | Volumen raíz de SVM 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+|===
+| SVM | Volumen | Agregado | Tamaño | SAN 
+
+
+|  |  |  | *Nombre de LUN* | *Tamaño de LUN* 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+|===
+6+| Interfaces de red de SVM 
+
+
+| SVM | Nombre de la interfaz | Rol de la interfaz | Dirección IP/máscara de red | Nodo de inicio/puerto de inicio | Grupo de recuperación tras fallos 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+|===
+6+| Puertos de destino FCP de SVM 
+
+
+| SVM | Nombre de puerto FCP | WWPN | WWNN | Nodo de inicio | Puerto de inicio 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+|===
+6+| Puertos iniciadores FCP del nodo 
+
+
+| Nombre del nodo | Nombre de puerto FCP | WWPN | WWN | Nodo Homer | Puerto de inicio 
+
+
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===

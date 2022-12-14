@@ -1,0 +1,20 @@
+---
+permalink: san-migration/concept_using_fli_to_import_luns_into_all_flash.html 
+sidebar: sidebar 
+keywords: use, foreign lun import, import luns, aff 
+summary: 'AFF no es compatible con FlexArray en todas las versiones del software ONTAP. En esas versiones, debe preparar la importación de LUN externos (FLI) a una pareja de alta disponibilidad (ha) que no sea AFF en el mismo clúster con AFF.' 
+---
+= Uso de la importación de LUN externos para importar LUN a AFF
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+AFF no es compatible con FlexArray en todas las versiones del software ONTAP. En esas versiones, debe preparar la importación de LUN externos (FLI) a una pareja de alta disponibilidad (ha) que no sea AFF en el mismo clúster con AFF.
+
+A partir de ONTAP 9.1, AFF admite FLI. Puede usar FKU para importar LUN de otras cabinas directamente a los clústeres de ONTAP.
+
+A partir de ONTAP 8.3.2, AFF puede admitir FLI con una solicitud de variación de procesos (PVR) aprobada. Póngase en contacto con el equipo de su cuenta de NetApp para recibir la aprobación del PVR. En el caso de la aprobación, el remitente, generalmente ingeniero de sistemas de NetApp, recibirá una carta de aprobación con instrucciones para habilitar la funcionalidad FLI.
+
+Para las versiones de software de ONTAP anteriores a la versión 8.3.2, AFF no admite actualmente FlexArray debido a algunas optimizaciones de escritura que se han realizado. Tendrá que preparar las importaciones FLI a una pareja de ha que no sea AFF en el mismo clúster con AFF. Una vez completada la migración, podrá utilizar operaciones NO disruptivas (NDO) como el movimiento de volúmenes o LUN para mover las LUN migradas a AFF. Si su clúster de AFF no tiene nodos que no sean AFF, hable con su equipo de cuentas sobre la posibilidad de solicitar mecanismos de migración para facilitar esto.

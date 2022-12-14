@@ -1,0 +1,25 @@
+---
+permalink: san-migration/concept_enablement_for_non_supported_luns_interoperability.html 
+redirect: ontap-fli/san-migration/task_importing_non_fc_luns.html 
+sidebar: sidebar 
+keywords: enablement, non-supported, luns 
+summary: Es importante verificar que el sistema operativo host, el HBA, el switch y la cabina ONTAP de la cabina de origen y la configuración final se enumeran todos como compatibles con la matriz de interoperabilidad. 
+---
+= Habilitación para LUN no compatibles
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es importante verificar que el sistema operativo host, el HBA, el switch y la cabina ONTAP de la cabina de origen y la configuración final se enumeran todos como compatibles con la matriz de interoperabilidad.
+
+En las siguientes secciones, se proporciona información para estos casos de uso:
+
+* Importar los LUN de iSCSI como LUN de FC
+* Mover LUN migrados a plataformas AFF
+
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

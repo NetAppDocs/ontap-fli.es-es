@@ -1,0 +1,16 @@
+---
+permalink: san-migration/concept_verify_host_lun_path_and_multipath_configuration_81ec.html 
+sidebar: sidebar 
+keywords: verify, host lun path, multipath, configuration 
+summary: Antes de realizar cualquier migración, compruebe que el acceso multivía está correctamente configurado y funciona correctamente. 
+---
+= Verifique la ruta de LUN del host y la configuración multivía
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de realizar cualquier migración, compruebe que el acceso multivía está correctamente configurado y funciona correctamente.
+
+Todas las rutas disponibles a las LUN deben estar activas. Consulte los temas de verificación multivía del host SAN para obtener ejemplos de cómo verificar la multivía en hosts Windows, Linux y ESXi.

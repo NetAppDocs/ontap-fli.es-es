@@ -1,0 +1,27 @@
+---
+permalink: san-migration/concept_fli_7_mode_to_ontap_transition_workflow.html 
+sidebar: sidebar 
+keywords: fli, 7-mode, ontap, transition, workflow 
+summary: En esta sección se proporciona un ejemplo del flujo de trabajo FLI de 7-Mode para la transición a ONTAP. El flujo de trabajo de transición se puede ejecutar como un flujo de trabajo en línea o sin conexión. 
+---
+= Flujo de trabajo de transición de FLI de 7-Mode a ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta sección se proporciona un ejemplo del flujo de trabajo FLI de 7-Mode para la transición a ONTAP. El flujo de trabajo de transición se puede ejecutar como un flujo de trabajo en línea o sin conexión.
+
+Se recomienda la transición FLI cuando la LUN de origen esté alojada en un agregado de 32 bits o cuando la LUN no esté alineada. La transición de FLI de 7-Mode a ONTAP puede combinar la transición de la LUN de 7-Mode a ONTAP junto con la corrección de la alineación de las LUN y la transición de la LUN de un agregado de 32 bits a 64 bits. Otros métodos para realizar la transición de la LUN, incluida 7-Mode Transition Tool (7MTT), pueden requerir el reparación de la alineación de LUN o la conversión de un agregado de 32 bits a 64 bits antes de la transición a ONTAP.
+
+El flujo de trabajo de transición de FLI de 7-Mode a ONTAP puede ser un flujo de trabajo en línea o sin conexión. Estos flujos de trabajo son funcionalmente idénticos a los dos flujos de trabajo de migración en línea y sin conexión FLI correspondientes, excepto que la cabina de origen es una cabina de almacenamiento 7-Mode de NetApp. Ambos flujos de trabajo comparten las mismas reglas y procedimientos que sus equivalentes de migración. Esto incluye la lista de soporte operativo del host de flujo de trabajo en línea FLI.
+
+El ejemplo proporcionado debería realizar un tutorial exhaustivo del proceso FLI 7-Mode a ONTAP. El flujo de transición de FLI de 7-Mode a ONTAP incluye las siguientes tareas:
+
+. Preparación de las cabinas de origen y destino
+. Realización de una transición disruptiva
+. Importar los datos
+. Verificación de los resultados de la migración
+. Tareas posteriores a la migración de FLI
+

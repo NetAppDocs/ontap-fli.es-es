@@ -1,0 +1,31 @@
+---
+permalink: san-migration/task_importing_non_fc_luns.html 
+sidebar: sidebar 
+keywords: import, non-fc luns 
+summary: 'Dado que Foreign LUN Import (FLI) aprovecha la tecnología FlexArray para montar LUN externos, solo puede conectarse a cabinas de origen mediante FCP. FLI solo admite los LUN de FC. Sin embargo, hay una solución que permite importar LUN iSCSI. Dado que importará las LUN de iSCSI como LUN de FC, a diferencia de otros flujos de trabajo FLI online 7-Mode para ONTAP, la ventana de interrupción abarcará todo el flujo de trabajo:' 
+---
+= Importación de LUN no FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dado que Foreign LUN Import (FLI) aprovecha la tecnología FlexArray para montar LUN externos, solo puede conectarse a cabinas de origen mediante FCP. FLI solo admite los LUN de FC. Sin embargo, hay una solución que permite importar LUN iSCSI. Dado que importará las LUN de iSCSI como LUN de FC, a diferencia de otros flujos de trabajo FLI online 7-Mode para ONTAP, la ventana de interrupción abarcará todo el flujo de trabajo:
+
+Dado que importará las LUN de iSCSI como LUN de FC, a diferencia de otros flujos de trabajo FLI online 7-Mode para ONTAP, la ventana de interrupción abarcará todo el flujo de trabajo.
+
+.Pasos
+. En la cabina de origen, se debe anular la asignación del LUN de iSCSI deseado de su igroup iSCSI.
+. En la cabina de origen, asigne el LUN a un igroup de FC, asegurándose de que los WWPN de la cabina de destino se hayan añadido al igroup.
+. Importe la LUN.
+. Una vez importada el LUN, puede crear un nuevo igroup iSCSI y añadir los hosts al igroup.
+. En los hosts, vuelva a analizar las LUN.
++
+Consulte la matriz de interoperabilidad (IMT) en el sitio web de soporte de NetApp con el fin de confirmar que las versiones exactas del producto y las funciones descritas en este documento son compatibles con su entorno concreto. La cabina IMT de NetApp define los componentes y las versiones del producto que pueden utilizarse para crear configuraciones que sean compatibles con NetApp. Los resultados específicos dependen de la instalación que realice cada cliente de acuerdo con las especificaciones publicadas.
+
+
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

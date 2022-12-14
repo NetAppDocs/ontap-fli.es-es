@@ -1,0 +1,36 @@
+---
+permalink: san-migration/concept_data_migration_methodology.html 
+sidebar: sidebar 
+keywords: data migration methodology 
+summary: El proceso de migración de datos consta de fases que proporcionan una metodología probada. Puede utilizar la metodología de migración de datos para definir el ámbito, planificar y documentar las opciones y tareas de migración. 
+---
+= Metodología de migración de datos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El proceso de migración de datos consta de fases que proporcionan una metodología probada. Puede utilizar la metodología de migración de datos para definir el ámbito, planificar y documentar las opciones y tareas de migración.
+
+. Fase de detección
++
+Se recopila la información sobre hosts, almacenamiento y entramados en el entorno.
+
+. Fase de análisis
++
+Se examinan los datos recopilados y se determina el enfoque de migración adecuado para cada host o cabina de almacenamiento.
+
+. Fase de planificación
++
+Se crean y prueban planes de migración, se aprovisiona el almacenamiento de destino y se configuran las herramientas de migración.
+
+. Fase de ejecución
++
+Migrar los datos y realizar reparaciones de host.
+
+. Fase de verificación
++
+Valide la nueva configuración del sistema y proporcione documentación.
+
+

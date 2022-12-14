@@ -1,0 +1,29 @@
+---
+permalink: san-migration/task_fli_online_importing_the_data.html 
+sidebar: sidebar 
+keywords: fli online, import, data 
+summary: Estos son los pasos para importar los datos de la LUN de origen a la LUN de destino. 
+---
+= FLI en línea: Importe los datos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Estos son los pasos para importar los datos de la LUN de origen a la LUN de destino.
+
+.Pasos
+. Inicie la importación de la migración.
++
+[listing]
+----
+cluster::*> lun import start -vserver fli_72C -path /vol/flivol/72Clun1
+----
+. Visualizar el estado de FLI.
++
+[listing]
+----
+cluster::*> lun import show -vserver fli_72C -path /vol/flivol/72Clun1
+----
+

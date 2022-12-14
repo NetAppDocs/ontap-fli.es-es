@@ -1,0 +1,218 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_sds_cli_scripts_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, sds cli scripts tab 
+summary: Como parte de su hoja de trabajo de planificación y encuesta del sitio, debe tener una ficha que contenga información sobre los scripts CLI de SDS. 
+---
+= Hoja de trabajo de planificación y encuesta del sitio Ficha secuencias de comandos CLI de SDS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de su hoja de trabajo de planificación y encuesta del sitio, debe tener una ficha que contenga información sobre los scripts CLI de SDS.
+
+A continuación se muestra un ejemplo de cómo configurar la pestaña secuencias de comandos de la CLI del SDS.
+
+|===
+| Controladora 1 | Controlador 2 
+
+
+ a| 
+vol size vol0 aggr0 108g
+ a| 
+
+
+
+ a| 
+snap reserve bootcampvol 0
+ a| 
+
+
+
+ a| 
+reserva snap vol0 20
+ a| 
+
+
+
+ a| 
+snap autodelete bootcamvol on
+ a| 
+
+
+
+ a| 
+compromiso bootcamvol de snap
+ a| 
+
+
+
+ a| 
+volumen de activación de bootcampvol de snap
+ a| 
+
+
+
+ a| 
+autodelete bootcampvol target_free_space 20
+ a| 
+
+
+
+ a| 
+snap autocreated bootcampvol deferd_delete user_created
+ a| 
+
+
+
+ a| 
+autodelete vol0 activado
+ a| 
+
+
+
+ a| 
+compromiso de eliminación automática de snap vol0 intente
+ a| 
+
+
+
+ a| 
+volumen de activación de snap autodelete vol0
+ a| 
+
+
+
+ a| 
+autodelete vol0 target_free_space 20
+ a| 
+
+
+
+ a| 
+autodelete vol0 did_delete user_created
+ a| 
+
+
+
+ a| 
+vol. autosize bootcampvol on
+ a| 
+
+
+
+ a| 
+vol autosize vol0 on
+ a| 
+
+
+
+ a| 
+vol options bootcampvol try_first volume_grow
+ a| 
+
+
+
+ a| 
+opciones vol bootcampvol fractional_reserve 100
+ a| 
+
+
+
+ a| 
+opciones vol. vol0 try_first volume_grow
+ a| 
+
+
+
+ a| 
+opciones vol. vol0 fraccional_reserve 100
+ a| 
+
+
+
+ a| 
+seguridad qtree /vol/bootcampvol unix
+ a| 
+
+
+
+ a| 
+seguridad qtree /vol/vol0 ntfs
+ a| 
+
+
+
+ a| 
+snap sched bootcampvol 0 0 0 0
+ a| 
+
+
+
+ a| 
+snap sched vol0 2 6@8,12,16,20
+ a| 
+
+
+
+ a| 
+El mapa de #LUN se ha omitido para /vol/qavol_narayan/testlun ya que la LUN no está asignada a un iGroup.
+ a| 
+
+
+
+ a| 
+Mapa de #LUN omitido para /vol/bootcamvol/dm25_boot_lun porque la LUN no está asignada a un iGroup.
+ a| 
+
+
+
+ a| 
+#LUN mapping omitida para /vol/bootcamvol/dm25_data1_lun ya que la LUN no está asignada a un iGroup.
+ a| 
+
+
+
+ a| 
+#LUN mapping omitida para /vol/bootcamvol/dm25_data2_lun ya que la LUN no está asignada a un iGroup.
+ a| 
+
+
+
+ a| 
+Mapa de #LUN omitido para /vol/bootcamvol/dm26_boot_lun ya que la LUN no está asignada a un iGroup.
+ a| 
+
+
+
+ a| 
+#LUN mapping omitida para /vol/bootcamvol/dm26_data1_lun ya que la LUN no está asignada a un iGroup.
+ a| 
+
+
+
+ a| 
+#LUN mapping omitida para /vol/bootcamvol/dm26_data2_lun ya que la LUN no está asignada a un iGroup.
+ a| 
+
+
+
+ a| 
+#LUN mapping omitidos para /vol/bootcampvol/dm27_boot_lun ya que la LUN no está asignada a un iGroup.
+ a| 
+
+
+
+ a| 
+#LUN mapping omitida para /vol/bootcamvol/dm27_data1_lun ya que la LUN no está asignada a un iGroup.
+ a| 
+
+
+
+ a| 
+#LUN mapping omitida para /vol/bootcamvol/dm27_data2_lun ya que la LUN no está asignada a un iGroup.
+ a| 
+
+|===

@@ -1,0 +1,227 @@
+---
+permalink: san-migration/task_test_migration_example_using_hitachi_ams2100.html 
+sidebar: sidebar 
+keywords: test, migration, example, hitachi ams2100 
+summary: A continuación se muestra un ejemplo de migración de prueba utilizando un Hitachi AMS2100 como matriz externa. Según las cabinas involucradas, los sistemas operativos host y otras variables, los pasos pueden ser diferentes. 
+---
+= Probar el ejemplo de migración con Hitachi AMS2100
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A continuación se muestra un ejemplo de migración de prueba utilizando un Hitachi AMS2100 como matriz externa. Según las cabinas involucradas, los sistemas operativos host y otras variables, los pasos pueden ser diferentes.
+
+Puede utilizar el siguiente ejemplo como guía general de los pasos necesarios para realizar migraciones de prueba. NetApp recomienda realizar migraciones de pruebas lo antes posible para encontrar y reducir el tiempo necesario para resolver los problemas derivados de las pruebas. Se debe realizar una migración de pruebas en todas las combinaciones de cabinas de origen y destino antes de continuar con las migraciones de producción.
+
+Para realizar una migración de pruebas, lleve a cabo los siguientes pasos:
+
+.Pasos
+. Cree un LUN de prueba de 2 GB en la cabina de origen.
+. Inicie sesión en el sistema AS de Hitachi Storage Navigator Modular.
+. Seleccione la matriz AMS 2100.
+. Haga clic en *Mostrar y configurar matriz*.
+. Inicie sesión mediante la raíz.
+. Expanda *grupos* y seleccione *unidades lógicas*.
+. Seleccione *Crear LU* para crear la LUN de prueba.
+. Cree un LUN de prueba de 2 GB.
+. Haga clic en *Aceptar*.
+. Omita aquí la asignación de LUN y haga clic en *Cerrar*.
+. Comprobar que se ha creado la LUN 0026.
+. Expanda **grupos**y seleccione *unidades lógicas*.
+. Seleccione *grupos de hosts* para asignar el LUN de prueba al grupo de hosts CDOT_FLI.
+. Seleccione el grupo de hosts CDOT_FLI creado en el paso anterior y haga clic en *Editar grupo de hosts*.
+. Elija los puertos del grupo de hosts. En este ejemplo seleccionamos 0a, 0e, 1a, 1e. Seleccione la opción Forced Set to All Selected Ports (establecer a todos los puertos seleccionados).
++
+image::../media/hds_storage_navigator_edit_host_group.gif[HDS Storage Navigator Edit Host Group]
+
+. Haga clic en *unidades lógicas* y agregue la LUN de prueba LUN0026.
+. Haga clic en *Aceptar* para asignar la LUN.
+. Seleccione *Sí, he leído la advertencia anterior y deseo editar el grupo de hosts* y haga clic en *Confirmar*.
+. Compruebe la creación del grupo de hosts y haga clic en *Cerrar*.
+. Verifique la LUN de prueba y la asignación desde el almacenamiento de origen al almacenamiento de destino, y ejecute la importación de LUN externa (FLI).
+. Inicie sesión en el almacenamiento de ONTAP a través de SSH mediante el usuario administrador.
+. Cambie el modo a Avanzado. `DataMig-cmode::> set -privilege advanced`
+. Introduzca y cuando se le pregunte si desea continuar con los comandos avanzados.
+. Detectar la cabina de origen en ONTAP. Se deben esperar unos minutos y volver a intentar detectar la cabina de origen.`storage array show`
++
+.. Cuando se detecta la cabina de almacenamiento por primera vez, es posible que ONTAP no muestre la cabina mediante la detección automática. Use las siguientes instrucciones para restablecer el puerto del switch donde están conectados los puertos iniciadores de ONTAP.
++
+Por ejemplo, los puertos de iniciador del clúster DataMig-cmode 0a y 0b de ONTAP están conectados a los puertos Cisco 4/9 y 4/11. Para restablecer el puerto 4/9 en el switch Cisco:
+
++
+[listing]
+----
+conf t
+interface fc4/9
+shutdown
+no shutdown
+exit
+exit
+----
++
+Restablecer un puerto por lo general es suficiente. Compruebe la lista de cabinas y las rutas de LUN después de restablecer un puerto.
+
+
+
+. Verifique que la cabina de origen se haya detectado a través de todos los puertos iniciadores: `storage array config show -array-name HITACHI_DF600F_1`
++
+[listing]
+----
+
+             LUN   LUN
+Node         Group Count     Array Name       Array Target Port Initiator
+------------ ----- ----- ---------------------------- -----------------------
+DataMig-cmode-01 0     1    HITACHI_DF600F_1     50060e801046b960        0a
+                                                 50060e801046b964        0b
+                                                 50060e801046b968        0a
+                                                 50060e801046b96c        0b
+DataMig-cmode-02 0     1    HITACHI_DF600F_1     50060e801046b960        0a
+                                                 50060e801046b964        0b
+                                                 50060e801046b968        0a
+                                                 50060e801046b96c        0b
+----
+. Enumere la LUN de prueba asignada del almacenamiento de Hitachi y verifique las propiedades y las rutas del disco: `storage disk show -array-name HITACHI_DF600F_1 -instance`
++
+[listing]
+----
+
+                  Disk: HIT-1.1
+        Container Type: unassigned
+            Owner/Home: -  / -
+               DR Home: -
+    Stack ID/Shelf/Bay: -  / -  / -
+                   LUN: 0
+                 Array: HITACHI_DF600F_1
+                Vendor: HITACHI
+                 Model: DF600F
+         Serial Number: 83017542001A
+                   UID: 48495441:43484920:38333031:37353432:30303236:00000000:00000000:00000000:00000000:00000000
+                   BPS: 512
+         Physical Size: -
+              Position: present
+Checksum Compatibility: block
+             Aggregate: -
+                  Plex: -
+Paths:
+                                LUN  Initiator Side        Target Side                                                        Link
+Controller         Initiator     ID  Switch Port           Switch Port           Acc Use  Target Port                TPGN    Speed      I/O KB/s          IOPS
+------------------ ---------  -----  --------------------  --------------------  --- ---  -----------------------  ------  -------  ------------  ------------
+DataMig-cmode-01   0a             0  DM-Cisco9506-1:4-9    DM-Cisco9506-1:2-24   AO  INU  50060e801046b968              2   2 Gb/S             0             0
+DataMig-cmode-01   0b             0  DM-Cisco9506-2:4-9    DM-Cisco9506-2:2-24   AO  INU  50060e801046b96c              2   2 Gb/S             0             0
+DataMig-cmode-01   0b             0  DM-Cisco9506-2:4-9    DM-Cisco9506-2:1-14   AO  INU  50060e801046b964              1   2 Gb/S             0             0
+DataMig-cmode-01   0a             0  DM-Cisco9506-1:4-9    DM-Cisco9506-1:1-14   AO  INU  50060e801046b960              1   2 Gb/S             0             0
+DataMig-cmode-02   0a             0  DM-Cisco9506-1:4-11   DM-Cisco9506-1:2-24   AO  INU  50060e801046b968              2   2 Gb/S             0             0
+DataMig-cmode-02   0b             0  DM-Cisco9506-2:4-11   DM-Cisco9506-2:2-24   AO  INU  50060e801046b96c              2   2 Gb/S             0             0
+DataMig-cmode-02   0b             0  DM-Cisco9506-2:4-11   DM-Cisco9506-2:1-14   AO  INU  50060e801046b964              1   2 Gb/S             0             0
+DataMig-cmode-02   0a             0  DM-Cisco9506-1:4-11   DM-Cisco9506-1:1-14   AO  INU  50060e801046b960              1   2 Gb/S             0             0
+
+Errors:
+-
+
+DataMig-cmode::*>
+----
+. Marque la LUN de origen como externa utilizando el número de serie: `storage disk set-foreign-lun { -serial-number 83017542001A } -is-foreign true`
+. Compruebe que la LUN de origen esté marcada como externa: `storage disk show -array-name HITACHI_DF600F_1`
+. Enumere todas las cabinas externas y sus números de serie: `storage disk show -container-type foreign -fields serial-number`
++
+[NOTE]
+====
+El comando LUN create detecta el tamaño y la alineación basados en la separación de particiones y crea el LUN en consecuencia con el argumento Foreign Disk.
+
+====
+. Cree un volumen de destino: `vol create -vserver datamig flivol aggr1 -size 10g`
+. Cree una LUN de prueba mediante una LUN externa: `lun create -vserver datamig -path /vol/flivol/testlun1 -ostype linux -foreign-disk 83017542001A`
+. Enumere la LUN de prueba y compruebe el tamaño de la LUN con la LUN de origen: `lun show`
++
+[NOTE]
+====
+Para la migración sin conexión FLI, la LUN debe estar en línea para asignarla a un igroup y, luego, debe estar sin conexión antes de crear la relación de importación de LUN.
+
+====
+. Cree un igroup de prueba del protocolo FCP sin añadir ningún iniciador: `lun igroup create -vserver datamig -igroup testig1 -protocol fcp -ostype linux`
+. Asigne el LUN de prueba al igroup de prueba: `lun map -vserver datamig -path /vol/flivol/testlun1 -igroup testig1`
+. Desconectar la LUN de prueba: `lun offline -vserver datamig -path /vol/flivol/testlun1`
+. Crear relación de importación con LUN de prueba y LUN externa: `lun import create -vserver datamig -path /vol/flivol/testlun1 -foreign-disk 83017542001A`
+. Inicie la migración (importar): `lun import start -vserver datamig -path /vol/flivol/testlun1`
+. Supervise el progreso de la importación: `lun import show -vserver datamig -path /vol/flivol/testlun1`
+. Compruebe que el trabajo de importación se ha completado correctamente: `lun import show -vserver datamig -path /vol/flivol/testlun1`
++
+[listing]
+----
+vserver foreign-disk   path                operation admin operational percent
+                                         in progress state state       complete
+-------------------------------------------------------------------------------
+datamig 83017542001A   /vol/flivol/testlun1
+                                           import    started
+                                                           completed        100
+----
+. Inicie la tarea de verificación para comparar las LUN de origen y de destino. Supervise el progreso de la verificación: `lun import verify start -vserver datamig -path /vol/flivol/testlun1`
++
+[listing]
+----
+DataMig-cmode::*> lun import show -vserver datamig -path /vol/flivol/testlun1
+vserver foreign-disk   path                operation admin operational percent
+                                         in progress state state       complete
+-------------------------------------------------------------------------------
+datamig 83017542001A   /vol/flivol/testlun1
+                                           verify    started
+                                                           in_progress       44
+----
+. Compruebe que el trabajo de verificación se haya completado sin errores: `lun import show -vserver datamig -path /vol/flivol/testlun1`
++
+[listing]
+----
+vserver foreign-disk   path                operation admin operational percent
+                                         in progress state state       complete
+-------------------------------------------------------------------------------
+datamig 83017542001A   /vol/flivol/testlun1
+                                           verify    started
+                                                           completed        100
+----
+. Elimine la relación de importación para eliminar el trabajo de migración: `lun import delete -vserver datamig -path /vol/flivol/testlun1``lun import show -vserver datamig -path /vol/flivol/testlun1`
+. Desasigne el LUN de prueba del igroup de prueba: `lun unmap -vserver datamig -path /vol/flivol/testlun1 -igroup testig1`
+. En línea de la LUN de prueba: `lun online -vserver datamig -path /vol/flivol/testlun1`
+. Marque el atributo de LUN externo como false: `storage disk modify { -serial-number 83017542001A } -is-foreign false`
++
+[NOTE]
+====
+No quite el grupo de hosts creado en almacenamiento de origen con puertos iniciadores ONTAP. El mismo grupo de hosts se vuelve a utilizar durante las migraciones de esa cabina de origen.
+
+====
+. Quitar la LUN de prueba del almacenamiento origen.
++
+.. Inicie sesión en Hitachi Storage Navigator Modular como sistema.
+.. Seleccione la matriz AMS 2100 y haga clic en *Mostrar y Configurar matriz*.
+.. Inicie sesión mediante la raíz.
+.. Seleccione *grupos* y, a continuación, seleccione *grupos de host*.
+.. Seleccione _CDOT_FLI iGroup_ y haga clic en *Editar grupo de hosts*.
+.. En la ventana *Editar grupo de hosts*, seleccione todos los puertos de destino seleccionados para asignar la LUN de prueba y seleccione *forzado a todos los puertos seleccionados*.
+.. Seleccione la ficha *unidades lógicas*.
+.. Seleccione el LUN de prueba en la ventana *unidades lógicas asignadas*.
+.. Seleccione *Quitar* para eliminar la asignación de LUN.
+.. Haga clic en Aceptar.
+.. No quite el grupo de hosts y continúe eliminando el LUN de prueba.
+.. Seleccione unidades lógicas.
+.. Seleccione la LUN de prueba creada en el paso anterior (LUN0026).
+.. Haga clic en *Eliminar LUN*.
+.. Haga clic en *Confirmar* para eliminar el LUN de prueba.
+
+
+. Eliminar la LUN de prueba del almacenamiento de destino.
++
+.. Inicie sesión en el almacenamiento de ONTAP a través de SSH mediante el usuario administrador.
+.. Desconectar el LUN de prueba del sistema de almacenamiento de NetApp: `lun offline -vserver datamig -path /vol/flivol/testlun1`
++
+[NOTE]
+====
+Asegúrese de no seleccionar otro LUN de host.
+
+====
+.. Destruir el LUN de prueba en el sistema de almacenamiento de NetApp: `lun destroy -vserver datamig -path /vol/flivol/testlun1`
+.. Offline el volumen de prueba del sistema de almacenamiento de NetApp: `vol offline -vserver datamig -volume flivol`
+.. Destruir el volumen de pruebas en el sistema de almacenamiento de NetApp: `vol destroy -vserver datamig -volume flivol`
+
+
+

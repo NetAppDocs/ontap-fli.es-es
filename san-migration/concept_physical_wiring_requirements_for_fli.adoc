@@ -1,0 +1,26 @@
+---
+permalink: san-migration/concept_physical_wiring_requirements_for_fli.html 
+sidebar: sidebar 
+keywords: physical, wiring, requirements, fli 
+summary: FLI tiene los mismos requisitos de cableado que FlexArray de NetApp. Los puertos de los iniciadores de almacenamiento de NetApp están conectados a la estructura en la que están conectados los puertos de destino para almacenamiento de origen. Siga las prácticas recomendadas de FlexArray al conectar el almacenamiento de origen al almacenamiento de NetApp. 
+---
+= Requisitos de cableado físico para FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+FLI tiene los mismos requisitos de cableado que FlexArray de NetApp. Los puertos de los iniciadores de almacenamiento de NetApp están conectados a la estructura en la que están conectados los puertos de destino para almacenamiento de origen. Siga las prácticas recomendadas de FlexArray al conectar el almacenamiento de origen al almacenamiento de NetApp.
+
+Las cabinas de almacenamiento utilizadas durante la migración deben tener una ruta principal desde cada controladora (en uso) presente en ambas estructuras. Esto significa que los nodos de cabina de origen y de destino que se migran deben estar en una zona común en ambas estructuras. No es necesario agregar otras controladoras al clúster de NetApp, solo aquellas que realmente importan/migran LUN. Si bien se podrían utilizar rutas indirectas para la migración, la práctica recomendada es utilizar rutas activas/optimizadas entre las cabinas de origen y de destino. La siguiente figura muestra que tanto el almacenamiento HDS AMS2100 como el almacenamiento ONTAP de NetApp tienen una ruta principal (activa) presente en ambos tejidos.
+
+Esta figura es un ejemplo de cableado de almacenamiento para tejidos dobles.
+
+image::../media/physical_wiring_1.png[cableado físico 1]
+
+Siga estas prácticas recomendadas para el cableado:
+
+* Utilice las mejores prácticas de FlexArray de NetApp para el almacenamiento de origen y destino del cableado, tal y como se explica en https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Referencias y requisitos de instalación de la virtualización FlexArray"].
+* Para conectarse a la estructura, el almacenamiento ONTAP requiere puertos iniciadores libres. Configure los puertos del iniciador si no existen puertos libres.
+

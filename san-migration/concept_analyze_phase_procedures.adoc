@@ -1,0 +1,31 @@
+---
+permalink: san-migration/concept_analyze_phase_procedures.html 
+sidebar: sidebar 
+keywords: analyze, phase, imt, best practices 
+summary: 'La fase de análisis se centra en los elementos que deben abordarse antes de continuar con las actividades de migración. La información de configuración del host debe compararse con las configuraciones compatibles documentadas en la matriz de interoperabilidad (IMT) de NetApp.' 
+---
+= Análisis de las mejores prácticas de IMT de fase
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de análisis se centra en los elementos que deben abordarse antes de continuar con las actividades de migración. La información de configuración del host debe compararse con las configuraciones compatibles documentadas en la matriz de interoperabilidad (IMT) de NetApp.
+
+IMT es una utilidad web que permite buscar información sobre las configuraciones de productos de NetApp que funcionan con productos y componentes de terceros cualificados por NetApp. IMT contiene configuraciones de NetApp compatibles y certificadas. Las configuraciones compatibles son aquellas cualificadas por NetApp. Las configuraciones certificadas son aquellas cualificadas por una empresa independiente para trabajar con componentes de NetApp.
+
+
+
+== Mejores prácticas para IMT
+
+* Introduzca las recomendaciones de IMT de NetApp para las actualizaciones y el software necesarios en la sección Switches y hosts de la hoja de trabajo de planificación.
+* Para empezar, introduzca en IMT información estática, como ONTAP OS, el protocolo y el modo CF. A continuación, utilice la encuesta de sitios como guía de filtros para introducir información sobre el sistema operativo host, el administrador de volúmenes y el HBA.
+* No sea tan específico como para que no se devuelvan resultados; es mejor ver varios resultados devueltos y elegir la mejor opción.
+* En ocasiones, los HBA del host se informan en el número de pieza del OEM y deben hacerse referencias cruzadas antes de introducirse en la IMT.
+* Compruebe cada host con el IMT para compatibilidad.
+
+
+*Información relacionada*
+
+https://mysupport.netapp.com/NOW/products/interoperability["Interoperabilidad de NetApp"]

@@ -1,0 +1,40 @@
+---
+permalink: san-migration/concept_migration_analyze_phase_workflow.html 
+sidebar: sidebar 
+keywords: analyze, phase, workflow 
+summary: La fase de análisis se centra en los elementos que deben abordarse antes de planificar la migración. Deben identificarse los detalles de configuración del host que no pertenecen a la matriz de interoperabilidad. 
+---
+= Flujo de trabajo de fase de análisis
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de análisis se centra en los elementos que deben abordarse antes de planificar la migración. Deben identificarse los detalles de configuración del host que no pertenecen a la matriz de interoperabilidad.
+
+Para cada host se identifica una configuración de destino (después de la migración) y se realiza un análisis de deficiencias para identificar los componentes específicos que no se admiten. El análisis de host debe revisarse inmediatamente al finalizar. Las actualizaciones necesarias pueden romper la compatibilidad con las aplicaciones que se ejecutan en cada host.
+
+Normalmente, los cambios del host necesarios no se realizan hasta el evento de migración real. Esto se debe a la necesidad común de programar ventanas de mantenimiento, pero con frecuencia es menos arriesgado realizar cambios con antelación en el host, como parches del sistema y actualizaciones del adaptador de bus de host (HBA). Además, las actualizaciones del sistema se realizan con frecuencia junto con las actualizaciones de aplicaciones que utilizan los mismos eventos de mantenimiento. Normalmente, cualquier cambio realizado en la configuración de I/o multivía (MPIO) antes de la migración afectará también a la compatibilidad del almacenamiento actual. Por ejemplo, la configuración de almacenamiento actual puede no admitir la eliminación de PowerPath de un host y volver a configurarlo para utilizar MPIO nativo y ALUA (nativo) en Linux.
+
+Aplazar la reconfiguración de MPIO hasta la migración simplifica el proceso de reversión, si es necesario.
+
+Las tareas de la fase de planificación se enumeran en la siguiente tabla.
+
+[cols="2*"]
+|===
+| Componente | Tareas 
+
+
+ a| 
+Host
+ a| 
+. Realice un análisis de deficiencias en cada host. Identificar las revisiones y correcciones necesarias, las actualizaciones del sistema operativo, los controladores HBA y las actualizaciones de firmware necesarias para que coincidan con la configuración de destino seleccionada en IMT de NetApp. Además, es necesario tener en cuenta los requisitos para instalar otro software de NetApp en este host (SnapDrive®, SnapManager®).
+. Determinar una configuración de destino (después de la migración) para cada host (configuración del sistema operativo, detalles de MPIO, HBA, versión del kit de utilidades de host).
+. Determinar los requisitos adicionales de productos de NetApp (SnapDrive, SnapManager).
+
+
+|===
+*Información relacionada*
+
+https://mysupport.netapp.com/NOW/products/interoperability["Interoperabilidad de NetApp"]

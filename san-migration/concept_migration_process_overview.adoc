@@ -1,0 +1,19 @@
+---
+permalink: san-migration/concept_migration_process_overview.html 
+redirect: ontap-fli/san-migration/concept_migration_discover_phase_workflow.html 
+sidebar: sidebar 
+keywords: migration, process, overview 
+summary: 'El proceso de migración FLI es una metodología de cinco fases que se aplica a cualquier migración de datos: Detección, análisis, planificación, ejecución y verificación.' 
+---
+= Descripción general del proceso de migración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El proceso de migración FLI es una metodología de cinco fases que se aplica a cualquier migración de datos: Detección, análisis, planificación, ejecución y verificación.
+
+image::../media/migration_overview_1.png[Metodología de migración en cinco fases]
+
+Estas fases proporcionan un marco general que ayuda a identificar dónde se realizan las tareas más comunes a lo largo del proceso de migración. Los gráficos de esta sección muestran las tareas que se pueden realizar en paralelo en cada uno de los cuatro componentes principales: Host, estructura, almacenamiento de destino y almacenamiento de origen.

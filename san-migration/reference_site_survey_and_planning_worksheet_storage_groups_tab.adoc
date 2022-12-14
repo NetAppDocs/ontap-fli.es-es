@@ -1,0 +1,71 @@
+---
+permalink: san-migration/reference_site_survey_and_planning_worksheet_storage_groups_tab.html 
+sidebar: sidebar 
+keywords: site, survey and planning worksheet, storage groups tab 
+summary: Como parte de la hoja de trabajo Encuesta y planificación del sitio, debe tener una ficha que contenga información sobre los grupos de almacenamiento. 
+---
+= Ficha grupos de almacenamiento de la hoja de trabajo Encuesta del sitio y planificación
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como parte de la hoja de trabajo Encuesta y planificación del sitio, debe tener una ficha que contenga información sobre los grupos de almacenamiento.
+
+A continuación se muestra un ejemplo de cómo configurar la pestaña Storage Groups.
+
+|===
+4+| Grupos de almacenamiento 
+
+
+ a| 
+Origen
+ a| 
+Destino
+
+
+
+ a| 
+Nombre de host
+ a| 
+Grupo de almacenamiento
+ a| 
+WWPN
+ a| 
+Comandos de iGroup
+
+
+
+ a| 
+dm-rx200s6-21
+ a| 
+dm-rx200s6-21
+ a| 
+21:00:00:24:ff:30:14:c521:00:00:24:ff:30:14:c4
+ a| 
+`igroup create -ostype` windows `-protocol` fcp `-vserver` mig `-igroup` dm-rx200s6-21 `-initiator` 21:00:00:24:ff:30:14:c4.21:00:00:24:ff:30:14:c5
+
+
+
+ a| 
+dm-rx200s6-22
+ a| 
+dm-rx200s6-22
+ a| 
+21:00:00:24:ff:30:04:8521:00:00:24:ff:30:04:84
+ a| 
+`igroup create -ostype` linux `-protocol` fcp `-vserver` mig `-igroup` dm-rx200s6-22 `-initiator` 21:00:00:24:ff:30:04:85,21:00:00:24:ff:30:04:84
+
+
+
+ a| 
+dm-rx200s6-20
+ a| 
+dm-rx200s6-20
+ a| 
+21:00:00:24:ff:30:03:ea21:00:00:24:ff:30:03:eb
+ a| 
+`igroup create -ostype` vmware `-protocol` fcp `-vserver` mig -`igroup` dm-rx200s6-20 `-initiator` 21:00:00:24:ff:30:03:ea,21:00:00:24:ff:30:03:eb
+
+|===

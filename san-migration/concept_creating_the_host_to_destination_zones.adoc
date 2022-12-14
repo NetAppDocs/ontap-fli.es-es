@@ -1,0 +1,133 @@
+---
+permalink: san-migration/concept_creating_the_host_to_destination_zones.html 
+sidebar: sidebar 
+keywords: create, host, destination, zones 
+summary: 'Deberá crear el host para las zonas de destino. Existen dos tipos de estructura de producción: La estructura a y la estructura B.' 
+---
+= Creación del host en zonas de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Deberá crear el host para las zonas de destino. Existen dos tipos de estructura de producción: La estructura a y la estructura B.
+
+El siguiente es una ilustración de la división en zonas del almacenamiento de host y de destino.
+
+image::../media/host_and_destination_storage_zoning.gif[División en zonas de almacenamiento de host y destino]
+
+Zonas de producción disponibles en la estructura de producción A.
+
+[cols="3*"]
+|===
+| Zona | WWPN | Miembros de la zona 
+
+
+ a| 
+Zona: Rx21_flicDOT
+ a| 
+21:00:00:24:ff:30:14:c5
+
+20:01:00:a0:98:94:d1
+
+20:03:00:a0:98:94:d1
+ a| 
+RX21 HBA 0
+
+FlicDOT liff 1
+
+FlicDOT liff 3
+
+
+
+ a| 
+Zona: rx22_flicDOT
+ a| 
+21:00:00:24:ff:30:04:85
+
+20:01:00:a0:98:94:d1
+
+20:03:00:a0:98:94:d1
+ a| 
+RX22 HBA 0
+
+FlicDOT liff 1
+
+FlicDOT liff 3
+
+
+
+ a| 
+Zona: rx20_flicDOT
+ a| 
+21:00:00:24:ff:30:03:ea
+
+20:01:00:a0:98:94:d1
+
+20:03:00:a0:98:94:d1
+ a| 
+HBA RX20 0
+
+FlicDOT liff 1
+
+FlicDOT liff 3
+
+|===
+Zonas de producción disponibles en la estructura de producción B.
+
+[cols="3*"]
+|===
+| Zona | WWPN | Miembros de la zona 
+
+
+ a| 
+Zona: Rx21_flicDOT
+ a| 
+21:00:00:24:ff:30:14:c4
+
+20:02:00:a0:98:94:d1
+
+20:04:00:a0:98:94:d1
+ a| 
+RX21 HBA 1
+
+FlicDOT liff 2
+
+FlicDOT liff 4
+
+
+
+ a| 
+Zona: rx22_flicDOT
+ a| 
+21:00:00:24:ff:30:04:84
+
+20:02:00:a0:98:94:d1
+
+20:04:00:a0:98:94:d1
+ a| 
+RX22 HBA 1
+
+FlicDOT liff 2
+
+FlicDOT liff 4
+
+
+
+ a| 
+Zona: rx20_flicDOT
+ a| 
+21:00:00:24:ff:30:03:eb
+
+20:02:00:a0:98:94:d1
+
+20:04:00:a0:98:94:d1
+ a| 
+HBA RX20 1
+
+FlicDOT liff 2
+
+FlicDOT liff 4
+
+|===
