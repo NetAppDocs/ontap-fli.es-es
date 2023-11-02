@@ -26,7 +26,3 @@ homepage:
       url: "/san-migration/concept_fli_7_mode_to_ontap_transition_workflow.html"
     - title: FLI con automatización del flujo de trabajo (WFA)
       url: "/san-migration/concept_fli_using_workflow_automation_wfa.html"
-product-family:
-  name: ONTAP
-  repo: ontap-family
-  sidebar_label: Documentación de productos All ONTAP
