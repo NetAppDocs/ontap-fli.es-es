@@ -1326,4 +1326,7 @@
   <block id="faad5f79401b38fa8970d5b9e778ca6a" category="sidebar">Rendimiento de importación de LUN externa</block>
   <block id="29b512fbc4379581cd2fd8694ca529c4" category="inline-link-macro">Uso de Windows Server 2022 con ONTAP</block>
   <block id="82e292bca3bfc1c57dd6f3dc796412a0" category="paragraph">Las instrucciones paso a paso para los hosts de Windows se pueden encontrar en la sección Rutas múltiples de <block ref="cce832a1ed6f79df8eb06042aeeb6d79" category="inline-link-macro-rx"></block>.</block>
+  <block id="9a4c1be88c2720ce2a1f8a5fd2b27a5c" category="sidebar">Flujos de trabajo de FLI</block>
+  <block id="9661e4f0a38203cee0d0ec82dcba896f" category="sidebar">Flujo de trabajo sin conexión</block>
+  <block id="afec4ed45e968a4fe6c00ed1c1e83691" category="sidebar">Flujo de trabajo en línea</block>
 </blocks>
