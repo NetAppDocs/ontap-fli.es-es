@@ -15,7 +15,7 @@ La fase de verificación del proceso de migración se centra en la limpieza desp
 
 La siguiente figura muestra el flujo de trabajo de la fase de verificación.
 
-image::../media/verify_phase_1.png[verificar fase 1]
+image::../media/verify_phase_1.png[Flujo de trabajo de la fase de verificación de la migración]
 
 Las tareas de la fase de verificación se enumeran en la siguiente tabla.
 

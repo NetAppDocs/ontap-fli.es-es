@@ -2,29 +2,71 @@
 permalink: san-migration/concept_fli_online_workflow.html 
 sidebar: sidebar 
 keywords: fli, online, workflow 
-summary: Este es el segundo de los cuatro ejemplos de flujos de trabajo FLI, que abarcan la migración en línea FLI. 
+summary: En una migración en línea de FLI, el sistema cliente permanece en línea durante la migración de datos desde la matriz de almacenamiento externa de terceros al sistema de almacenamiento de NetApp . 
 ---
-= Flujo de trabajo en línea FLI
+= Resumen del flujo de trabajo de migración en línea de ONTAP FLI
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Este es el segundo de los cuatro ejemplos de flujos de trabajo FLI, que abarcan la migración en línea FLI. La matriz de origen de este ejemplo es un EMC VNX5500.
+Una migración de datos mediante importación de LUN externa (FLI) es un proceso que implica varios pasos clave para garantizar una migración exitosa de datos desde cabinas de almacenamiento externas a sistemas de almacenamiento NetApp . FLI admite migraciones en línea y fuera de línea. En una migración en línea mediante importación de LUN externa (FLI), el sistema cliente permanece en línea durante la migración de datos desde la cabina de almacenamiento externa de terceros al sistema de almacenamiento NetApp .
 
-el flujo de trabajo en línea tiene las siguientes tareas:
+.Antes de empezar:
+* Debes completar el link:concept_migration_discover_phase_workflow.html["detección"] , link:concept_migration_analyze_phase_workflow.html["análisis"] , y link:concept_migration_plan_phase_workflow.html["planificación"] fases del proceso migratorio.
+* Debe verificar que la migración en línea sea compatible con su tipo de host y con la configuración de su matriz de almacenamiento de destino de NetApp .
++
+Las configuraciones de MetroCluster no admiten migraciones en línea. Si se produce una conmutación por error del sitio durante una importación en línea activa, las transferencias de escritura a la matriz de origen podrían fallar, lo que provocaría un error de verificación y una posible pérdida de datos. Si su controladora de destino de NetApp está en una configuración de MetroCluster , debe usar link:prepare-host-offline-migration.html["Proceso de migración fuera de línea de FLI"] .
 
-. Preparar la ruta de LUN
-. Realización de una transición disruptiva
-. Importe los datos de las LUN de origen
-. Verificación de los resultados de la migración
-. Limpieza de la migración en línea FLI
-. Tareas posteriores a la migración en línea de FLI
++
+Las migraciones en línea son compatibles con las siguientes versiones de Windows, Linux o ESXi. Para otros sistemas operativos, utilice link:prepare-host-offline-migration.html["Proceso de migración fuera de línea de FLI"] .
+
++
+** Microsoft (todas las versiones de los servidores que se muestran son compatibles):
++
+*** Windows Server 2008 R2 y posterior (incluye clúster de conmutación por error de Windows Server)
+*** Microsoft Hyper-V Server 2008 y posterior
+*** Windows Server 2012 y posterior (incluye clúster Windows Server 2012)
+*** Microsoft Hyper-V Server 2012 y posterior
 
 
-[NOTE]
-====
-Si el destino de las controladoras de NetApp es una MetroCluster, NO use el flujo de trabajo en línea. Si se produce una conmutación por error de un sitio durante una importación en línea activa, podría producirse un error en las transferencia de escritura en la matriz de origen, lo que provocaría un fallo de verificación y una posible pérdida de datos. Si el destino es MetroCluster, use el proceso FLI sin conexión.
+** VMware ESXi 5.x y posteriores
+** Red Had Enterprise Linux (RHEL) 5.x y posteriores
 
-====
+
+* Debe verificar que la multirruta de host esté configurada correctamente y funcione correctamente. Todas las rutas disponibles a los LUN deben estar activas.
+* Debería link:configure-fc-adapter-initiator.html["Configure sus adaptadores FC para el modo iniciador"] .
+* Debería link:concept_target_and_initiator_port_zoning.html["zonifique los puertos de destino de la matriz externa con los puertos iniciadores de almacenamiento ONTAP"] .
+
+
+.Acerca de esta tarea
+Para realizar una migración en línea de FLI, debe preparar su host, crear una relación de importación de LUN, asignar el LUN externo a su sistema de almacenamiento ONTAP , importar datos del LUN externo, verificar los resultados de la migración, eliminar la relación de importación de LUN y, finalmente, realizar tareas posteriores a la migración.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["1"]link:prepare-host-online-migration.html["Prepara a tu anfitrión"] .
+[role="quick-margin-para"]
+Realice los pasos de reparación del host necesarios y reinicie sus hosts.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Dos"]link:create-lun-import-relationship-online.html["Crear una relación de importación de LUN"] .
+[role="quick-margin-para"]
+La creación de la relación de importación de LUN incluye la identificación del LUN externo que se importará desde la matriz de origen, la creación de un volumen de destino para contener el LUN externo, la creación del LUN de destino en su sistema de almacenamiento ONTAP y, finalmente, el establecimiento de la relación de importación.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Tres"]link:map-source-lun-to-destination-online-migration.html["Asigne los LUN externos a su sistema de almacenamiento ONTAP"] .
+[role="quick-margin-para"]
+En la matriz externa, desasignar el LUN que se va a migrar y reasignarlo a su sistema de almacenamiento ONTAP . Este proceso es disruptivo.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Cuatro"]link:task_fli_online_importing_the_data.html["Importar datos de sus LUN externos"] .
+[role="quick-margin-para"]
+Importe los datos del LUN de origen de la matriz externa al LUN de destino de ONTAP .
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png["Cinco"]link:task_fli_online_verifying_migration_results.html["Verificar los resultados de la migración"] .
+[role="quick-margin-para"]
+Utilice FLI para realizar una comparación bloque por bloque de los LUN de origen y destino para verificar que la migración sea completa y precisa.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-6.png["Seis"]link:remove-lun-import-relationship-online.html["Eliminar la relación de importación de LUN"] .
+[role="quick-margin-para"]
+Una vez completada la migración en línea de FLI, la relación de importación de LUN se puede eliminar de forma segura.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-7.png["Siete"]link:concept_fli_online_post_migration_tasks.html["Realizar tareas posteriores a la migración"] .
+[role="quick-margin-para"]
+Revise los registros en busca de errores, verifique la configuración de múltiples rutas de su host y realice pruebas de la aplicación para verificar que la migración se completó exitosamente.

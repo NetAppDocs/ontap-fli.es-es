@@ -1,0 +1,98 @@
+---
+permalink: san-migration/prepare-foreign-lun-offline.html 
+sidebar: sidebar 
+keywords: present, source luns, ontap storage, fli 
+summary: En el proceso de migración fuera de línea de FLI, debe presentar el LUN de origen externo al almacenamiento de ONTAP ; luego debe descubrir el LUN de origen externo en el almacenamiento de ONTAP . 
+---
+= Preparar LUN de matriz de almacenamiento externa para una migración sin conexión de ONTAP FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En una migración fuera de línea de importación de LUN extranjera (FLI), debe realizar pasos manuales desde su matriz de almacenamiento extranjera para presentar el LUN de origen extranjera a su sistema de almacenamiento ONTAP ; luego debe realizar pasos desde su sistema de almacenamiento ONTAP para descubrir el LUN extranjera.
+
+
+
+== Paso 1: Presentar los LUN de origen de la matriz externa al almacenamiento ONTAP
+
+Antes de poder comenzar a importar datos desde un LUN de una matriz de almacenamiento externa mediante una migración fuera de línea de FLI, debe presentar los LUN de origen en su matriz de almacenamiento externa a su sistema de almacenamiento ONTAP .
+
+.Pasos
+. Inicie sesión en la matriz de origen.
+. Añada los iniciadores de NetApp al grupo de hosts que se ha creado en la fase de planificación.
+. Seleccione los LUN de host que deben migrarse de los LUN lógicos disponibles.
++
+Utilice nombres de LUN para cada host mencionado en la sección LUN de origen de su link:reference_site_survey_and_planning_worksheet_source_luns_tab.html["Hoja de trabajo de estudio y planificación del sitio"] .
+
+
+
+
+
+== Paso 2: Descubra los LUN de origen de la matriz externa en ONTAP
+
+Después de haber presentado sus LUN de origen de matriz externa a su sistema de almacenamiento ONTAP , los LUN se deben descubrir en ONTAP antes de poder crear la relación de importación de LUN.
+
+.Pasos
+. Verifique los LUN de origen y la asignación desde el almacenamiento de origen al almacenamiento de destino.
+. Inicie sesión en el sistema de almacenamiento ONTAP a través de SSH utilizando el usuario administrador.
+. Cambie el modo a avanzado.
++
+[source, cli]
+----
+set -privilege advanced
+----
+. Introduzca `y` cuando se le pregunte si desea continuar.
+. Descubra la matriz de origen en ONTAP. Espere unos minutos y vuelva a intentar detectarla.
++
+[source, cli]
+----
+storage array show
+----
++
+El siguiente ejemplo muestra el descubrimiento de una matriz Hitachi DF600F.
+
++
+[listing]
+----
+DataMig-ontap::*> storage array show
+Prefix                         Name   Vendor            Model Options
+-------- ---------------------------- -------- ---------------- ----------
+HIT-1                HITACHI_DF600F_1  HITACHI           DF600F
+----
++
+[NOTE]
+====
+Cuando se detecta la cabina de almacenamiento por primera vez, es posible que ONTAP no muestre la cabina mediante la detección automática. Use las siguientes instrucciones para restablecer el puerto del switch donde están conectados los puertos iniciadores de ONTAP.
+
+====
+. Verifique que la cabina de origen se haya detectado a través de todos los puertos iniciadores.
++
+[source, cli]
+----
+storage array config show -array-name <array_name>
+----
++
+El siguiente ejemplo muestra la matriz Hitachi DF600F descubierta a través de todos los puertos iniciadores.
+
++
+[listing]
+----
+DataMig-ontap::*> storage array config show -array-name HITACHI_DF600F_1
+             LUN   LUN
+Node         Group Count     Array Name       Array Target Port Initiator
+------------ ----- ----- ---------------------------- -----------------------
+DataMig-ontap-01 0     1    HITACHI_DF600F_1     50060e801046b960        0a
+                                                 50060e801046b964        0b
+                                                 50060e801046b968        0a
+                                                 50060e801046b96c        0b
+DataMig-ontap-02 0     1    HITACHI_DF600F_1     50060e801046b960        0a
+                                                 50060e801046b964        0b
+                                                 50060e801046b968        0a
+                                                 50060e801046b96c        0b
+----
+
+
+.¿Que sigue?
+link:create-lun-import-relationship-offline.html["Crear la relación de importación de LUN"] .

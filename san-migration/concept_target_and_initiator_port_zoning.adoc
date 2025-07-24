@@ -4,14 +4,14 @@ sidebar: sidebar
 keywords: target, initiator, port, zoning 
 summary: La migración FLI requiere que el almacenamiento de NetApp acceda a las LUN de almacenamiento de origen. Esto se logra mediante la división en zonas de los puertos de destino del almacenamiento de origen con los puertos iniciadores del almacenamiento de destino. 
 ---
-= División en zonas de puertos de destino e iniciador
+= Zonificación de puertos de destino e iniciador para migraciones FLI de ONTAP
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-La migración FLI requiere que el almacenamiento de NetApp acceda a las LUN de almacenamiento de origen. Esto se logra mediante la división en zonas de los puertos de destino del almacenamiento de origen con los puertos iniciadores del almacenamiento de destino.
+La migración de FLI requiere que el almacenamiento de NetApp acceda a los LUN de origen de la matriz externa. Esto se logra zonificando los puertos de destino del almacenamiento de origen con los puertos de inicio del almacenamiento de destino de NetApp .
 
 Las zonas de almacenamiento de origen a host existentes no se modifican y se desactivan tras la migración. Las zonas de almacenamiento del host al destino se crean para permitir el acceso del host a las LUN migradas del almacenamiento de destino.
 
@@ -37,3 +37,48 @@ Siga las siguientes prácticas recomendadas de la división en zonas:
 Después de dividir en zonas los puertos de destino de almacenamiento de origen con los puertos de iniciador de almacenamiento de destino, el almacenamiento de origen será visible en el almacenamiento de destino mediante el comando Storage array show.cuando se detecta por primera vez la cabina de almacenamiento, es posible que las controladoras de NetApp no muestren la cabina automáticamente. Corrija esto mediante el restablecimiento del puerto del switch donde se conectan los puertos iniciadores ONTAP.
 
 ====
+Una situación de migración estándar con FLI requiere cuatro zonas distintas. Debe incluir puertos específicos en cada zona.
+
+* Zona 1: Almacenamiento de origen a almacenamiento de destino (estructura De producción A)
++
+La zona 1 debe contener todos los iniciadores de almacenamiento de destino en todos los nodos y todos los puertos de destino de almacenamiento de origen de la estructura A. Entre los miembros de la zona se incluyen:
+
++
+** ONTAP -- Nodo1 -- 0a
+** ONTAP -- Nodo2 -- 0a
+** AMS2100 -- Ctrl0 -- 0a
+** AMS2100 -- CTRL1 -- 1a
+
+
+* Zona 2: Almacenamiento de origen al almacenamiento de destino (estructura de producción B)
++
+La zona 2 debe contener todos los puertos de iniciadores de almacenamiento de destino en todos los nodos y todos los puertos de destino de almacenamiento de origen de la estructura B. Entre los miembros de la zona 2 se incluyen:
+
++
+** ONTAP -- Nodo1 -- 0b
+** ONTAP -- Nodo2 -- 0b
+** AMS2100 -- Ctrl0 -- 0e
+** AMS2100 -- CTRL1 -- 1e
+
+
+* Zona 3: Host a almacenamiento de destino (estructura De producción A)
++
+La zona 3 debe contener el puerto 1 del adaptador de bus de host (HBA) y los puertos de la controladora de destino en la estructura de producción A. Entre los miembros de la zona 3 se incluyen:
+
++
+** ONTAP -- lif1
+** ONTAP -- lif3
+** Host -- HBA0
+
+
+* Zona 4: Host a almacenamiento de destino (estructura de producción B)
++
+La zona 4 debe contener el puerto HBA 2 y los puertos de la controladora de destino en la estructura de producción B. Entre los miembros de la zona 4 se incluyen:
+
++
+** ONTAP -- lif2
+** ONTAP -- lif4
+** Host -- HBA1
+
+
+

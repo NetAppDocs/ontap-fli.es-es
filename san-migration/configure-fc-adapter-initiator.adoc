@@ -1,0 +1,59 @@
+---
+permalink: san-migration/configure-fc-adapter-initiator.html 
+sidebar: sidebar 
+keywords: online, migration, workflow 
+summary: 'El modo iniciador se utiliza para conectar los puertos a unidades de cinta, bibliotecas de cintas o almacenamiento de terceros con importación de LUN externa (FLI).' 
+---
+= Configurar adaptadores FC para el modo iniciador
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El modo iniciador se utiliza para conectar los puertos a unidades de cinta, bibliotecas de cintas o almacenamiento de terceros con Importación de LUN Externo (FLI). Debe convertir su adaptador de destino FC al modo iniciador para usarlo con FLI.
+
+.Antes de empezar
+* Los LIF del adaptador deben eliminarse de cualquier conjunto de puertos del que sean miembros.
+* Todos los LIF de cada máquina virtual de almacenamiento (SVM) que utilizan el puerto físico que se va a modificar se deben migrar o destruir antes de cambiar la personalidad del puerto físico de destino a iniciador.
+
+
+.Pasos
+. Eliminar todos los LIF del adaptador:
++
+[source, cli]
+----
+network interface delete -vserver <SVM_name> -lif <lif_name>,<lif_name>
+----
+. Desconecte su adaptador:
++
+[source, cli]
+----
+network fcp adapter modify -node <node_name> -adapter <adapter_port> -status-admin down
+----
++
+Si el adaptador no se desconecta, también puede quitar el cable del puerto del adaptador apropiado en el sistema.
+
+. Cambiar el adaptador de destino a iniciador:
++
+[source, cli]
+----
+system hardware unified-connect modify -t initiator <adapter_port>
+----
+. Reinicie el nodo que aloja el adaptador que cambió.
+. Verifique que los puertos FC estén configurados en el estado correcto para su configuración:
++
+[source, cli]
+----
+system hardware unified-connect show
+----
+. Vuelva a poner el adaptador en línea:
++
+[source, cli]
+----
+node run -node _node_name_ storage enable adapter <adapter_port>
+----
+
+
+.¿Que sigue?
+Ubica los puertos de destino de la matriz externa con los puertos de iniciador de tu almacenamiento ONTAP .

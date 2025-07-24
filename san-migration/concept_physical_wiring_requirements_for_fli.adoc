@@ -17,10 +17,9 @@ Las cabinas de almacenamiento utilizadas durante la migración deben tener una r
 
 Esta figura es un ejemplo de cableado de almacenamiento para tejidos dobles.
 
-image::../media/physical_wiring_1.png[cableado físico 1]
+image::../media/physical_wiring_1.png[Ejemplo de cableado de almacenamiento para tejidos duales]
 
 Siga estas prácticas recomendadas para el cableado:
 
-* Utilice las mejores prácticas de FlexArray de NetApp para el almacenamiento de origen y destino del cableado, tal y como se explica en https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Referencias y requisitos de instalación de la virtualización FlexArray"].
 * Para conectarse a la estructura, el almacenamiento ONTAP requiere puertos iniciadores libres. Configure los puertos del iniciador si no existen puertos libres.
 

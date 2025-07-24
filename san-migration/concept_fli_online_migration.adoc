@@ -13,7 +13,7 @@ summary: El flujo de trabajo de migración en línea se realiza durante la fase 
 [role="lead"]
 El flujo de trabajo de migración en línea se realiza durante la fase de ejecución del proceso de migración. El diagrama de flujo de trabajo en línea muestra las tareas que se ejecutan en el host, la estructura, el almacenamiento de destino y el almacenamiento de origen.
 
-image::../media/online_migration_1.png[migración en línea 1]
+image::../media/online_migration_1.png[Flujo de trabajo de migración en línea de FlI]
 
 Las tareas del flujo de trabajo en línea se enumeran en la siguiente tabla.
 

@@ -4,29 +4,32 @@ sidebar: sidebar
 keywords: fli online, verify, migration, results 
 summary: Un trabajo de verificación es opcional, pero se recomienda. Es una comparación entre bloques de las LUN de origen y de destino. La verificación de las tareas tarda casi el mismo tiempo, o incluso un poco más, que el tiempo de migración. 
 ---
-= FLI online: Verificación de los resultados de la migración
+= Verificar los resultados de la migración en línea de ONTAP FLI
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Un trabajo de verificación es opcional, pero se recomienda. Es una comparación entre bloques de las LUN de origen y de destino. La verificación de las tareas tarda casi el mismo tiempo, o incluso un poco más, que el tiempo de migración.
+Tras migrar su LUN del arreglo externo al arreglo ONTAP , la Importación de LUN Externos (FLI) puede realizar una comparación bloque por bloque de los LUN de origen y destino para verificar que la migración sea completa y precisa. La verificación de la migración tarda aproximadamente el mismo tiempo (o un poco más) que la migración.
 
-Inicie la tarea de verificación para comparar las LUN de origen y de destino. Supervise el progreso de la verificación. Las LUN que se verifican deben estar desconectadas durante la sesión de verificación. La sesión de verificación puede ser potencialmente larga porque es una comparación bloque por bloque entre LUN de origen y de destino. Aunque no es necesaria la verificación, es recomendable verificar un subconjunto de las LUN importadas o migradas para estar cómodos con el proceso de importación. Estas verificaciones se agregarían a las realizadas durante las migraciones piloto/de pruebas.
+No es necesaria una verificación de migración, pero es muy recomendable.
 
-[NOTE]
-====
-Este proceso es disruptivo.
+.Acerca de esta tarea
+* A partir de ONTAP 9.17.1, la migración de datos de LUNs ajenos mediante migración FLI offline es compatible conlink:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Sistemas ASA r2"^]. Los sistemas ASA r2 se diferencian de otros sistemas ONTAP (ASA, AFF y FAS) en la implementación de su capa de almacenamiento. de nombres). Cada volumen contiene solo una unidad de almacenamiento. Por lo tanto, en los sistemas ASA r2, no es necesario incluir el nombre del volumen en el...  `-path` opción al crear el LUN; debe incluir la ruta de la unidad de almacenamiento en su lugar.
+* Una verificación de migración es disruptiva. Los LUN que se verifican deben estar desconectados durante la verificación.
 
-====
-[NOTE]
-====
-Antes de volver a conectar la LUN, es necesario detener explícitamente la importación de la LUN. De lo contrario, la LUN conectada falla. Consulte el siguiente resultado de la CLI.
 
-====
 .Pasos
-. Sin conexión las LUN que se van a verificar. <The disruption window begins here>
+. Sin conexión las LUN que se van a verificar.
++
+[source, cli]
+----
+lun offline -vserver <SVM_name> -path <volume_path|storage_unit_path>
+----
++
+Este ejemplo muestra el comando para desconectar el LUN llamado *72Clun1* en el volumen *flivol* y el SVM *fli_72C*.
+
 +
 [listing]
 ----
@@ -34,13 +37,24 @@ cluster::*> lun offline -vserver fli_72C -path /vol/flivol/72Clun1
 Warning: This command will take LUN "/vol/flivol/72Clun1" in Vserver "fli_72C" offline.
 Do you want to continue? {y|n}: y
 ----
-. Iniciar la verificación de la LUN.
 +
-[listing]
+El periodo de interrupción comienza aquí.
+
+. Iniciar la verificación de la migración de LUN.
++
+[source, cli]
 ----
-lun import verify start -vserver fli_72C -path /vol/flivol/72Clun1
+lun import verify start -vserver <SVM_name> -path <volume_path|storage_unit_path>
 ----
-. Mostrar el estado de verificación de LUN.
+. Supervisar el estado de verificación.
++
+[source, cli]
+----
+lun import show -vserver <SVM_name> -path <volume_path|storage_unit_path>
+----
++
+Este ejemplo muestra el comando para monitorear el estado de verificación del LUN llamado *72Clun1* en el volumen *flivol* y el SVM *fli_72C*.
+
 +
 [listing]
 ----
@@ -51,16 +65,25 @@ vserver foreign-disk   path                operation admin operational percent
 fli_72C D0i1E+G8Wg6m   /vol/flivol/72Clun1 verify    started
                                                                         9
 ----
-. Detener la verificación de la LUN. Este paso debe realizarse manualmente incluso si el estado muestra que la verificación está completa.
+. Detener la verificación de LUN.
 +
-[listing]
+[source, cli]
 ----
-lun import verify stop -vserver fli_72C -path /vol/flivol/72Clun1
+lun import verify stop -vserver <SVM_name> -path <volume_path|storage_unit_path>
 ----
-. Conexión en línea de la LUN una vez finalizada la verificación. <The disruption window ends here>
 +
-[listing]
-----
-lun online -vserver fli_72C -path /vol/flivol/72Clun1
-----
+La verificación de importación de LUN debe detenerse explícitamente antes de volver a poner el LUN en línea. De lo contrario, el LUN fallará. Este paso debe realizarse manualmente incluso si el estado indica que la verificación se ha completado.
 
+. En línea el LUN.
++
+[source, cli]
+----
+lun online -vserver <SVM_name> -path <volume_path|storage_unit_path>
+----
++
+El plazo para la interrupción termina aquí.
+
+
+
+.¿Que sigue?
+link:remove-lun-import-relationship-online.html["Eliminar la relación de importación de LUN"] .

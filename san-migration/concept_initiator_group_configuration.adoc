@@ -30,4 +30,4 @@ Los iGroups se usan con diferentes nombres, según el proveedor y el producto. P
 
 Independientemente de la nomenclatura, el propósito de un iGroup es identificar iniciadores por WWPN que compartan las mismas asignaciones de LUN.
 
-Para definir grupos iniciadores, revise la documentación de la cabina para ver cómo configurar el enmascaramiento de LUN (iGroups/grupos de hosts/grupos de almacenamiento, etc.). También puede revisar https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"] para requisitos de configuración del almacenamiento de terceros.
+Para definir grupos de iniciadores, revise la documentación de su matriz para saber cómo configurar el enmascaramiento de LUN (igroups/grupos de host/grupos de almacenamiento, etc.).

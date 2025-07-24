@@ -13,6 +13,9 @@ summary: Estos pasos describen cómo importar los datos de una LUN de origen de 
 [role="lead"]
 Estos pasos describen cómo importar los datos de una LUN de origen de 7-Mode a una LUN de destino de ONTAP con FLI.
 
+.Acerca de esta tarea
+A partir de ONTAP 9.17.1, la migración de datos de LUNs ajenos mediante migración FLI offline es compatible conlink:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Sistemas ASA r2"^]. Los sistemas ASA r2 se diferencian de otros sistemas ONTAP (ASA, AFF y FAS) en la implementación de su capa de almacenamiento. de nombres). Cada volumen contiene solo una unidad de almacenamiento. Por lo tanto, en los sistemas ASA r2, no es necesario incluir el nombre del volumen en el...  `-path` opción al crear el LUN; debe incluir la ruta de la unidad de almacenamiento en su lugar.
+
 .Pasos
 . Inicie la importación de la migración.
 +

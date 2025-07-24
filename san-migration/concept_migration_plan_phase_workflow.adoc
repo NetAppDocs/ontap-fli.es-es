@@ -17,7 +17,7 @@ En la fase de planificación, se desarrolla un plan de solución de problemas me
 
 La siguiente figura muestra el flujo de trabajo del plan.
 
-image::../media/plan_and_prepare_phase_1.png[planificar y preparar la fase 1]
+image::../media/plan_and_prepare_phase_1.png[flujo de trabajo del plan de migración]
 
 Las tareas de la fase de planificación se enumeran en la siguiente tabla.
 

@@ -20,10 +20,10 @@ Los siguientes pasos muestran cómo quitar la configuración de la cabina de des
 . Expanda grupos y seleccione *grupos de hosts*.
 . Seleccione *CDOT_FLI* host group y haga clic en *Delete Host Group*.
 +
-image::../media/remove_destination_array_configuration_from_source_array_1.png[quitar la configuración de la matriz de destino de la matriz de origen 1]
+image::../media/remove_destination_array_configuration_from_source_array_1.png[Eliminar la configuración de la matriz de destino de la matriz de origen]
 
 . Confirme la eliminación del grupo de hosts.
 +
-image::../media/remove_destination_array_configuration_from_source_array_2.png[quitar la configuración de la matriz de destino de la matriz de origen 2]
+image::../media/remove_destination_array_configuration_from_source_array_2.png[Eliminar la configuración de la matriz de destino de la matriz de origen]
 
 

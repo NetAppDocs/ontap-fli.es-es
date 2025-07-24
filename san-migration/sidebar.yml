@@ -48,10 +48,10 @@ entries:
     url: "/san-migration/concept_implementation_basics_for_data_migration.html"
   - title: Requisitos de cableado físico para FLI
     url: "/san-migration/concept_physical_wiring_requirements_for_fli.html"
-  - title: División en zonas de puertos de destino e iniciador
+  - title: Configurar adaptadores FC para el modo iniciador
+    url: san-migration/configure-fc-adapter-initiator.html
+  - title: Zonificación de puertos de destino e iniciador para FLI
     url: "/san-migration/concept_target_and_initiator_port_zoning.html"
-  - title: Requisitos de la división en zonas de FLI
-    url: "/san-migration/concept_fli_zoning_requirements.html"
   - title: Configuración del iGroup
     url: "/san-migration/concept_initiator_group_configuration.html"
   - title: Motivos para realizar migraciones de prueba
@@ -113,65 +113,41 @@ entries:
       url: "/san-migration/concept_migration_tests.html"
     - title: Probar el ejemplo de migración con Hitachi AMS2100
       url: "/san-migration/task_test_migration_example_using_hitachi_ams2100.html"
-- title: Flujo de trabajo sin conexión FLI
+- title: Migración sin conexión de FLI
   entries:
-  - title: Descripción general
+  - title: Flujo de trabajo
     url: "/san-migration/concept_fli_offline_workflow.html"
-  - title: 'FLI fuera de línea: Preparación para la transición'
-    entries:
-    - title: Descripción general
-      url: "/san-migration/concept_fli_offline_preparation_for_cutover.html"
-    - title: Reiniciar el host para validar el estado del sistema
-      url: "/san-migration/task_rebooting_the_host_to_validate_system_state.html"
-    - title: Verificación de la ruta de LUN del host y de la configuración multivía
-      entries:
-      - title: Descripción general
-        url: "/san-migration/concept_verifying_host_lun_path_and_multipath_configuration.html"
-      - title: Verificación multivía para hosts Windows
-        url: "/san-migration/task_multipath_verification_for_windows_hosts.html"
-      - title: Verificación multivía para hosts Linux
-        url: "/san-migration/task_multipath_verification_for_linux_hosts.html"
-      - title: Verificación multivía para hosts ESXi
-        url: "/san-migration/task_multipath_verification_for_esxi_hosts.html"
-    - title: Preparar los hosts para la migración sin conexión FLI
-      url: "/san-migration/concept_prepare_hosts_for_fli_offline_migration.html"
-    - title: Presentación de las LUN de origen al almacenamiento de ONTAP durante
-        FLI
-      url: "/san-migration/task_presenting_source_luns_to_ontap_storage_during_offline_fli.html"
-    - title: Verificación de las LUN de origen en el almacenamiento de destino para
-        FLI sin conexión
-      url: "/san-migration/task_verifying_source_luns_on_destination_storage_for_offline_foreign_lun_import.html"
-    - title: Configuración de trabajos de migración
-      url: "/san-migration/task_configuring_migration_jobs.html"
-  - title: 'FLI sin conexión: Importe los datos'
+  - title: Preparar el host para la migración
+    url: "/san-migration/prepare-host-offline-migration.html"
+  - title: Preparar LUN extranjeros para la migración
+    url: "/san-migration/prepare-foreign-lun-offline.html"
+  - title: Crear la relación de importación de LUN
+    url: "/san-migration/create-lun-import-relationship-offline.html"
+  - title: Importar datos
     url: "/san-migration/task_fli_offline_importing_the_data.html"
-  - title: 'FLI fuera de línea: Verificación de los resultados de la migración'
+  - title: Verificar los resultados de la migración
     url: "/san-migration/task_fli_offline_verifying_migration_results.html"
-  - title: Las tareas posteriores a la migración sin conexión de FLI
+  - title: Eliminar la relación de importación de LUN
+    url: "/san-migration/remove-lun-import-relationship-offline.html"
+  - title: Realizar tareas posteriores a la migración
     url: "/san-migration/concept_fli_offline_post_migration_tasks.html"
-- title: Flujo de trabajo en línea FLI
+- title: Migración en línea de FLI
   entries:
-  - title: Descripción general
+  - title: Flujo de trabajo
     url: "/san-migration/concept_fli_online_workflow.html"
-  - title: Reiniciar hosts
-    url: "/san-migration/task_rebooting_hosts_f0f8.html"
-  - title: Sistemas operativos de host compatibles para FLI en línea
-    url: "/san-migration/concept_supported_host_operating_systems_for_fli_online.html"
-  - title: Verifique la ruta de LUN del host y la configuración multivía
-    url: "/san-migration/concept_verify_host_lun_path_and_multipath_configuration_fa1e.html"
-  - title: Preparar los hosts para la migración en línea FLI
-    url: "/san-migration/concept_prepare_hosts_for_fli_online_migration.html"
-  - title: 'FLI en línea: Preparar la ruta de la LUN'
-    url: "/san-migration/task_fli_online_preparing_the_lun_path.html"
-  - title: 'FLI en línea: Realiza una transición sin interrupciones'
-    url: "/san-migration/task_fli_online_performing_a_disruptive_cutover.html"
-  - title: 'FLI en línea: Importe los datos'
+  - title: Preparar los hosts para la migración
+    url: "/san-migration/prepare-host-online-migration.html"
+  - title: Crear la relación de importación de LUN
+    url: "/san-migration/create-lun-import-relationship-online.html"
+  - title: Asignar los LUN de origen a la matriz de destino
+    url: "/san-migration/map-source-lun-to-destination-online-migration.html"
+  - title: Importar datos
     url: "/san-migration/task_fli_online_importing_the_data.html"
-  - title: 'FLI online: Verificación de los resultados de la migración'
+  - title: Verificar los resultados de la migración
     url: "/san-migration/task_fli_online_verifying_migration_results.html"
-  - title: Limpieza de la migración en línea FLI
-    url: "/san-migration/task_fli_online_cleanup.html"
-  - title: Tareas posteriores a la migración en línea de FLI
+  - title: Eliminar la relación de importación de LUN
+    url: "/san-migration/remove-lun-import-relationship-online.html"
+  - title: Realizar tareas posteriores a la migración
     url: "/san-migration/concept_fli_online_post_migration_tasks.html"
 - title: Flujo de trabajo de transición de FLI de 7-Mode a ONTAP
   entries:
@@ -200,8 +176,6 @@ entries:
   url: "/san-migration/concept_fli_using_workflow_automation_wfa.html"
 - title: Procedimientos posteriores a la migración FLI
   entries:
-  - title: Descripción general
-    url: "/san-migration/concept_fli_post_migration_procedures_all_workflows.html"
   - title: Eliminar las LUN de origen del almacenamiento de ONTAP
     url: "/san-migration/task_removing_source_luns_from_ontap_storage.html"
   - title: Eliminación de las LUN de origen de los hosts
@@ -228,8 +202,6 @@ entries:
     url: "/san-migration/task_document_customer_environment.html"
 - title: Rendimiento de importación de LUN externa
   entries:
-  - title: Descripción general
-    url: "/san-migration/concept_performance.html"
   - title: Mejoras del rendimiento en ONTAP 8.3.1
     url: "/san-migration/concept_performance_enhancements_in_clustered_data_ontap_8_3_1.html"
   - title: Variables que afectan al rendimiento de la migración de importación de

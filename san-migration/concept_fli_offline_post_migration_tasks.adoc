@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: fli, offline, post-migration, tasks 
 summary: Cualquier corrección de servidor pendiente que no se haya realizado anteriormente se realizará durante la migración posterior. 
 ---
-= Las tareas posteriores a la migración sin conexión de FLI
+= Realizar tareas posteriores a la migración de ONTAP FLI sin conexión
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

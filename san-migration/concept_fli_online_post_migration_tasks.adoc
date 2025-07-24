@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: fli, online, post-migration, tasks 
 summary: Durante la migración posterior, se lleva a cabo cualquier corrección del servidor que no se haya realizado antes de la migración. 
 ---
-= Tareas posteriores a la migración en línea de FLI
+= Realice tareas posteriores a la migración de ONTAP FLI en línea
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

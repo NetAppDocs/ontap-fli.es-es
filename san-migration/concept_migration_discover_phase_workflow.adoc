@@ -15,7 +15,7 @@ La fase de detección del proceso de migración se centra en recopilar la inform
 
 La siguiente figura muestra el flujo de trabajo de la fase de detección.
 
-image::../media/discover_phase_1.png[descubrir fase 1]
+image::../media/discover_phase_1.png[flujo de trabajo de la fase de descubrimiento]
 
 Las tareas de la fase de detección se enumeran en la siguiente tabla.
 

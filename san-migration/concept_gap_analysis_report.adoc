@@ -21,4 +21,4 @@ La sección «Completed NetApp recommended» en la sección hosts de su hoja de 
 
 A continuación se muestra un ejemplo de informe de análisis de brechas.
 
-image::../media/create_the_gap_analysis_report_1.png[crear el informe de análisis de separaciones 1]
+image::../media/create_the_gap_analysis_report_1.png[Ejemplo de un informe de análisis de brechas]
