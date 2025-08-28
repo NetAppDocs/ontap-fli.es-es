@@ -122,7 +122,7 @@ entries:
   - title: Preparar LUN extranjeros para la migración
     url: "/san-migration/prepare-foreign-lun-offline.html"
   - title: Crear la relación de importación de LUN
-    url: "/san-migration/create-lun-import-relationship-offline.adoc.html"
+    url: "/san-migration/create-lun-import-relationship-offline.html"
   - title: Importar datos
     url: "/san-migration/task_fli_offline_importing_the_data.html"
   - title: Verificar los resultados de la migración

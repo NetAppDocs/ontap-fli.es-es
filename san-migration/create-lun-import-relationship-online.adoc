@@ -231,7 +231,7 @@ DGC-1.9 600601603F103100662E70861000E511
 Antes de crear la relación de importación de LUN para una migración en línea de FLI, debe crear un volumen en su sistema de almacenamiento ONTAP para contener el LUN que importará desde su matriz externa.
 
 .Acerca de esta tarea
-A partir de ONTAP 9.17.1, la migración de datos de LUN externos mediante la migración sin conexión de FLI es compatible con los sistemas ASA r2. Los sistemas ASA r2 se diferencian de otros sistemas ONTAP (ASA, AFF y FAS) en la implementación de su capa de almacenamiento. En los sistemas ASA r2, los volúmenes se crean automáticamente al crear una unidad de almacenamiento (LUN o espacio de nombres). Por lo tanto, no es necesario crear un volumen antes de crear la relación de importación de LUN. Puede omitir este paso si utiliza un sistema ASA r2.
+A partir de ONTAP 9.17.1, la migración de datos de LUN extranjeros mediante la migración en línea FLI es compatible con los sistemas ASA r2. Los sistemas ASA r2 se diferencian de otros sistemas ONTAP (ASA, AFF y FAS) en la implementación de su capa de almacenamiento. En los sistemas ASA r2, los volúmenes se crean automáticamente al crear una unidad de almacenamiento (LUN o espacio de nombres). Por lo tanto, no es necesario crear un volumen antes de crear la relación de importación de LUN. Puede omitir este paso si utiliza un sistema ASA r2.
 
 Obtenga más información sobre link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Sistemas ASA r2"^] .
 
@@ -417,4 +417,4 @@ lun import create -vserver <SVM_name> -path <volume_path|storage_unit_path> -for
 link:map-source-lun-to-destination-online-migration.html["Asignar el LUN de origen al LUN de destino de ONTAP"] .
 
 .Información relacionada
-https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/What_is_an_unaligned_I%2F%2FO%3F["Obtenga más información sobre E/S no alineadas"] .
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/What_is_an_unaligned_I%2F%2FO%3F["Obtenga más información sobre E/S no alineadas"^] .
