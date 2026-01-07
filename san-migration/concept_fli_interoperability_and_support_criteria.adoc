@@ -2,7 +2,7 @@
 permalink: san-migration/concept_fli_interoperability_and_support_criteria.html 
 sidebar: sidebar 
 keywords: fli, interoperability, support, criteria 
-summary: 'FLI Interoperability Matrix (IMT) es muy similar a FlexArray IMT, pero se añadió como una herramienta de interoperabilidad claramente diferente con el fin de ofrecer un mejor soporte a las cabinas de origen certificadas por NetApp que funcionan con FLI.' 
+summary: 'La Matriz de interoperabilidad FLI (IMT) es una herramienta de interoperabilidad claramente diferente, diseñada para brindar un mejor soporte a las matrices de origen calificadas NetApp que funcionan con FLI.' 
 ---
 = Criterios de compatibilidad e interoperabilidad de FLI
 :allow-uri-read: 
@@ -11,7 +11,7 @@ summary: 'FLI Interoperability Matrix (IMT) es muy similar a FlexArray IMT, pero
 
 
 [role="lead"]
-FLI Interoperability Matrix (IMT) es muy similar a FlexArray IMT, pero se añadió como una herramienta de interoperabilidad claramente diferente con el fin de ofrecer un mejor soporte a las cabinas de origen certificadas por NetApp que funcionan con FLI.
+La Matriz de interoperabilidad FLI (IMT) es una herramienta de interoperabilidad claramente diferente, diseñada para brindar un mejor soporte a las matrices de origen calificadas NetApp que funcionan con FLI.
 
 Antes de importar una LUN externa, es necesario comprobar dos áreas de interoperabilidad:
 

@@ -19,6 +19,4 @@ FLI admite cuatro tipos principales de flujos de trabajo de migración: En líne
 * En una migración automatizada, FLI utiliza el software de automatización del flujo de trabajo (WFA) para automatizar partes del proceso de migración. FLI con WFA está disponible en modo en línea o sin conexión.
 
 
-Desde el punto de vista de la arquitectura, las tres migraciones y el flujo de trabajo de transición son bastante similares. Las cuatro confían en la tecnología FlexArray de NetApp para permitir que su controladora ONTAP actúe como iniciador frente a una cabina de origen y utilice esa posición para copiar LUN en bloque desde la fuente a una LUN de la cabina ONTAP de destino.
-
 Las diferencias entre los flujos de trabajo deben estar relacionados cuando se producen recortes, la duración del plazo de interrupción, el uso de la automatización o si la cabina de origen es una cabina de NetApp que ejecuta ONTAP 7-Mode o una cabina de terceros.
