@@ -3,42 +3,42 @@ section: sample-site
 title: Hoja de trabajo de planificación y encuesta de emplazamiento de ejemplo
 entries:
 - title: Descripción general
-  url: "/san-migration/reference_sample_site_survey_and_planning_worksheet.html"
+  url: "/sample-site/reference_sample_site_survey_and_planning_worksheet.html"
 - title: Ficha Contactos de la hoja de trabajo de planificación y encuesta del sitio
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_contacts_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_contacts_tab.html"
 - title: Pestaña Cuestionario de la hoja de trabajo de planificación y encuesta de
     sitio
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_questionnaire_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_questionnaire_tab.html"
 - title: Pestaña Switches de hoja de trabajo de planificación y encuesta de sitio
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_switches_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_switches_tab.html"
 - title: Hoja de trabajo Encuesta de sitios y planificación Ficha dispositivos de
     almacenamiento de origen
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_source_storage_devices_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_source_storage_devices_tab.html"
 - title: Hoja de trabajo Encuesta de sitios y planificación Ficha dispositivos de
     almacenamiento de destino
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_destination_storage_devices_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_destination_storage_devices_tab.html"
 - title: Ficha hosts de hoja de cálculo de planificación y encuesta de sitio
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_hosts_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_hosts_tab.html"
 - title: Hoja de trabajo para la encuesta y planificación de las instalaciones, ficha
     HBA e Información de zona
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_hba_and_zone_information_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_hba_and_zone_information_tab.html"
 - title: Ficha LUN de origen de la hoja de cálculo Encuesta del sitio y planificación
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_source_luns_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_source_luns_tab.html"
 - title: Ficha grupos de almacenamiento de la hoja de trabajo Encuesta del sitio y
     planificación
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_storage_groups_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_storage_groups_tab.html"
 - title: Pestaña Detalles de LUN de la hoja de trabajo Encuesta del sitio y planificación
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_lun_details_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_lun_details_tab.html"
 - title: Hoja de trabajo para la encuesta y la planificación del sitio Ficha diseños
     de LUN de NetApp
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_netapp_lun_layouts_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_netapp_lun_layouts_tab.html"
 - title: Ficha Planificación y encuesta de sitios Planificación de la hoja de trabajo
     Planificación de migración
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_migration_schedule_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_migration_schedule_tab.html"
 - title: Ficha Estado agregado de la hoja de cálculo Encuesta de planta y planificación
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_aggregate_status_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_aggregate_status_tab.html"
 - title: Ficha Configuración de FAS de la hoja de trabajo Encuesta del sitio y planificación
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_fas_config_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_fas_config_tab.html"
 - title: Hoja de trabajo de planificación y encuesta del sitio Ficha secuencias de
     comandos CLI de SDS
-  url: "/san-migration/reference_site_survey_and_planning_worksheet_sds_cli_scripts_tab.html"
+  url: "/sample-site/reference_site_survey_and_planning_worksheet_sds_cli_scripts_tab.html"
