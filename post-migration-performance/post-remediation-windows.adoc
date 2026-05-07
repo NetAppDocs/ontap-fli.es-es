@@ -1,0 +1,157 @@
+---
+permalink: post-migration-performance/post-remediation-windows.html 
+sidebar: sidebar 
+keywords: host remediation, windows, post-migration, fli, ontap 
+summary: Tras la migración, los hosts Windows requieren pasos de corrección para garantizar que los LUN recién importados se reconocen y funcionan correctamente. 
+---
+= Realiza la corrección del host ONTAP FLI Windows posterior a la migración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Tras la migración, los hosts Windows requieren pasos de corrección para garantizar que los LUN recién importados se reconocen y funcionan correctamente.
+
+
+
+== Post migración - FLI offline
+
+Para FLI sin conexión, pon el LUN en línea después de eliminar la importación de lun y confirmar que los iniciadores de host están conectados.
+
+[cols="4"]
+|===
+| Dispositivos del sistema de archivos | Unidades físicas (sin sistema de archivos) | WFSC | Hyper V 
+
+
+| Paso 1: volver a escanear el almacenamiento en todos los hosts asignados | Paso 1: volver a escanear el almacenamiento en todos los hosts asignados | Paso 1: volver a escanear el almacenamiento en todos los hosts asignados | Paso 1: Vuelve a escanear la gestión de discos, todos los discos deben conectarse. 
+
+
+| Paso 2: identifica las unidades que aparecen en la lista y pon en línea los discos | Paso 2: agrega el disco físico a la aplicación requerida y comienza. | Paso 2: identifica las unidades que aparecen en la lista y conecta los discos. | Paso 2: Selecciona los discos y ponlos en línea, todos deberían aparecer como ONLINE y deberían obtener el nombre original y la letra de disco. 
+
+
+| Paso 3: Verifica si todos los discos del sistema de ficheros están disponibles y funcionando |  | Paso 3: verifica si todos los hosts mapeados tienen las unidades disponibles y ONLINE | Paso 3: Intenta encender las máquinas virtuales, la máquina virtual debería estar en línea sin problemas 
+
+
+| Paso 4: inicia las aplicaciones necesarias |  | Paso 4: Inicia la aplicación de clúster WFSC y configura los recursos de clúster necesarios. |  
+|===
+
+
+== Post migración - FLI en línea
+
+Después de eliminar la importación del LUN, comprueba si el LUN está configurado con -space-reserve desactivado y -space-allocation activado. Si no es así, modifícalo en consecuencia.
+
+[cols="2"]
+|===
+| Dispositivos del sistema de archivos | Unidades físicas (sin sistema de archivos) 
+
+
+| Paso 1: volver a escanear el almacenamiento en todos los hosts asignados | Paso 1: volver a escanear el almacenamiento en todos los hosts asignados 
+
+
+| Paso 2: Si la asignación de espacio está activada en el lado de destino, entonces es necesario reiniciar el host para reflejar los cambios. | Paso 2: Si la asignación de espacio está activada en el lado de destino, entonces es necesario reiniciar el host para reflejar los cambios. 
+|===
+
+
+=== Dispositivos del sistema de archivos
+
+.Pasos
+. Vuelve a escanear el almacenamiento en todos los hosts asignados
++
+[source, cli]
+----
+Update-HostStorageCache
+----
+. Identifica las unidades que aparecen en la lista y pon en línea los discos.
++
+[source, cli]
+----
+Get-Disk | Where-Object IsOffline -eq $true
+Set-Disk -Number <DiskNumber> -IsOffline $false
+----
+. Verifica si todos los discos del sistema de archivos están disponibles y funcionando.
++
+[source, cli]
+----
+Get-Volume | Format-Table DriveLetter, FileSystemLabel, Size, SizeRemaining
+----
+. Inicia las aplicaciones necesarias.
++
+[source, cli]
+----
+Start-Service -Name <ServiceName>
+----
+
+
+
+
+=== Unidades físicas (sin sistema de archivos)
+
+.Pasos
+. Vuelve a escanear el almacenamiento en todos los hosts asignados.
++
+[source, cli]
+----
+Update-HostStorageCache
+----
+. Agrega el disco físico a la aplicación requerida y comienza.
+
+
+
+
+=== WSFC
+
+.Pasos
+. Vuelve a escanear el almacenamiento en todos los hosts asignados.
++
+[source, cli]
+----
+Update-HostStorageCache
+----
+. Identifica las unidades que aparecen en la lista y pon en línea los discos.
++
+[source, cli]
+----
+Get-Disk | Where-Object IsOffline -eq $true
+Set-Disk -Number <DiskNumber> -IsOffline $false
+----
+. Verifica si todos los hosts mapeados tienen las unidades disponibles y ONLINE.
++
+[source, cli]
+----
+Get-ClusterResource | Where-Object ResourceType -eq "Physical Disk"
+----
+. Inicia la aplicación de clúster WSFC y configura los recursos de clúster necesarios.
++
+[source, cli]
+----
+Start-Cluster -Name <ClusterName>
+Start-ClusterResource -Name <ResourceName>
+----
+
+
+
+
+=== Hyper V
+
+.Pasos
+. Vuelve a escanear la gestión de discos, todos los discos deberían conectarse.
++
+[source, cli]
+----
+Update-HostStorageCache
+----
+. Selecciona los discos y ponlos en línea, todos deberían quedar EN LÍNEA y obtener el nombre original y la letra del disco.
++
+[source, cli]
+----
+Get-Disk | Where-Object IsOffline -eq $true
+Set-Disk -Number <DiskNumber> -IsOffline $false
+----
+. Intenta encender las máquinas virtuales, la máquina virtual debería estar en línea sin problemas.
++
+[source, cli]
+----
+Start-VM -Name <VM_Name>
+----
+

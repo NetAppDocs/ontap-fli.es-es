@@ -1,0 +1,70 @@
+---
+permalink: phases/execute-phase.html 
+sidebar: sidebar 
+keywords: execute phase, foreign lun import, fli, offline fli, online fli, cutover, import jobs, san migration, zoning, host remediation, iscsi fli, fc fli 
+summary: Conoce la fase de ejecución, que abarca las tareas de extremo a extremo necesarias para realizar una migración FLI offline u online y para cambiar el acceso del host a ONTAP. 
+---
+= Fase de ejecución de ONTAP Foreign LUN Import (FLI)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de ejecución es en la que se realiza la migración. Cubre las tareas de extremo a extremo necesarias para ejecutar una Foreign LUN Import offline u online y para realizar la transición de acceso al host desde la cabina ajena a la cabina ONTAP.
+
+
+
+== Tareas de la fase de ejecución de ONTAP FLI
+
+A continuación se indican las tareas de ejecución de ONTAP FLI para cada componente.
+
+[cols="1,2"]
+|===
+| Componente | Tareas 
+
+
+| Host  a| 
+* Revisa los registros de eventos del host y del sistema para detectar problemas a tiempo y reducir el riesgo antes de cualquier reconfiguración importante.
+* Reinicia los hosts según proceda para garantizar la estabilidad antes de la transición anticipada o la remediación.
+* Después de la transición, valida el acceso al host. Todos los dispositivos esperados están presentes, la multivía funciona correctamente y las aplicaciones y los sistemas de archivos se inician sin problemas.
+
+
+
+
+| iSCSI FLI y la red  a| 
+* Confirma la accesibilidad de IC LIF a los portales de destino de la cabina externa y asegúrate de que la conectividad backend se mantenga estable durante toda la importación.
+* Valida que las sesiones iSCSI permanezcan en buen estado porque impulsan el descubrimiento de LUN de cabina ajenos y la disponibilidad de rutas.
+
+
+
+
+| Estructura  a| 
+* Asegúrate de que la división en zonas y el enmascaramiento necesarios estén configurados para que los puertos de iniciador de ONTAP puedan acceder a los LUN de la cabina externa para su detección e importación.
+* Después de la transición, actualiza la división en zonas según sea necesario para que los hosts accedan a los LUN de destino de ONTAP y prepárate para la limpieza más adelante.
+
+
+
+
+| NetApp matriz de almacenamiento (destino)  a| 
+* Confirma que ONTAP detecta los LUN externos antes de crear trabajos de importación.
+* Crea la relación de importación e inicia los trabajos de importación una vez confirmada la detección.
+* Supervisa el progreso de la importación y gestiona las excepciones. Usa la pausa y la reanudación según sea necesario para regular los flujos de copia, especialmente si aumenta la latencia del host.
+* Gestión de la transición:
++
+** La transición a FLI sin conexión se produce una vez finalizada la importación.
+** La transición del host FLI en línea se produce antes, mientras que la importación continúa en segundo plano.
+
+
+
+
+
+
+| Matriz de almacenamiento externo (Source)  a| 
+* Asegúrate de que los LUN de origen destinados a la migración se presentan correctamente para el descubrimiento e importación en ONTAP (enmascaramiento FC o visibilidad del destino iSCSI según el tipo de transporte).
+* Asegúrate de que no se accede a los LUN de origen a través del host durante la importación. Esto es fundamental para asegurar que no se realicen operaciones de escritura desde varias fuentes.
+* Durante la transición en línea, coordina las acciones de desasignación y reasignación según sea necesario para evitar la doble presentación y asegurarte de que el host realiza una transición limpia a ONTAP.
+
+
+|===
+Tanto para FC como para iSCSI-backend FLI, el éxito de la ejecución depende en gran medida del mantenimiento de una conectividad backend estable, asegurando la salud de la sesión FC/iSCSI y la redundancia de la ruta completa al LUN externo. Dado que la E/S del host (en línea) y la copia de importación pueden competir por los mismos recursos backend, la importación puede ser pausada operativamente (por ejemplo, usando pausa y reanudación) si es necesario para proteger la latencia del host, y las migraciones normalmente se programan durante las ventanas de menor actividad.

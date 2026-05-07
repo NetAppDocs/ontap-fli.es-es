@@ -1,0 +1,68 @@
+---
+permalink: phases/remediation-linux.html 
+sidebar: sidebar 
+keywords: ontap, fli, foreign lun import, linux host, pre-migration, offline fli, online fli 
+summary: Antes de ejecutar la migración de ONTAP FLI en un host Linux, completa estos pasos previos a la migración. Hay pasos distintos para las migraciones offline y online. 
+---
+= Remediación del host ONTAP FLI Linux
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de ejecutar la migración de ONTAP FLI en un host Linux, completa estos pasos previos a la migración. Hay pasos distintos para las migraciones offline y online.
+
+
+
+== Premigración - FLI sin conexión
+
+Estos pasos son comunes tanto para FLI online como offline. Antes de desaprovisionar el LUN de origen desde el host, asegúrate de que se han completado los siguientes pasos.
+
+[cols="3"]
+|===
+| Sistema de archivos (LVM y no LVM) | Pacemaker con LVM (SCSI3 PR) | SANBOOT 
+
+
+| Paso 1: recopila la configuración del dispositivo de bloque de extremo a extremo: salud/rutas de multivía, disposición de LVM en el dispositivo de bloque y configuración de GRUB/cargador de arranque confirmando el dispositivo de arranque y los parámetros de arranque correctos. | Paso 1: recopila la configuración del dispositivo de bloque de extremo a extremo: salud/rutas de multivía, disposición de LVM en el dispositivo de bloque y configuración de GRUB/cargador de arranque confirmando el dispositivo de arranque y los parámetros de arranque correctos. | Paso 1: recopila la configuración de arranque SAN de extremo a extremo: salud/rutas multivía, disposición LVM en el LUN de arranque y configuración de GRUB/cargador de arranque que confirme el dispositivo de arranque y los parámetros de arranque correctos. 
+
+
+| Paso 2: Asegúrate de que las entradas `/etc/fstab` para los respectivos dispositivos de datos (LVM/Non-LVM) estén referenciadas por su FS UUID. | Paso 2: Desactiva los grupos de recursos del clúster para los respectivos LUN que se van a migrar. Una vez desactivados, elimina los grupos de recursos. | Paso 2: Asegúrate de que las entradas de  `/etc/fstab` para el dispositivo de arranque SAN, incluidos los dispositivos de datos (lvm/nonlvm), estén referenciadas por su UUID de FS. 
+
+
+| Paso 3: asegúrate de que todas las operaciones a los puntos de montaje de destino están en pausa. Asegúrate de que no hay procesos que siguen accediendo al dispositivo de bloque. Si es necesario, drena/elimina los manejadores de procesos abiertos. | Paso 3: Realiza la copia de seguridad de la configuración del grupo de volúmenes LVM en un archivo para los respectivos grupos de recursos que acabamos de deshabilitar/eliminar. Luego, desactiva los grupos de volúmenes. | Paso 3: Asegúrate de que has actualizado la línea `GRUB_CMDLINE_LINUX` con las referencias UUID correctas. Vuelve a crear una nueva configuración de GRUB basada en las referencias UUID del dispositivo. 
+
+
+| Paso 4: Desmonta el sistema de archivos y realiza la copia de seguridad de la configuración del grupo de volúmenes LVM. Desactiva el VG y expórtalo | Paso 4: elimina los LUN de origen de la configuración de PCS stonith. | Paso 4: Valida los cambios con la nueva configuración de grub y vuelve a crear la nueva imagen initrd para reflejar los cambios con SAN Boot Device. 
+
+
+| Paso 5: Limpia la configuración multivía del dispositivo y elimina todos los archivos de dispositivo SCSI obsoletos. | Paso 5: Limpia la configuración multivía del dispositivo y elimina todos los archivos de dispositivo SCSI obsoletos. Nota: si se ve alguna reserva persistente de lun, bórrala y asegúrate de que no hay claves PR | Paso 5: reinicia el host para asegurarte de que el host puede arrancar bien con los cambios anteriores. Una vez que el host arranca correctamente, entiende que el host está listo para la pre-remediación de la migración FLI. 
+
+
+| Paso 6: Vuelve a cargar la configuración de multivía para que el host tenga la lista de dispositivos actualizada. Si es necesario, realiza un nuevo escaneo del bus SCSI del host. | Paso 6: Vuelve a escanear el host para asegurarte de que no hay entradas obsoletas en la asignación de dispositivos existente. | Paso 6: Ahora apaga el host sanboot para proceder con el flujo de trabajo de ONTAP FLI. 
+|===
+
+
+== Premigración - FLI en línea
+
+A continuación se indican los pasos específicos del FLI en línea, pero estos pasos deben ir precedidos de los pasos del FLI fuera de línea previo a la migración. Los siguientes pasos deben llevarse a cabo después de que el LUN NetApp se aprovisione en el host. Estos pasos deben llevarse a cabo después de que el LUN NetApp se aprovisione en el host. Y sólo es aplicable al FLI en línea.
+
+[cols="3"]
+|===
+| Sistema de archivos (LVM y no LVM) | Pacemaker con LVM (SCSI3 PR) | SANBOOT 
+
+
+| Paso 1: Vuelve a explorar el almacenamiento en todos los hosts Linux asignados. | Paso 1: Vuelve a explorar el almacenamiento en todos los hosts Linux asignados. | Paso 1: Enciende el servidor. 
+
+
+| Paso 2: Descubre los dispositivos multivía. | Paso 2: Descubre los dispositivos multivía. Asegúrate de que los LUN migrados se añaden a la configuración de PCS Stonith. | Paso 2: En la BIOS o UEFI del HBA del servidor, configura el nuevo dispositivo de arranque que se presenta a este HBA del host. 
+
+
+| Paso 3: Importa los grupos de volúmenes y realiza la activación de VG. | Paso 3: realiza la restauración de la copia de seguridad de la configuración del grupo de volúmenes para esos grupos de volúmenes/LVM recién descubiertos, seguida de la activación del grupo de volúmenes. | Paso 3: reinicia el host para arrancar desde el nuevo LUN mapeado que forma parte de LUN Import. 
+
+
+| Paso 4: Monta la configuración LVM en los respectivos puntos de montaje. | Paso 4: Crea los nuevos grupos de recursos PCS y agrega los recursos respectivos para los LV y sistemas de archivos disponibles. NOTA: Ten en cuenta que los objetos LVM recién activados tienen las estructuras de LV y sistema de archivos intactas. |  
+
+
+|  | Paso 5: Verifica el estado del clúster PCS para que todos los recursos estén en línea y disponibles. |  
+|===

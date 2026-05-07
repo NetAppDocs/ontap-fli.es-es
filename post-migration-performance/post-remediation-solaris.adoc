@@ -1,0 +1,143 @@
+---
+permalink: post-migration-performance/post-remediation-solaris.html 
+sidebar: sidebar 
+keywords: host remediation, solaris, post-migration, fli, ontap 
+summary: Después de la migración, los hosts Solaris requieren pasos de corrección para garantizar que los LUN recién importados se reconozcan y funcionen correctamente. 
+---
+= Realiza la corrección del host ONTAP FLI Solaris posterior a la migración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Después de la migración, los hosts Solaris requieren pasos de corrección para garantizar que los LUN recién importados se reconozcan y funcionen correctamente.
+
+
+
+== Post-migración - FLI offline
+
+Para FLI sin conexión, pon el LUN en línea después de eliminar la importación de lun y confirmar que los iniciadores de host están conectados.
+
+[cols="5"]
+|===
+| Sistema de archivos | Dispositivo de bloques | LVM (FS) | Clúster | Sanboot 
+
+
+| Paso 1: volver a explorar el almacenamiento en todos los hosts Solaris asignados | Paso 1: vuelve a explorar el almacenamiento en todos los hosts Solaris asignados. | Paso 1: volver a explorar el almacenamiento en todos los hosts Solaris asignados | Paso 1: volver a explorar el almacenamiento en todos los hosts Solaris asignados | Paso 1: enciende el servidor 
+
+
+| Paso 2: identificar los dispositivos multivía | Paso 2: identificar los dispositivos multivía | Paso 2: identificar los dispositivos multivía | Paso 2: identificar los dispositivos multivía | Paso 2: En el OBP del servidor SPARC, configura el nuevo dispositivo de arranque que se presenta a este Host HBA 
+
+
+| Paso 3: comprobar los detalles del pool | Paso 3: Identifica el ID del dispositivo de multivía y preséntalo a la aplicación correspondiente. | Paso 3: comprobar el estado del pool | Paso 3: comprobar los detalles del sistema de archivos | Paso 3: reinicia el host para arrancar desde el nuevo LUN mapeado que forma parte de LUN Import 
+
+
+| Paso 4: monta de nuevo los dispositivos en las carpetas respectivas |  | Paso 4: importar el Pool | Paso 4: verifica la configuración de clúster necesaria e inicia la aplicación de clúster |  
+
+
+|  |  | Paso 5: Enumera los FS presentes en el Pool | Paso 5: valida el estado del clúster y la aplicación que está consumiendo. |  
+
+
+|  |  | Paso 6: Monta el FS de nuevo en las carpetas respectivas |  |  
+|===
+
+NOTE: Consulta la documentación del proveedor del sistema operativo para ver la lista de comandos más reciente y actualizada.
+
+.Pasos
+. Vuelve a escanear después de adjuntar.
++
+[source, cli]
+----
+cfgadm -al
+----
+. Identifica los dispositivos de almacenamiento.
++
+[source, cli]
+----
+format
+sanlun lun show all
+mpathadm list lu
+mpathadm show lu
+----
+. Verifica que el dispositivo está conectado.
++
+[source, cli]
+----
+format |grep disk_id
+----
+. Importa el zpool y el FS se montará automáticamente.
++
+[source, cli]
+----
+zpool import zpool_name
+df -g (to ensure its unmounted)
+----
+
+
+
+
+== Post-migración - FLI en línea
+
+Después de eliminar la importación del LUN, comprueba si el LUN está configurado con -space-reserve desactivado y -space-allocation activado. Si no es así, modifícalo en consecuencia.
+
+[cols="4"]
+|===
+| Sistema de archivos | Dispositivo de bloques | LVM (FS) | Sanboot 
+
+
+| Paso 1: vuelve a explorar el almacenamiento en todos los hosts Solaris asignados. | Paso 1: vuelve a explorar el almacenamiento en todos los hosts Solaris asignados. | Paso 1: vuelve a explorar el almacenamiento en todos los hosts Solaris asignados. | Paso 1: vuelve a explorar el almacenamiento en todos los hosts Solaris asignados. 
+|===
+
+NOTE: Consulta la documentación del proveedor del sistema operativo para ver la lista de comandos más reciente y actualizada.
+
+.Pasos
+. Vuelve a escanear después de adjuntar.
++
+[source, cli]
+----
+cfgadm -al
+----
+. Identifica los dispositivos de almacenamiento.
++
+[source, cli]
+----
+format
+sanlun lun show all
+mpathadm list lu
+mpathadm show lu
+----
+. Verifica que el dispositivo está conectado.
++
+[source, cli]
+----
+`format |grep disk_id`
+----
+. Importa el zpool y el FS se montará automáticamente.
++
+[source, cli]
+----
+zpool import zpool_name
+df -g
+----
+
+
+[cols="2"]
+|===
+|  | Solaris 
+
+
+| Paso 1 | Captura información del host. 
+
+
+| Paso 2 | Desmonta el sistema de archivos. 
+
+
+| Paso 3 | Haz una copia de seguridad de la VG. 
+
+
+| Paso 4 | Desactiva la VG. 
+
+
+| Paso 5 | Exporta la VG. 
+|===

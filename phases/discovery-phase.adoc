@@ -1,0 +1,109 @@
+---
+permalink: phases/discovery-phase.html 
+sidebar: sidebar 
+keywords: discovery phase, foreign lun import, fli, active iq onecollect, fc fli, iscsi fli, intercluster lif, wwpn, iqn, foreign array, lun discovery, san migration 
+summary: Conoce la fase de descubrimiento, que recopila información sobre el entorno de origen y la conectividad para sentar las bases de la planificación de la migración. 
+---
+= Fase de descubrimiento de ONTAP Foreign LUN Import (FLI)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de descubrimiento de ONTAP FLI es el primer paso del proceso de migración. Es fundamental recopilar toda la información necesaria sobre el entorno de origen, la conectividad y el sistema ONTAP de destino para garantizar una migración sin problemas. La fase de descubrimiento sienta las bases para planificar, preparar, ejecutar y verificar la migración.
+
+
+
+== Prepárate para una migración iSCSI con ONTAP FLI
+
+La fase de descubrimiento de ONTAP FLI recopila los detalles técnicos necesarios para completar la migración:
+
+* Planifica el flujo de trabajo de la migración (online vs offline)
+* Ejecuta la corrección del host de forma segura
+* Valida la conectividad y el descubrimiento del LUN externo en ONTAP antes de crear la relación de importación
+
+
+Para la recopilación de datos estructurada y repetible en hosts, controladores NetApp y fabrics, puedes usar NetApp Active IQ OneCollect. OneCollect está diseñado para recopilar información de almacenamiento, hosts, fabrics y switches para la planificación y validación de la migración.
+
+Para FC FLI, la fase de descubrimiento debe capturar los WWPN de puerto de destino de la cabina externa.
+
+Para iSCSI FLI, la fase de descubrimiento debe:
+
+* Captura las IPs del portal de destino de la cabina externa y los IQN de destino
+* Verifica la accesibilidad de IC LIF
+* Planifica sesiones iSCSI de malla completa (cada nodo de HA se conecta a cada portal de destino) para garantizar que el LUN externo se descubre a través de todas las rutas disponibles
+
+
+
+
+== Tareas de la fase de descubrimiento de ONTAP FLI
+
+Cada componente tiene un conjunto de tareas para recopilar datos o validar la conectividad.
+
+[cols="1,2"]
+|===
+| Componente | Tareas 
+
+
+| Host  a| 
+* Identifica la versión del sistema operativo del host, la pila y la configuración de multivía, y cualquier modelo de consumo especial, como sistema de archivos, dispositivo sin procesar o disco de clúster, para guiar los pasos de remediación y transición del host.
+* Captura el inventario de LUN, incluido el tamaño, los identificadores o números de serie, las distribuciones de particiones o desplazamientos, y cómo cada LUN es consumido por las aplicaciones para la planificación y el rollback.
+* Para entornos frontales FC, registra los WWPN de iniciador de host. Estos se usan para la división en zonas y el enmascaramiento, si aplica al diseño general de migración y transición.
+* Para entornos frontales iSCSI, si se utiliza después de la migración, registra los IQN del iniciador del host y las IP del portal de destino que el host usará para iniciar sesión después de la transición.
+
+
+
+
+| Tejido y redes  a| 
+* Para entornos FC:
++
+** Documenta la división en zonas actual (hacia y desde las zonas del host y de la cabina de origen) para que puedas eliminarla o actualizarla de forma segura después de la transición.
+** Captura los identificadores del switch y los puertos implicados.
+
+
+* Para entornos iSCSI:
++
+** Documenta la VLAN, la subred y la ruta de enrutamiento entre los LIF de ONTAP IC y los portales de destino de array externos
+** Confirma que no hay cortafuegos ni ACL que bloqueen la comunicación.
+
+
+
+
+
+
+| NetApp matriz de almacenamiento (destino)  a| 
+* Confirma la versión de ONTAP y la preparación de ECV para iSCSI FLI.
++
+
+NOTE: La creación de iniciadores se bloquea si el clúster no se encuentra en el nivel admitido.
+
+* Identifica qué nodos participarán, como el nodo propietario del LUN y su partner de HA, y registra los LIF intercluster disponibles en esos nodos. Planifica la redundancia; planifica los LIF de IC, los iniciadores y las sesiones en ambos nodos de HA.
+* Registra el IPspace y la subred de las IC LIF y verifica que pueden llegar a portales de destino externos. Evita crear nuevas IC LIF en una subred diferente si las IC LIF existentes ya se usan en otra parte del clúster.
+* Valida las restricciones del lado de destino que debes aplicar durante la planificación, como el tamaño máximo de importación, el requisito de tamaño de bloque de 512B y los límites de escalado de sesión e importación relevantes para iSCSI FLI.
+
+
+
+
+| Matriz de almacenamiento externo (fuente)  a| 
+* Identifica las IP del portal de destino de la cabina externa y los IQN de destino; las sesiones de descubrimiento iSCSI no son compatibles con iSCSI FLI, así que deben conocerse explícitamente desde el principio.
+* Identifica los LUN específicos asignados al host de origen, incluido el tamaño de LUN y el tamaño de bloque. Asegúrate de que el LUN sea estable, que no esté en expansión y que sea adecuado para la planificación de la importación.
+* Registra el acceso al host y los objetos de enmascaramiento, como los registros de host e iniciador, para que puedas desasignar o reasignar de forma segura durante la transición y validar que estás listo para revertir si es necesario.
+* Planifica y ejecuta la cualificación de la cabina externa.
++
+
+NOTE: La cualificación de campo es necesaria para iSCSI FLI; no asumas que las cabinas cualificadas para FC están automáticamente cualificadas para iSCSI.
+
+
+
+|===
+
+
+== Resultados recomendados del descubrimiento de ONTAP FLI
+
+* Un único mapeo de hoja de inventario: host → LUN(s) de origen → portal/IQN de destino foráneo → LIFs/nodos de ONTAP IC → LUN(s) de destino para ejecución limpia y rollback.
+* Un paquete OneCollect (o equivalente) capturado antes de la ejecución del cambio para reducir el tiempo de triaje si se producen problemas.
+
+
+.Información relacionada
+link:https://mysupport.netapp.com/site/tools["Herramientas"]

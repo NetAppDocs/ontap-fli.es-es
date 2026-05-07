@@ -1,0 +1,14 @@
+---
+section: configure
+title: Configura ONTAP FLI
+entries:
+- title: Descripción general
+  url: "/configure/config-overview.html"
+- title: Conectividad y cableado FC
+  url: "/configure/fc-connectivity-wiring.html"
+- title: Configurar adaptadores FC para el modo iniciador
+  url: "/configure/fc-configure-adapter-initiator-mode.html"
+- title: Mejores prácticas de división en zonas de FC
+  url: "/configure/fc-zoning-model-best-practices.html"
+- title: Configura el backend iSCSI
+  url: "/configure/iscsi-setup-backend-connectivity.html"

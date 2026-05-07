@@ -1,0 +1,53 @@
+---
+permalink: post-migration-performance/post-remediation-linux.html 
+sidebar: sidebar 
+keywords: host remediation, linux, post-migration, fli, ontap 
+summary: Después de la migración, los hosts Linux requieren pasos de remediación para asegurar que los LUNs recién importados sean reconocidos correctamente y funcionales. 
+---
+= Realiza la corrección del host ONTAP FLI Linux posterior a la migración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Después de la migración, los hosts Linux requieren pasos de remediación para asegurar que los LUNs recién importados sean reconocidos correctamente y funcionales.
+
+
+
+== Post-migración - FLI offline
+
+Para FLI sin conexión, pon el LUN en línea después de eliminar la importación de lun y confirmar que los iniciadores de host están conectados.
+
+[cols="3"]
+|===
+| Sistema de archivos (LVM y no LVM) | Pacemaker con LVM (SCSI3 PR) | SANBOOT 
+
+
+| Paso 1: volver a explorar el almacenamiento en todos los hosts Linux asignados | Paso 1: volver a explorar el almacenamiento en todos los hosts Linux asignados | Paso 1: enciende el servidor 
+
+
+| Paso 2: Descubre los dispositivos multivía. | Paso 2: Descubre los dispositivos multivía. Asegúrate de que los LUN migrados se añaden a la configuración de PCS Stonith. | Paso 2: En la BIOS o UEFI del HBA del servidor, configura el nuevo dispositivo de arranque que se presenta a este HBA del host 
+
+
+| Paso 3: importa los grupos de volúmenes y realiza la activación de VG. | Paso 3: realiza la restauración de la copia de seguridad de la configuración del grupo de volúmenes para esos grupos de volúmenes/LVM recién descubiertos, seguida de la activación del grupo de volúmenes. | Paso 3: reinicia el host para arrancar desde el nuevo LUN mapeado que forma parte de LUN Import 
+
+
+| Paso 4: Monta la configuración LVM en los respectivos puntos de montaje. | Paso 4: crea los nuevos grupos de recursos PCS y agrega los recursos respectivos para los LV y sistemas de archivos disponibles. NOTA: Ten en cuenta que los objetos LVM recién activados tienen las estructuras de LV y sistema de archivos intactas. |  
+
+
+|  | Paso 5: Verifica el estado del clúster PCS para que todos los recursos estén en línea y disponibles. |  
+|===
+
+
+== Post-migración - FLI en línea
+
+Después de eliminar la importación del LUN, verifica si el LUN está configurado con `-space-reserve disabled` y `-space-allocation enabled`. Si no, modifícalo en consecuencia.
+
+[cols="4"]
+|===
+| Sistema de archivos | Dispositivo de bloques | LVM (FS) | Sanboot 
+
+
+| Paso 1: volver a explorar el almacenamiento en todos los hosts Linux asignados | Paso 1: volver a explorar el almacenamiento en todos los hosts Linux asignados | Paso 1: volver a explorar el almacenamiento en todos los hosts Linux asignados | Paso 1: volver a explorar el almacenamiento en todos los hosts Linux asignados 
+|===

@@ -1,0 +1,70 @@
+---
+permalink: phases/verify-phase.html 
+sidebar: sidebar 
+keywords: verify phase, foreign lun import, fli, post-migration cleanup, application validation, fc zoning, iscsi cleanup, ontap configuration, migration documentation, san migration 
+summary: Conoce la fase de verificación, que confirma que la migración se completó según lo planeado y elimina las configuraciones temporales usadas durante la ventana de migración. 
+---
+= ONTAP Foreign LUN Import (FLI) fase de verificación
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de verificación confirma que la migración se ha completado según lo previsto y se centra en la limpieza posterior a la migración. Esto incluye validar el comportamiento de la aplicación, confirmar el acceso correcto del host y las rutas a los LUN de ONTAP, recopilar los registros de migración para auditoría y solución de problemas, y eliminar la conectividad y configuración temporales que se usaron solo para la migración.
+
+Como parte de la limpieza, eliminas los registros de iniciador del lado de origen y la división en zonas que ya no son necesarios, y documentas la configuración final para que los equipos de operaciones tengan un estado "as-built" claro.
+
+Para iSCSI FLI, la fase de verificación también debe incluir la eliminación de las sesiones de iniciador iSCSI de software y los iniciadores creados en LIFs intercluster. Si los LIFs intercluster se crearon solo para la importación de LUN extranjeros, incluso esos LIFs deben ser eliminados.
+
+
+
+== Tareas de la fase de verificación de ONTAP FLI
+
+A continuación se indican las tareas de verificación de ONTAP FLI para cada componente.
+
+[cols="1,2"]
+|===
+| Componente | Tareas 
+
+
+| Host  a| 
+* Realiza la validación a nivel de aplicación contra los LUN migrados. (comprobación de la coherencia del sistema de archivos, error de suma de comprobación, dbcc checkdb (MS SQL), rman (Oracle))
+* Confirma que todos los sistemas de archivos, almacenes de datos y discos de clúster previstos son accesibles y estables después de la migración y la corrección.
+* Confirma que el recuento de rutas IO y el tipo de ruta están en las líneas esperadas.
+
+
+
+
+| Fabric FC FLI  a| 
+* Elimina las zonas de almacenamiento de host a origen del conjunto de zonas activas, o las reglas de acceso equivalentes, si no se han eliminado ya durante la transición anticipada.
+* Elimina las zonas de conectividad de origen a destino creadas específicamente para la migración.
+* Haz una copia de seguridad del conjunto de zonas actualizado después de la migración para poder restaurar y auditar si lo necesitas.
+
+
+
+
+| red iSCSI FLI  a| 
+* Eliminar objetos de conectividad de backend iSCSI FLI creados para la migración.
+* Deben eliminarse las sesiones de iniciador iSCSI y también debe eliminarse el objeto Initiator Object iSCSI creado en los LIF intercluster.
+
+
+
+
+| NetApp matriz de almacenamiento (destino)  a| 
+* Verifica que el almacenamiento posterior a la migración sea correcto, incluida la alineación de LUN cuando lo requiera tu host o caso de uso.
+* Recopila los registros de importación de la migración FLI para auditoría y solución de problemas. Activa AutoSupport después de que la migración haya finalizado.
+* Elimina cualquier copia Snapshot creada manualmente que se haya usado solo para la reversión durante la ventana de migración.
+* Elimina los artefactos de configuración de la LUN de cabina de origen de ONTAP que ya no sean necesarios, como los objetos de la LUN de cabina de origen y los detalles de asociación de discos externos. Confirma lo mismo usando el comando storage disk show.
+* Documenta la configuración final de ONTAP, incluidas las rutas LUN, las asignaciones, los igroups, los iniciadores y el modelo de acceso al host.
+
+
+
+
+| Matriz de almacenamiento externo (Source)  a| 
+* Elimina los grupos de iniciadores de almacenamiento de destino (NetApp) y los grupos de hosts creados para presentar LUN de origen a ONTAP durante la migración.
+* Elimina los grupos de iniciadores de host y los registros de host relacionados con la asignación de host original cuando desmanteles el acceso de origen.
+* Asegúrate de que los LUN de origen migrados ya no se presenten de forma que puedan causar una doble presentación en el host. Esto es fundamental y debe garantizarse durante toda la migración.
+
+
+|===

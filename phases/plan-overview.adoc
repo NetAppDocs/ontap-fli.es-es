@@ -1,0 +1,74 @@
+---
+permalink: phases/plan-overview.html 
+sidebar: sidebar 
+keywords: plan and prepare phase, foreign lun import, fli, migration planning, test migration, cutover, intercluster lif, iscsi fli, gap analysis, san migration, fc fli, zoning 
+summary: Conoce la fase de planificación y preparación, que convierte los resultados del descubrimiento y el análisis en un plan de migración ejecutable y valida la preparación del entorno. 
+---
+= Fase de planificación y preparación de ONTAP Foreign LUN Import (FLI)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La fase de planificación y preparación convierte los resultados de la detección y el análisis en un plan de migración ejecutable y confirma que el entorno está listo para la ventana de migración. La mayor parte del esfuerzo del proyecto suele concentrarse aquí, porque es donde finalizas el enfoque de transición, en línea o sin conexión, validas la conectividad de extremo a extremo y demuestras el flujo de trabajo mediante una o varias migraciones de prueba antes de pasar a producción.
+
+Para iSCSI FLI, esta fase también debe validar las restricciones de diseño del backend iSCSI. El iniciador de software iSCSI de ONTAP utiliza LIFs IC, requiere IP de portal de destino e IQN de destino explícitos, sin sesiones de descubrimiento y está diseñado para ejecutarse dentro de los límites de escala definidos (importaciones por nodo, sesiones por LIF/nodo, iniciador por LIF, tamaño máximo de importación).
+
+
+
+== Resultados de la fase de planificación y preparación de ONTAP FLI
+
+* Finaliza el plan de corrección usando el análisis de deficiencias del host, incluyendo qué cambios se hacen antes de la migración y cuáles se hacen durante la ventana de transición, como los cambios de MPIO.
+* Crea la asignación de LUN de origen a destino, los identificadores y seriales de LUN de origen a los nombres y rutas de LUN de ONTAP de destino, incluida la asignación de rollback.
+* Valida la conectividad backend de ONTAP con el array ajeno usando la accesibilidad IC LIF y una topología de sesión de malla completa donde cada nodo HA establece sesiones con cada portal de destino. Este es el requisito previo para el descubrimiento fiable de LUN ajenos.
+* Realiza una o varias migraciones de prueba para confirmar que la configuración es correcta y para recopilar muestras de rendimiento que ayuden a estimar la duración de la producción y el esfuerzo del personal.
+
+
+
+
+== Tareas de la fase de planificación y preparación de ONTAP FLI
+
+A continuación se detallan las tareas de planificación y preparación de ONTAP FLI para cada componente.
+
+[cols="1,2"]
+|===
+| Componente | Tareas 
+
+
+| Host  a| 
+* Finaliza el plan de corrección del host usando el análisis de deficiencias, incluyendo si el cambio debe hacerse antes de la migración, durante la transición o después de la migración.
+* Elige el modo de migración, en línea o fuera de línea, según la tolerancia al tiempo de inactividad y la criticidad de la carga de trabajo; ajusta el momento de la remediación en consecuencia.
+* Valida y documenta los pasos de redescubrimiento y corrección del lado del host para el caso de uso previsto, LUN estándar, disco en clúster, almacén de datos RDM/VMFS, etc., que se usarán durante la ventana de migración.
+
+
+
+
+| Fabric / Red  a| 
+* Entornos FC: Haz copias de seguridad de los conjuntos de zonas existentes y planifica los cambios de zona necesarios para la transición y la limpieza posterior a la migración.
+* entornos de backend iSCSI: valida la accesibilidad IP de extremo a extremo entre los LIF de ONTAP IC y las IP de portal de destino del array externo (enrutamiento/VLAN/firewall incl. TCP/3260) y garantiza la redundancia.
+* No agregues nuevas IC LIFs en una subred diferente solo para alcanzar destinos externos cuando ya se están usando IC LIFs existentes en otra subred (considéralo como una planificación no compatible).
+
+
+
+
+| NetApp matriz de almacenamiento (destino ONTAP)  a| 
+* Confirma que el clúster ONTAP está listo para iSCSI FLI (versión compatible/ECV) y que la configuración del backend iSCSI solo para migración se eliminará después de la migración (importante para la preparación para actualización/reversión).
+* Identifica y confirma las IC LIF en el nodo propietario del LUN y en el partner de HA y planifica la resiliencia (normalmente dos IC LIF por nodo en puertos diferentes).
+* Crea iniciadores de software iSCSI (un iniciador por IC LIF) y establece sesiones de malla completa (cada nodo HA para cada portal de destino externo e IQN) y verifica que las sesiones estén saludables.
+* Descubre los LUN extranjeros en ONTAP usando el comando storage disk show, valida el estado de la ruta y las propiedades básicas, incluido el requisito de 512B, y luego marca los LUN extranjeros como extranjeros.
+* Aprovisiona un LUN de destino de prueba con paridad de tamaño usando el parámetro -foreign-disk, asígnalo usando el protocolo front end previsto (FC o iSCSI) y ejecuta al menos una migración de prueba para validar el flujo de trabajo de extremo a extremo y capturar el rendimiento.
+* Asegúrate de que el plan respeta las restricciones iSCSI FLI (sin sesiones de descubrimiento, sin MCS, solo ERL0, límites de importación y sesión, y tamaño máximo de importación).
+
+
+
+
+| Matriz de almacenamiento externo (Source)  a| 
+* Recopila las IPs del portal de destino y los IQNs de destino, las sesiones se crean explícitamente y no se utilizan sesiones de descubrimiento.
+* Crea un objeto de acceso del lado del proveedor (equivalente a host/grupo de host) para los iniciadores de ONTAP y asigna un pequeño LUN de prueba (normalmente ~1 GB) solo a los iniciadores de ONTAP para la cualificación y las pruebas.
+* Verifica que el destino externo vea los inicios de sesión y las sesiones del iniciador de ONTAP y que los LUN correctos estén asignados para la importación.
+* Asegúrate de que al host de producción no se le presente simultáneamente el mismo LUN de origen durante la transición para evitar la presentación dual.
+* Completa la cualificación de matrices extranjeras usando herramientas de cualificación compatibles y el enfoque admitido antes de las importaciones de producción.
+
+
+|===

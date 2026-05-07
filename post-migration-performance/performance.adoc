@@ -1,0 +1,80 @@
+---
+permalink: post-migration-performance/performance.html 
+sidebar: sidebar 
+keywords: fli performance, foreign lun import, import throttle, throughput, lun import pause, lun import resume, iscsi fli, performance counters, san migration, bandwidth 
+summary: Administra el rendimiento de importación FLI usando controles de aceleración para reducir la inanición de la carga de trabajo y equilibrar el ancho de banda durante las cargas de trabajo de producción activas. 
+---
+= Controles de rendimiento de ONTAP FLI
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Foreign LUN Import (FLI) incluye controles para reducir el riesgo de inanición de la carga de trabajo y para ayudar a gestionar cuánto ancho de banda consume la importación mientras la E/S de producción está activa.
+
+Limitar la importación (limitar el límite de rendimiento de la importación):: ONTAP proporciona un acelerador de importación lun para aplicar un límite de rendimiento máximo a una relación de importación. Un valor de 0 significa que la importación se ejecuta al máximo esfuerzo junto con la E/S del usuario; un valor distinto de cero limita el ancho de banda de importación:
++
+--
+Para establecer un límite de rendimiento máximo de importación (ejemplo: 3MB/s), haz lo siguiente:
+
+[source, cli]
+----
+set -privilege advanced
+lun import throttle -vserver <SVM> -path <LUN_PATH> -max-throughput-limit 3MB
+----
+--
+Supervisa el progreso detallado de la importación y el rendimiento:: Usa lun import show -instance (o -fields) para ver el estado detallado, incluido el rendimiento actual, el límite de rendimiento máximo y cualquier contexto de QoS mostrado para la importación:
++
+--
+[source, cli]
+----
+set -privilege advanced
+lun import show -instance
+----
+--
+Pausa (estrangulamiento operativo):: Cuando las importaciones en línea comparten recursos de backend con la E/S del host, puede ser útil desde el punto de vista operativo pausar la importación para permitir que la E/S del host se recupere y luego reanudarla desde el último punto de control.
++
+--
+[source, cli]
+----
+set -privilege advanced
+lun import pause -vserver <SVM> -path <LUN_PATH>
+----
+--
+Reanudar la importación::
++
+--
+[source, cli]
+----
+set -privilege advanced
+lun import resume -vserver <SVM> -path <LUN_PATH>
+----
+--
+
+
+
+
+== contadores de rendimiento iSCSI FLI
+
+Descubrir/confirmar los objetos disponibles (opcional):: `statistics catalog object show | grep -i iswi`
+Iniciar la recopilación de estadísticas:: `statistics start -object iswi_session -sample_id import_in_progress`
+Recopilar contadores de sesión del iniciador iSCSI:: `statistics show -sample-id import_in_progress`
+
+
+
+
+== Factores de ONTAP FLI que afectan al rendimiento
+
+El tiempo necesario para completar una importación depende de múltiples variables, entre ellas:
+
+* Número de migraciones simultáneas entre el origen y el destino
+* Capacidad de la cabina de origen y carga actual
+* Capacidad de ONTAP de destino y carga actual
+* Cantidad de E/S del host durante la migración (especialmente relevante para las importaciones en línea)
+* Características del tejido y la red del frontend, como ancho de banda, entrada y salida en abanico y topología general
+* Otras aplicaciones ONTAP no FLI que consumen los recursos LIF intercluster
+* Concurrencia, la guía general de FLI recomienda limitar a no más de 8 migraciones concurrentes por nodo para un mejor rendimiento.
+
+
+Dado que estas variables varían en función del entorno, la forma más fiable de estimar el rendimiento es ejecutar varias migraciones de prueba de distintos tamaños y luego usar el rendimiento medido para planificar la duración de la producción.

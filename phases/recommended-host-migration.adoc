@@ -1,0 +1,157 @@
+---
+permalink: phases/recommended-host-migration.html 
+sidebar: sidebar 
+keywords: discovery phase, foreign lun import, fli, active iq onecollect, fc fli, iscsi fli, intercluster lif, wwpn, iqn, foreign array, lun discovery, san migration 
+summary: 'Alinea el sistema operativo del host y la configuración de almacenamiento con el enfoque recomendado de Foreign LUN Import (FLI) antes de seleccionar un método de migración.' 
+---
+= Enfoques recomendados de ONTAP FLI por sistema operativo y configuración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Alinea el sistema operativo del host y la configuración de almacenamiento con el enfoque recomendado de Foreign LUN Import (FLI) antes de seleccionar un método de migración.
+
+
+
+== Intención
+
+La tabla siguiente ayuda a alinear el sistema operativo de host y la configuración de almacenamiento con el enfoque recomendado de Foreign LUN Import (FLI) antes de seleccionar un método de migración. Para cada tipo de host y modelo de uso, indica si es apropiado Online FLI, Offline FLI o cualquiera de los dos. La columna Notas / Justificación destaca las restricciones técnicas clave, como la semántica de clustering, las reservas persistentes de SCSI 3 y las dependencias de arranque, que influyen directamente en si la E/S del host puede coexistir de forma segura con una relación de importación activa. Esta guía debe utilizarse al principio de la planificación para evitar flujos de trabajo no compatibles y para establecer expectativas realistas sobre las ventanas de interrupción y los plazos de remediación.
+
+
+
+== Orientaciones clave
+
+* La agrupación en clústeres casi siempre implica FLI sin conexión debido a los requisitos de reserva persistente de SCSI 3.
+* Los hosts independientes y las cargas de trabajo virtualizadas no agrupadas en clústeres suelen ser flexibles y pueden usar FLI en línea o fuera de línea.
+* Los casos de uso de arranque SAN se admiten técnicamente en ambos modos, pero a menudo son más sencillos de ejecutar operativamente como FLI sin conexión.
+* La selección final del modo debe tener en cuenta la tolerancia al tiempo de inactividad de la aplicación, los requisitos de reversión y la complejidad operativa, no solo la compatibilidad con el protocolo.
+
+
+
+
+== Orientaciones detalladas
+
+
+
+=== Windows
+
+[cols="3"]
+|===
+| Configuración | Recomendación | Motivos si los hay 
+
+
+| Volumen NTFS  a| 
+FLI en línea / fuera de línea
+| Se admite en ambos modos; la elección depende de la tolerancia al tiempo de inactividad de la aplicación. 
+
+
+| Windows Failover Cluster (WFSC) | FLI fuera de línea | Las reservas persistentes SCSI 3 son requeridas por WFSC y no se admiten mientras un LUN está en una relación de importación activa. 
+
+
+| Hyper V | FLI en línea / fuera de línea | Se admite Hyper V independiente; Hyper V en clúster sigue las directrices del WFSC. 
+
+
+| Arranque SAN | FLI en línea / fuera de línea | Requiere una planificación cuidadosa de la transición; normalmente se trata como fuera de línea a menos que el tiempo de inactividad esté bien controlado. 
+|===
+
+
+=== Linux (RHEL/SLES)
+
+[cols="3"]
+|===
+| Configuración | Recomendación | Motivos si los hay 
+
+
+| Sistema de archivos / Disco RAW | FLI en línea / fuera de línea | Compatible en ambos modos con multivía estándar. 
+
+
+| LVM | FLI en línea / fuera de línea | Compatible; garantiza la correcta detección de host y la coherencia de PV/VG durante la transición. 
+
+
+| Cluster de Pacemaker | FLI en línea / fuera de línea | Se admite, pero el comportamiento del clúster debe validarse durante la transición. 
+
+
+| Arranque SAN | FLI en línea / fuera de línea | Suele ser más sencillo desde el punto de vista operativo que fuera de línea, aunque técnicamente se admite en línea. 
+|===
+
+
+=== Solaris
+
+[cols="3"]
+|===
+| Configuración | Recomendación | Motivos si los hay 
+
+
+| Independiente | FLI en línea / fuera de línea | Se admiten ambos modos en función de la tolerancia a las interrupciones. 
+
+
+| Oracle Solaris Cluster (OSC / Sun Cluster) | FLI fuera de línea | El cluster requiere comportamientos SCSI exclusivos no soportados durante la importación activa. 
+
+
+| Arranque SAN | FLI en línea / fuera de línea | Trata de forma similar a otros escenarios de arranque SAN de otros sistemas operativos. 
+|===
+
+
+=== AIX
+
+[cols="3"]
+|===
+| Configuración | Recomendación | Motivos si los hay 
+
+
+| Independiente | FLI en línea / fuera de línea | Compatible con ambos modos. 
+
+
+| PowerHA (HACMP) | FLI fuera de línea | Los discos agrupados requieren una semántica de reserva incompatible con la importación en línea. 
+
+
+| Virtualizado (PowerVM NPIV/VFC, vSCSI - sin clustering) | FLI en línea / fuera de línea | Se admite cuando no forma parte de un clúster. 
+
+
+| Virtualizado (PowerVM con clustering) | FLI fuera de línea | Las mismas limitaciones de clustering que PowerHA físico. 
+
+
+| Arranque SAN | FLI en línea / fuera de línea | Preferencia operativa a menudo fuera de línea. 
+|===
+
+
+=== HP-UX
+
+[cols="3"]
+|===
+| Configuración | Recomendación | Motivos si los hay 
+
+
+| Independiente | FLI en línea / fuera de línea | Compatible con ambos modos. 
+
+
+| Agrupación de hosts (MC/ServiceGuard) | FLI fuera de línea | La semántica del disco de clúster requiere una migración fuera de línea. 
+
+
+| Arranque SAN | FLI en línea / fuera de línea | Normalmente se planifica como fuera de línea en la práctica. 
+|===
+
+
+=== VMware ESXi
+
+[cols="3"]
+|===
+| Configuración | Recomendación | Motivos si los hay 
+
+
+| VMDK (almacenes de datos estándar) | FLI en línea / fuera de línea | Admite cualquier modo; en línea minimiza el tiempo de inactividad de la máquina virtual. 
+
+
+| RDM (estándar) | FLI en línea / fuera de línea | Soportado; garantiza la coherencia de los reescaneos de host durante la transición. 
+
+
+| VMSC / VMHA | FLI en línea / fuera de línea | Compatible con una coordinación cuidadosa. 
+
+
+| WFSC (VMDK en clúster) | FLI fuera de línea | Se aplican las limitaciones de clustering de Windows. 
+
+
+| WFSC (RDM) | FLI fuera de línea | Se requiere SCSI 3 PR, no se admite la importación en línea. 
+|===

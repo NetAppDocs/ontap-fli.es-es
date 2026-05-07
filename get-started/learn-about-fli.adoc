@@ -1,0 +1,44 @@
+---
+permalink: get-started/learn-about-fli.html 
+sidebar: sidebar 
+keywords: foreign lun import, fli, ontap, block migration, lun migration, san migration, offline fli, online fli, fibre channel, iscsi, scsi initiator, import workflow, cutover, fc backend, iscsi backend 
+summary: Aprende cómo ONTAP Foreign LUN Import migra LUN SAN actuando como iniciador SCSI para leer desde cabinas externas y escribir en LUN de destino de ONTAP. 
+---
+= Conoce la importación de LUN externos a ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Foreign LUN Import (FLI) es una funcionalidad de ONTAP que permite la migración de datos a nivel de bloque (LUN) copiando datos de usuario desde un LUN de cabina ajeno a un LUN de ONTAP. ONTAP realiza la migración actuando como iniciador SCSI que lee desde el LUN ajeno y escribe en el LUN de ONTAP de destino.
+
+FLI funciona estrictamente a nivel de LUN y está pensado para migraciones SAN; no es una herramienta de migración a nivel de archivos (las migraciones de protocolos NAS/archivos como NFS/SMB requieren enfoques diferentes). FLI admite migraciones tanto fuera de línea como en línea. En el modo fuera de línea, la E/S del host se detiene mientras dura la importación; en el modo en línea, las operaciones del host se reanudan tras una breve transición mientras la importación continúa en segundo plano.
+
+Los LUN ajenos aparecen en la pila de almacenamiento de ONTAP y deben marcarse explícitamente como ajenos para evitar sobrescritura/propiedad accidental. FC FLI utiliza conectividad de backend FC (puertos de iniciador, división en zonas/enmascaramiento), mientras que en iSCSI FLI, el backend usa un iniciador de software iSCSI vinculado a la conectividad intercluster, mientras que el protocolo de cara al host (frontend) después de la migración puede seguir siendo FC o iSCSI según el diseño.
+
+.Comparación de FLI fuera de línea y en línea
+A continuación se resumen las principales diferencias entre los enfoques de migración offline y online.
+
+[cols="3"]
+|===
+| Área | FLI fuera de línea | FLI en línea 
+
+
+| E/S del host durante la importación | La E/S del host se detiene durante toda la duración de la importación. | La E/S del host puede ejecutarse mientras continúa la copia de importación (después de la transición). 
+
+
+| Perfil del tiempo de inactividad | Requiere tiempo de inactividad durante toda la ventana de importación. | Diseñada para ser en su mayoría no disruptiva, normalmente solo requiere una breve interrupción para la transición. 
+
+
+| Caso de uso operativo | Es la mejor opción cuando el tiempo de inactividad prolongado es aceptable o requerido por la aplicación o el modelo de host. | Mejor cuando el tiempo de inactividad debe minimizarse y puedes tolerar la actividad de copia en segundo plano. 
+|===
+.Flujo de trabajo FLI offline
+En el flujo de trabajo sin conexión, el host está desconectado durante toda la importación.
+
+image::new-offline-fli.png[Flujo de trabajo FLI offline]
+
+.Flujo de trabajo FLI en línea
+En el flujo de trabajo en línea, el host solo se desconecta durante un breve periodo de transición mientras la importación pasa de la copia a la finalización.
+
+image::new-online-fli.png[Flujo de trabajo FLI offline]

@@ -1,0 +1,56 @@
+---
+permalink: post-migration-performance/esxi-remediation.html 
+sidebar: sidebar 
+keywords: esxi remediation, vmfs, ats, caw, vaai, vmkfstools, datastore, online fli, foreign lun import, fli, vmware, ats-only 
+summary: Soluciona los almacenes de datos VMware ESXi con cabeceras VMFS solo ATS que pueden impedir el montaje cuando se presentan a través de una relación de importación FLI en línea. 
+---
+= Realiza la corrección de ONTAP FLI ESXi VMFSS ATS/CAW
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durante una migración FLI en línea, la relación de importación temporal no admite VMware ATS o CAW (VAAI Atomic Test and Set o SCSI Compare And Write). Si tu almacén de datos es VMFS5 y se creó en un almacenamiento que admite ATS, VMware podría marcar el encabezado VMFS como “solo ATS”. En ese estado, el almacén de datos puede fallar al montarse cuando se presenta a través de una relación FLI en línea.
+
+.Acerca de esta tarea
+* La configuración "ATS-only" se almacena en la cabecera VMFS, que reside en la primera extensión del almacén de datos. Si el almacén de datos abarca varias extensiones, solo es necesario corregir la primera extensión.
+* Si el almacén de datos se comparte entre varios hosts ESXi, normalmente basta con actualizarlo desde un host; los demás hosts detectan el cambio después de un nuevo escaneo y montaje.
+* No se puede ejecutar ninguna E/S activa contra el almacén de datos mientras se cambia el modo de sólo ATS. La orientación de VMware es evacuar y migrar o apagar las máquinas virtuales y desmontar y volver a montar según sea necesario para aplicar el cambio.
+
+
+.Pasos
+. Comprueba el modo ATS actual del almacén de datos.
++
+Ejecuta esto en un host ESXi para el volumen VMFS:
+
++
+[source, cli]
+----
+vmkfstools -Ph -v1 /vmfs/volumes/<DATASTORE_NAME_OR_UUID>
+----
+. Desactivar solo ATS.
++
+
+IMPORTANT: Asegúrate de que las máquinas virtuales se han migrado y apagado, y de que el almacén de datos se ha desmontado de todos los hosts cuando así lo requiera tu plan de cambio. Ejecuta en la ruta del dispositivo del primer LUN de extensión (naa.*):
+
++
+[source, cli]
+----
+vmkfstools --configATSOnly 0 /vmfs/devices/disks/naa.<naa_id>:1
+----
++
+Esto cambia el volumen para permitir el bloqueo no ATS (público).
+
+. Vuelve a escanear los adaptadores de almacenamiento (o vuelve a montar el almacén de datos) para que los hosts vuelvan a leer el modo actualizado.
+. Reactivar ATS.
++
+Una vez finalizada la migración y si quieres restaurar el comportamiento de solo ATS:
+
++
+[source, cli]
+----
+vmkfstools --configATSOnly 1 /vmfs/devices/disks/naa.<naa_id>:1
+----
+. Vuelve a escanear y a montar para aplicar el cambio.
+

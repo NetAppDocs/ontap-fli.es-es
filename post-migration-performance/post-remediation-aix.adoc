@@ -1,0 +1,153 @@
+---
+permalink: post-migration-performance/post-remediation-aix.html 
+sidebar: sidebar 
+keywords: host remediation, aix, post-migration, fli, ontap 
+summary: Tras la migración, los hosts AIX requieren pasos de remediación para garantizar que los LUN recién importados se reconocen y funcionan correctamente. 
+---
+= Realiza la corrección del host ONTAP FLI AIX después de la migración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Tras la migración, los hosts AIX requieren pasos de remediación para garantizar que los LUN recién importados se reconocen y funcionan correctamente.
+
+
+
+== Post-migración - FLI offline
+
+Para FLI sin conexión, pon el LUN en línea después de eliminar la importación de lun y confirmar que los iniciadores de host están conectados.
+
+[cols="5"]
+|===
+| Sistema de archivos | Dispositivo de bloques | LVM (FS) | Clúster | Sanboot 
+
+
+| Paso 1: volver a explorar el almacenamiento en todos los hosts AIX asignados | Paso 1: Vuelve a explorar el almacenamiento en todos los hosts AIX asignados. | Paso 1: volver a explorar el almacenamiento en todos los hosts AIX asignados | Paso 1: volver a explorar el almacenamiento en todos los hosts AIX asignados | Paso 1: enciende el servidor 
+
+
+| Paso 2: identificar los dispositivos multivía | Paso 2: identificar los dispositivos multivía | Paso 2: identificar los dispositivos multivía | Paso 2: identificar los dispositivos multivía | Paso 2: Verifica que la lista de dispositivos de arranque del menú IPL((Initial Program Load))/SMS muestre los nuevos LUN haciendo referencia a la lista de dispositivos que provienen del nuevo dispositivo de Storage. Configura el orden de arranque en la nueva ruta de la lista de dispositivos 
+
+
+| Paso 3: comprobar los detalles del sistema de archivos | Paso 3: Identifica el ID del dispositivo de multivía y preséntalo a la aplicación correspondiente. | Paso 3: asegúrate de que se descubren los nuevos LUNs | Paso 3: comprobar los detalles del sistema de archivos | Paso 3: Asegúrate de que el servidor arranca correctamente 
+
+
+| Paso 4: monta de nuevo los dispositivos en las carpetas respectivas |  | Paso 4: activar la VG | Paso 4: verifica la configuración de clúster necesaria e inicia la aplicación de clúster | Paso 4: reinicia el host para arrancar desde el nuevo LUN mapeado que forma parte de LUN Import 
+
+
+|  |  | Paso 5: Enumera los LV presentes en la VG | Paso 5: valida el estado del clúster y la aplicación que lo está consumiendo. |  
+
+
+|  |  | Paso 6: volver a montar los LVM en las carpetas respectivas |  |  
+|===
+
+NOTE: Consulta la documentación del proveedor del sistema operativo para ver la lista de comandos más reciente y actualizada.
+
+.Pasos
+. Vuelve a escanear después de separar para confirmar el estado limpio.
++
+[source, cli]
+----
+cfgmgr
+----
+. Identifica los dispositivos de almacenamiento.
++
+[source, cli]
+----
+lsdev -Cc disk
+sanlun lun show all
+sanlun lun show all -pv
+lsmpio -l hdiskx
+----
+. Verifica que el dispositivo está conectado.
++
+[source, cli]
+----
+lspv |grep hdiskx
+----
+. Identifica el grupo de volúmenes y los sistemas de ficheros.
++
+[source, cli]
+----
+lspv
+lsvg <vg_name>
+lsvg -l <vg_name>
+lsvg -p <vs_name>
+----
+. Varyonvg y monta sistemas de archivos.
++
+[source, cli]
+----
+varyonvg <vg_name>
+mount /mount_point
+df -g
+----
+
+
+
+
+== Post-migración - FLI en línea
+
+Después de eliminar la relación de importación, confirma que el nuevo LUN funciona de forma independiente con UNMAP activado. Después de eliminar la importación de LUN, verifica si el LUN está configurado con `-space-reserve disabled` y `-space-allocation enabled`. Si no, modifícalo en consecuencia.
+
+[cols="4"]
+|===
+| Sistema de archivos | Dispositivo de bloques | LVM (FS) | Sanboot 
+
+
+| Paso 1: volver a explorar el almacenamiento en todos los hosts AIX asignados | Paso 1: Vuelve a explorar el almacenamiento en todos los hosts AIX asignados. | Paso 1: volver a explorar el almacenamiento en todos los hosts AIX asignados | Paso 1: volver a explorar el almacenamiento en todos los hosts AIX asignados 
+
+
+|  |  | SCSI UNMAP se activa automáticamente si el dispositivo está thin provisioned. | SCSI UNMAP se activa automáticamente si el dispositivo está thin provisioned. 
+|===
+.Pasos
+. Vuelve a escanear después de separar para confirmar el estado limpio.
++
+[source, cli]
+----
+cfgmgr
+----
+. Identifica los dispositivos de almacenamiento.
++
+[source, cli]
+----
+lsdev -Cc disk
+sanlun lun show all
+sanlun lun show all -pv
+lsmpio -l hdiskx
+----
+. Verifica que el dispositivo está conectado.
++
+[source, cli]
+----
+lspv |grep hdiskx
+----
+. Verifica UNMAP en el dispositivo:
++
+[source, cli]
+----
+chfs -a reclaim=normal /mount_point
+lvmstat -v vg_name -r
+----
+
+
+[cols="1,2"]
+|===
+|  | AIX/PowerVM 
+
+
+| Paso 1 | Captura información del host. 
+
+
+| Paso 2 | Desmonta el sistema de archivos. 
+
+
+| Paso 3 | Haz una copia de seguridad de la VG. 
+
+
+| Paso 4 | Desactiva la VG. 
+
+
+| Paso 5 | Exporta la VG. 
+|===

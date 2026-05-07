@@ -1,0 +1,35 @@
+---
+permalink: configure/fc-zoning-model-best-practices.html 
+sidebar: sidebar 
+keywords:  
+summary:  
+---
+= Prácticas recomendadas de cableado FC y división en zonas para ONTAP Foreign LUN Import
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Foreign LUN Import (FLI) requiere que los LUN de origen sean accesibles por ONTAP, lo que se consigue mediante la división en zonas de los puertos objetivo de origen con los puertos de iniciador de ONTAP. Las zonas de origen a host existentes no suelen modificarse durante la migración y pueden eliminarse o desactivarse tras la migración.
+
+.El escenario estándar FC FLI utiliza 4 zonas distintas
+* Zona 1: almacenamiento de origen a almacenamiento de destino (Fabric A)
+* Zona 2: Almacenamiento de origen a almacenamiento de destino (Fabric B)
+* Zona 3: Host a almacenamiento de destino (Fabric A)
+* Zona 4: Host a almacenamiento de destino (Fabric B)
+
+
+.Buenas prácticas de división en zonas
+* No mezcles puertos objetivo de origen y puertos objetivo de destino en la misma zona.
+* No mezcles puertos iniciadores de destino y puertos host en la misma zona.
+* No mezcles puertos objetivo de destino y puertos iniciadores de destino en la misma zona.
+* Zona con al menos dos puertos por controlador para redundancia, donde sea posible.
+* Prefiere la división en zonas de iniciador único y objetivo único.
+* Utiliza los WWPN de puerto físico adecuados para el modelo de división en zonas requerido por el flujo de trabajo FLI. No uses los WWPN NPIV cuando la guía de división en zonas de migración lo prohíba explícitamente.
+
+
+image::new-fc-zoning-model.png[Ejemplo de modelo de división en zonas FC para ONTAP FLI]
+
+
+NOTE: Tras la división en zonas de los objetivos de origen a los iniciadores de destino, el almacenamiento de origen debería ser visible desde ONTAP mediante comandos de descubrimiento. Si el array no aparece la primera vez, en algunos entornos podría ser necesario reiniciar el puerto del switch conectado a los iniciadores de ONTAP.

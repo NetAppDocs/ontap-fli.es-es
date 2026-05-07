@@ -1,0 +1,27 @@
+---
+permalink: configure/fc-connectivity-wiring.html 
+sidebar: sidebar 
+keywords:  
+summary:  
+---
+= Conectividad y cableado de ONTAP Foreign LUN Import (FLI)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La importación de LUN de cabina externos a través de FC se basa en un diseño SAN de doble tejido para que los controladores ONTAP de destino puedan acceder de forma fiable a los LUN de cabina externos durante el descubrimiento y la importación. Para una implementación compatible, cada controladora de almacenamiento en uso debe tener una ruta activa primaria en ambos tejidos, lo que significa que los puertos objetivo de la cabina de origen y los puertos iniciadores de ONTAP para los nodos que realizan la importación deben estar en una zona común en el tejido A y el tejido B. No es necesario incluir todos los nodos en el clúster de ONTAP, solo los nodos que realmente importarán y migrarán LUN de cabina. Aunque las rutas indirectas pueden funcionar, la mejor práctica es utilizar rutas activas y optimizadas entre el origen y el destino.
+
+
+
+== Prácticas de cableado y división en zonas de FC recomendadas por ONTAP FLI
+
+* Usa dos redes (A y B) para la redundancia.
+* Asegúrate de que las rutas primarias activas de cada controlador en uso estén presentes en ambas estructuras.
+* Utiliza al menos dos puertos iniciadores ONTAP y dos puertos objetivo de la cabina de origen siempre que sea posible para evitar puntos únicos de fallo.
+* No dividas en zonas los puertos iniciadores de ONTAP con el host. Los puertos iniciadores de ONTAP solo se usan para conectarse a los puertos objetivo de la cabina de origen para la importación y el descubrimiento.
+* Divide en zonas solo los nodos ONTAP que participan en las importaciones, no necesitas dividir en zonas todo el clúster.
+
+
+image::new-zoning.png[Ejemplo de división en zonas FC para ONTAP FLI]

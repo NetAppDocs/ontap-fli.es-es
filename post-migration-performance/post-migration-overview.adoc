@@ -1,0 +1,16 @@
+---
+permalink: post-migration-performance/post-migration-overview.html 
+sidebar: sidebar 
+keywords: foreign lun import, fli, ontap, post-migration, performance, overview 
+summary: 'Esta sección describe qué hacer después de que la migración de Foreign LUN Import (FLI) esté completa.' 
+---
+= Conoce ONTAP FLI después de la migración
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta sección se describe qué hacer una vez finalizada la migración Foreign LUN Import (FLI). Existen pasos generales de limpieza, pasos de validación del rendimiento y pasos para cada tipo de host (AIX, ESXi, HP, Linux, Solaris y Windows).
+
+Los pasos posteriores a la migración son importantes para garantizar que el entorno se deja en un estado limpio y compatible, y para validar que la migración fue exitosa tanto desde el punto de vista de la integridad de los datos como del rendimiento.
