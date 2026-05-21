@@ -1300,7 +1300,6 @@
   <block id="f54f8723cdd855de6b42f8c6088ea7cf" category="paragraph">Start-VM -Name &lt;VM_Name&gt;</block>
   <block id="3530aa78abbe00fb441a6a913266c4f5" category="summary">Conoce la fase de verificación, que confirma que la migración se completó según lo planeado y elimina las configuraciones temporales usadas durante la ventana de migración.</block>
   <block id="c7b5ec48b58689a14b9ca8360ae61c36" category="doc">ONTAP Foreign LUN Import (FLI) fase de verificación</block>
-  <block id="2dc59e510103c83c15f9b3fff186d965" category="paragraph">La fase de verificación confirma que la migración se ha completado según lo previsto y se centra en la limpieza posterior a la migración. Esto incluye validar el comportamiento de la aplicación, confirmar el acceso correcto del host y las rutas a los LUN de ONTAP, recopilar los registros de migración para auditoría y solución de problemas, y eliminar la conectividad y configuración temporales que se usaron solo para la migración.</block>
   <block id="312705c3917e0ecf74999294476290b4" category="paragraph">Como parte de la limpieza, eliminas los registros de iniciador del lado de origen y la división en zonas que ya no son necesarios, y documentas la configuración final para que los equipos de operaciones tengan un estado "as-built" claro.</block>
   <block id="f67442f7dd9efc703506d4e505684839" category="paragraph">Para iSCSI FLI, la fase de verificación también debe incluir la eliminación de las sesiones de iniciador iSCSI de software y los iniciadores creados en LIFs intercluster. Si los LIFs intercluster se crearon solo para la importación de LUN extranjeros, incluso esos LIFs deben ser eliminados.</block>
   <block id="c8253ba169277559e143f0f27d32ba7a" category="section-title">Tareas de la fase de verificación de ONTAP FLI</block>
@@ -1546,4 +1545,5 @@
   <block id="144e3bff2769f72c63f6e00004097fcc" category="sidebar">FLI después de la migración</block>
   <block id="259c870f8a8594516755af0729eb847a" category="sidebar">Panorama postmigración</block>
   <block id="5d793778d9d63a7b0602b47ee814bd26" category="sidebar">Novedades en migración de datos SAN</block>
+  <block id="d6fe85b2a7716d9377c34dd3d6ea37c4" category="paragraph">La fase de verificación confirma que la migración se ha completado según lo previsto y se centra en la limpieza posterior a la migración. Esto incluye validar el comportamiento de la aplicación, confirmar el acceso correcto del host y las rutas a los LUN de ONTAP, recopilar los registros de migración para auditoría y solución de problemas, y eliminar la conectividad y configuración temporales usadas solo para la migración.</block>
 </blocks>

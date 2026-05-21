@@ -11,7 +11,7 @@ summary: Conoce la fase de verificación, que confirma que la migración se comp
 
 
 [role="lead"]
-La fase de verificación confirma que la migración se ha completado según lo previsto y se centra en la limpieza posterior a la migración. Esto incluye validar el comportamiento de la aplicación, confirmar el acceso correcto del host y las rutas a los LUN de ONTAP, recopilar los registros de migración para auditoría y solución de problemas, y eliminar la conectividad y configuración temporales que se usaron solo para la migración.
+La fase de verificación confirma que la migración se ha completado según lo previsto y se centra en la limpieza posterior a la migración. Esto incluye validar el comportamiento de la aplicación, confirmar el acceso correcto del host y las rutas a los LUN de ONTAP, recopilar los registros de migración para auditoría y solución de problemas, y eliminar la conectividad y configuración temporales usadas solo para la migración.
 
 Como parte de la limpieza, eliminas los registros de iniciador del lado de origen y la división en zonas que ya no son necesarios, y documentas la configuración final para que los equipos de operaciones tengan un estado "as-built" claro.
 
