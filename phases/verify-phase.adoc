@@ -19,6 +19,7 @@ Para iSCSI FLI, la fase de verificación también debe incluir la eliminación d
 
 
 
+[[ontap-fli-verify-phase-tasks]]
 == Tareas de la fase de verificación de ONTAP FLI
 
 A continuación se indican las tareas de verificación de ONTAP FLI para cada componente.

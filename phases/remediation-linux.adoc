@@ -15,6 +15,7 @@ Antes de ejecutar la migración de ONTAP FLI en un host Linux, completa estos pa
 
 
 
+[[pre-migration-offline-fli]]
 == Premigración - FLI sin conexión
 
 Estos pasos son comunes tanto para FLI online como offline. Antes de desaprovisionar el LUN de origen desde el host, asegúrate de que se han completado los siguientes pasos.
@@ -43,6 +44,7 @@ Estos pasos son comunes tanto para FLI online como offline. Antes de desaprovisi
 |===
 
 
+[[pre-migration-online-fli]]
 == Premigración - FLI en línea
 
 A continuación se indican los pasos específicos del FLI en línea, pero estos pasos deben ir precedidos de los pasos del FLI fuera de línea previo a la migración. Los siguientes pasos deben llevarse a cabo después de que el LUN NetApp se aprovisione en el host. Estos pasos deben llevarse a cabo después de que el LUN NetApp se aprovisione en el host. Y sólo es aplicable al FLI en línea.

@@ -15,6 +15,7 @@ Tras la migración, los hosts Windows requieren pasos de corrección para garant
 
 
 
+[[post-migration-offline-fli]]
 == Post migración - FLI offline
 
 Para FLI sin conexión, pon el LUN en línea después de eliminar la importación de lun y confirmar que los iniciadores de host están conectados.
@@ -37,6 +38,7 @@ Para FLI sin conexión, pon el LUN en línea después de eliminar la importació
 |===
 
 
+[[post-migration-online-fli]]
 == Post migración - FLI en línea
 
 Después de eliminar la importación del LUN, comprueba si el LUN está configurado con -space-reserve desactivado y -space-allocation activado. Si no es así, modifícalo en consecuencia.
@@ -53,6 +55,7 @@ Después de eliminar la importación del LUN, comprueba si el LUN está configur
 |===
 
 
+[[filesystem-devices]]
 === Dispositivos del sistema de archivos
 
 .Pasos
@@ -85,6 +88,7 @@ Start-Service -Name <ServiceName>
 
 
 
+[[physical-drives-no-filesystem]]
 === Unidades físicas (sin sistema de archivos)
 
 .Pasos
@@ -99,6 +103,7 @@ Update-HostStorageCache
 
 
 
+[[wsfc]]
 === WSFC
 
 .Pasos
@@ -132,6 +137,7 @@ Start-ClusterResource -Name <ResourceName>
 
 
 
+[[hyper-v]]
 === Hyper V
 
 .Pasos

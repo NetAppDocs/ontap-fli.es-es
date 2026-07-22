@@ -15,6 +15,7 @@ La fase de descubrimiento de ONTAP FLI es el primer paso del proceso de migraci�
 
 
 
+[[prepare-for-an-iscsi-migration-with-ontap-fli]]
 == Prepárate para una migración iSCSI con ONTAP FLI
 
 La fase de descubrimiento de ONTAP FLI recopila los detalles técnicos necesarios para completar la migración:
@@ -37,6 +38,7 @@ Para iSCSI FLI, la fase de descubrimiento debe:
 
 
 
+[[ontap-fli-discovery-phase-tasks]]
 == Tareas de la fase de descubrimiento de ONTAP FLI
 
 Cada componente tiene un conjunto de tareas para recopilar datos o validar la conectividad.
@@ -99,6 +101,7 @@ NOTE: La cualificación de campo es necesaria para iSCSI FLI; no asumas que las 
 |===
 
 
+[[recommended-ontap-fli-discovery-deliverables]]
 == Resultados recomendados del descubrimiento de ONTAP FLI
 
 * Un único mapeo de hoja de inventario: host → LUN(s) de origen → portal/IQN de destino foráneo → LIFs/nodos de ONTAP IC → LUN(s) de destino para ejecución limpia y rollback.

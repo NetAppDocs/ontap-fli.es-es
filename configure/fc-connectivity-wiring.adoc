@@ -15,6 +15,7 @@ La importación de LUN de cabina externos a través de FC se basa en un diseño 
 
 
 
+[[ontap-fli-recommended-fc-wiring-and-zoning-practices]]
 == Prácticas de cableado y división en zonas de FC recomendadas por ONTAP FLI
 
 * Usa dos redes (A y B) para la redundancia.

@@ -15,6 +15,7 @@ Antes de ejecutar la migración de ONTAP FLI en un host Solaris, completa estos 
 
 
 
+[[pre-migration-offline-fli]]
 == Premigración - FLI sin conexión
 
 Estos pasos son comunes tanto para FLI online como offline. Antes de desaprovisionar el LUN de origen desde el host, asegúrate de que se han completado los siguientes pasos.
@@ -88,6 +89,7 @@ cfgadm -al
 
 
 
+[[pre-migration-online-fli]]
 == Premigración - FLI en línea
 
 A continuación se indican los pasos específicos de FLI en línea, pero estos pasos deben ir precedidos de los pasos de FLI antes de la migración - fuera de línea. Los siguientes pasos deben llevarse a cabo después de que el LUN de NetApp se aprovisione en el host.

@@ -23,6 +23,7 @@ Para iSCSI FLI, la fase de análisis también debe capturar la preparación espe
 
 
 
+[[ontap-fli-analyze-phase-tasks]]
 == Tareas de la fase de análisis de ONTAP FLI
 
 La fase de análisis se centra en el host, pero también debe validar toda la cadena de soporte de extremo a extremo (del host al fabric a ONTAP y viceversa) y confirmar la posición de interoperabilidad del backend de FLI.
@@ -73,6 +74,7 @@ La fase de análisis se centra en el host, pero también debe validar toda la ca
 |===
 
 
+[[use-the-imt-during-the-ontap-fli-analyze-phase]]
 == Usa el IMT durante la fase de análisis de ONTAP FLI
 
 La herramienta Interoperability Matrix Tool (IMT) es un repositorio de configuraciones y una forma guiada de acotar hasta un resultado final compatible las configuraciones en las que los productos de NetApp interoperan con componentes de terceros. IMT puede contener tanto configuraciones compatibles como certificadas:
@@ -107,6 +109,7 @@ A partir de ONTAP 9.9.1, si el array externo no aparece como compatible en IMT, 
 
 
 
+[[ontap-fli-host-changes-and-rollback-strategy]]
 == Cambios en el host ONTAP FLI y estrategia de reversión
 
 En la fase de análisis se debe decidir explícitamente qué va a cambiar y cuándo, ya que los cambios en el host pueden introducir riesgos y afectar también al soporte del almacenamiento actual. Esto es importante si la pila del host requiere una actualización antes de poder ser soportada con ONTAP.
@@ -118,6 +121,7 @@ En la fase de análisis se debe decidir explícitamente qué va a cambiar y cuá
 
 
 
+[[ontap-fli-gap-analysis]]
 == Análisis de carencias de ONTAP FLI
 
 El análisis de deficiencias resume el entorno actual en comparación con la configuración de destino recomendada por NetApp y enumera las actualizaciones o medidas correctoras necesarias para alcanzar un estado compatible tras la migración.

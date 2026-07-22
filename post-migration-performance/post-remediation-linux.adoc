@@ -15,6 +15,7 @@ Después de la migración, los hosts Linux requieren pasos de remediación para 
 
 
 
+[[post-migration-offline-fli]]
 == Post-migración - FLI offline
 
 Para FLI sin conexión, pon el LUN en línea después de eliminar la importación de lun y confirmar que los iniciadores de host están conectados.
@@ -40,6 +41,7 @@ Para FLI sin conexión, pon el LUN en línea después de eliminar la importació
 |===
 
 
+[[post-migration-online-fli]]
 == Post-migración - FLI en línea
 
 Después de eliminar la importación del LUN, verifica si el LUN está configurado con `-space-reserve disabled` y `-space-allocation enabled`. Si no, modifícalo en consecuencia.

@@ -15,12 +15,14 @@ Alinea el sistema operativo del host y la configuración de almacenamiento con e
 
 
 
+[[intent]]
 == Intención
 
 La tabla siguiente ayuda a alinear el sistema operativo de host y la configuración de almacenamiento con el enfoque recomendado de Foreign LUN Import (FLI) antes de seleccionar un método de migración. Para cada tipo de host y modelo de uso, indica si es apropiado Online FLI, Offline FLI o cualquiera de los dos. La columna Notas / Justificación destaca las restricciones técnicas clave, como la semántica de clustering, las reservas persistentes de SCSI 3 y las dependencias de arranque, que influyen directamente en si la E/S del host puede coexistir de forma segura con una relación de importación activa. Esta guía debe utilizarse al principio de la planificación para evitar flujos de trabajo no compatibles y para establecer expectativas realistas sobre las ventanas de interrupción y los plazos de remediación.
 
 
 
+[[key-guidance]]
 == Orientaciones clave
 
 * La agrupación en clústeres casi siempre implica FLI sin conexión debido a los requisitos de reserva persistente de SCSI 3.
@@ -31,10 +33,12 @@ La tabla siguiente ayuda a alinear el sistema operativo de host y la configuraci
 
 
 
+[[detailed-guidance]]
 == Orientaciones detalladas
 
 
 
+[[windows]]
 === Windows
 
 [cols="3"]
@@ -57,6 +61,7 @@ FLI en línea / fuera de línea
 |===
 
 
+[[linux-rhelsles]]
 === Linux (RHEL/SLES)
 
 [cols="3"]
@@ -77,6 +82,7 @@ FLI en línea / fuera de línea
 |===
 
 
+[[solaris]]
 === Solaris
 
 [cols="3"]
@@ -94,6 +100,7 @@ FLI en línea / fuera de línea
 |===
 
 
+[[aix]]
 === AIX
 
 [cols="3"]
@@ -117,6 +124,7 @@ FLI en línea / fuera de línea
 |===
 
 
+[[hp-ux]]
 === HP-UX
 
 [cols="3"]
@@ -134,6 +142,7 @@ FLI en línea / fuera de línea
 |===
 
 
+[[vmware-esxi]]
 === VMware ESXi
 
 [cols="3"]

@@ -48,6 +48,7 @@ ONTAP FLI debe implementarse en una configuración compatible para garantizar un
 
 
 
+[[supported-configurations-and-platform]]
 == Configuraciones y plataforma compatibles
 
 ONTAP FLI debe desplegarse en una configuración compatible para garantizar un comportamiento predecible y una compatibilidad total. A medida que se cualifican nuevas configuraciones, las combinaciones compatibles pueden cambiar. Para cada migración, valida la pila de extremo a extremo (array de origen + host + fabric/red + ONTAP target) con la guía de interoperabilidad actual.
@@ -84,6 +85,7 @@ Una vez finalizada la importación y cuando los hosts se estén ejecutando en lo
 
 
 
+[[best-practices]]
 == Mejores prácticas
 
 NetApp recomienda encarecidamente contar con servicios profesionales o servicios profesionales de partners, mantener el alcance y planificar la migración, así como formar al personal de clientes sobre cómo realizar migraciones de datos con Foreign LUN Import (FLI) 7-Mode a ONTAP.

@@ -15,6 +15,7 @@ La migración de datos SAN suele estar limitada por tiempos de inactividad ajust
 
 
 
+[[choosing-the-right-migration-approach-high-level]]
 == Elegir el enfoque de migración adecuado (a grandes rasgos)
 
 Una estrategia de migración práctica puede utilizar un método principal y complementarlo con otros enfoques donde mejor encajen. Para migraciones a nivel SAN/LUN en ONTAP, FLI suele ser una buena opción; sin embargo, algunos escenarios pueden estar mejor servidos por alternativas que son no disruptivas por diseño.
@@ -27,12 +28,14 @@ Migraciones basadas en el sistema operativo del host o en aplicaciones:: Resulta
 
 
 
+[[planning-migration-duration]]
 == Planificar la duración de la migración
 
 Sólo para la planificación inicial, un supuesto de referencia comúnmente citado es de ~5 horas por host para un host con 8 LUNs que suman ~2 TB, lo que equivale a aproximadamente ~400 GB/hora. Esta es intencionadamente una cifra de planificación aproximada y es poco probable que coincida con todos los entornos. La forma recomendada de obtener una estimación precisa es ejecutar múltiples migraciones de prueba de diferentes tamaños para medir el rendimiento real en tus propias condiciones de almacenamiento, red y host.
 
 
 
+[[recommended-tools-data-collection-compatibility-automation-qualification]]
 == Herramientas recomendadas (recogida de datos, compatibilidad, automatización, cualificación)
 
 Las herramientas de servicio ofrecen una forma estandarizada de recopilar datos del entorno, validar la compatibilidad y reducir los errores humanos durante la planificación y ejecución.

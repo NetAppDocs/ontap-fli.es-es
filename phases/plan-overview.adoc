@@ -17,6 +17,7 @@ Para iSCSI FLI, esta fase también debe validar las restricciones de diseño del
 
 
 
+[[ontap-fli-plan-and-prepare-phase-results]]
 == Resultados de la fase de planificación y preparación de ONTAP FLI
 
 * Finaliza el plan de corrección usando el análisis de deficiencias del host, incluyendo qué cambios se hacen antes de la migración y cuáles se hacen durante la ventana de transición, como los cambios de MPIO.
@@ -27,6 +28,7 @@ Para iSCSI FLI, esta fase también debe validar las restricciones de diseño del
 
 
 
+[[ontap-fli-plan-and-prepare-phase-tasks]]
 == Tareas de la fase de planificación y preparación de ONTAP FLI
 
 A continuación se detallan las tareas de planificación y preparación de ONTAP FLI para cada componente.

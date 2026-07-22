@@ -23,6 +23,7 @@ Una buena migración de prueba valida:
 
 
 
+[[test-migration-example-using-hitachi-ams2100]]
 == Probar el ejemplo de migración con Hitachi AMS2100
 
 A continuación se muestra un ejemplo de migración de prueba utilizando un Hitachi AMS2100 como matriz externa. Según las cabinas involucradas, los sistemas operativos host y otras variables, los pasos pueden ser diferentes.

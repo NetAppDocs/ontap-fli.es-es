@@ -15,6 +15,7 @@ Tras la migración, los hosts ESXi requieren pasos de remediación para garantiz
 
 
 
+[[post-migration-offline-fli]]
 == Post migración - FLI offline
 
 Para FLI sin conexión, pon el LUN en línea después de eliminar la importación de lun y confirmar que los iniciadores de host están conectados.
@@ -124,6 +125,7 @@ vim-cmd vmsvc/power.on <VMID>
 
 
 
+[[post-migration-online-fli]]
 == Post migración - FLI en línea
 
 Tras eliminar la relación de importación, confirma que el nuevo LUN funciona de forma independiente con CAW/UNMAP/XCOPY/WRITESAME activado.

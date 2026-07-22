@@ -55,6 +55,7 @@ lun import resume -vserver <SVM> -path <LUN_PATH>
 
 
 
+[[iscsi-fli-performance-counters]]
 == contadores de rendimiento iSCSI FLI
 
 Descubrir/confirmar los objetos disponibles (opcional):: `statistics catalog object show | grep -i iswi`
@@ -64,6 +65,7 @@ Recopilar contadores de sesión del iniciador iSCSI:: `statistics show -sample-i
 
 
 
+[[ontap-fli-factors-that-impact-performance]]
 == Factores de ONTAP FLI que afectan al rendimiento
 
 El tiempo necesario para completar una importación depende de múltiples variables, entre ellas:
